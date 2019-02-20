@@ -15,7 +15,8 @@ It’s a web APP basic configuration with MEAN stack.
   - **Connect Mongo:** Manage a connection to a MongoDB.
   - **Mongoose:** Object Data Modeling (ODM) library for MongoDB and Node.js.
   - **Morgan:** HTTP request logger middleware for node.js.
-  - **Reset** CSS stylesheet
+  - **Sass:**  CSS preprocessor, which adds special features (variables, nested rules and mixins) into regular CSS.
+  - Inlcudes Sass reset mixin for **Reset** CSS default stylesheet.
 
 ## Usage
 
@@ -49,7 +50,7 @@ If you want to configure your APP manually:
   - `npm i express-session`
   - `npm i connect-mongo`
   - `npm i connect-flash`
-
+  - `npm i node-sass-middleware`
 
 ## Licence
 

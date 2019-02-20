@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const sassMiddleware = require('node-sass-middleware');
 
 // notifications handle
 // const { notifications } = require('./assets');
@@ -44,7 +45,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 // app.use(session({
 //   store: new MongoStore({
 //     mongooseConnection: mongoose.connection,
@@ -64,6 +64,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 //   next();
 // });
 // app.use(notifications);
+// app.use(sassMiddleware({
+//   /* Options */
+//   src: __dirname,
+//   dest: path.join(__dirname, 'public'),
+//   debug: true,
+//   outputStyle: 'compressed',
+//   prefix: '/prefix', // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
+// }));
+app.use(sassMiddleware({
+  src: path.join(__dirname, 'sass'),
+  dest: path.join(__dirname, 'public'),
+  indentedSyntax: false, // true = .sass and false = .scss
+  sourceMap: true,
+}));
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
