@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const createError = require('http-errors');
 const flash = require('connect-flash');
 const express = require('express');
@@ -17,17 +19,16 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 // mongodb connect
-// const dbName = 'YOUR-DATABASE-NAME';
 // (async () => {
 //   try{
-//     await mongoose.connect(`mongodb://localhost/${dbName}`, { useNewUrlParser: true });
-//     console.log(`Conected to ${dbName}`);
+//     await mongoose.connect(`${process.env.MONGODB_URI}${process.env.MONGODB_NAME}`, { useNewUrlParser: true });
+//     console.log(`Conected to ${process.env.MONGODB_NAME}`);
 //   }catch{
 //     err => {
-//       console.error(`Error conecting to ${dbName}. `, err);
+//       console.error(`Error conecting to ${process.env.MONGODB_NAME}. `, err);
 //     }
 //   }
-// })();
+// })();N
 
 const app = express();
 
@@ -50,7 +51,7 @@ app.use(cookieParser());
 //     mongooseConnection: mongoose.connection,
 //     ttl: 24 * 60 * 60, // 1 day
 //   }),
-//   secret: 'jdej',
+//   secret: process.env.SESSION_SECRET,
 //   resave: true,
 //   saveUninitialized: true,
 //   cookie: {
