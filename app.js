@@ -13,7 +13,7 @@ const MongoStore = require('connect-mongo')(session);
 const sassMiddleware = require('node-sass-middleware');
 
 // notifications handle
-// const { notifications } = require('./assets');
+// const { messages } = require('./assets');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -58,21 +58,13 @@ app.use(cookieParser());
 //     maxAge: 24 * 60 * 60 * 1000,
 //   },
 // }));
-// app.use(flash());
 // app.use((req, res, next) => {
 //   // app.locals.currentUser = req.session.currentUser;
 //   res.locals.currentUser = req.session.currentUser;
 //   next();
 // });
-// app.use(notifications);
-// app.use(sassMiddleware({
-//   /* Options */
-//   src: __dirname,
-//   dest: path.join(__dirname, 'public'),
-//   debug: true,
-//   outputStyle: 'compressed',
-//   prefix: '/prefix', // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
-// }));
+// app.use(flash());
+// app.use(messages);
 app.use(sassMiddleware({
   src: path.join(__dirname, 'sass'),
   dest: path.join(__dirname, 'public'),
@@ -80,7 +72,6 @@ app.use(sassMiddleware({
   sourceMap: true,
 }));
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -90,7 +81,7 @@ app.use((req, res, next) => {
 });
 
 // error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
