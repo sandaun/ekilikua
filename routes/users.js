@@ -1,6 +1,6 @@
 const express = require('express');
 const assets = require('../assets');
-const Model = require('../models/example');
+const User = require('../models/user');
 
 const router = express.Router();
 router.use(assets.authRoute);

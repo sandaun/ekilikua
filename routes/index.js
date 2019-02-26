@@ -1,16 +1,20 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const assets = require('../assets');
-const Model = require('../models/example');
+const User = require('../models/user');
 
 const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res) => {
-  res.render('index');
+  res.render('index', { title: 'JdeJ', copyright: '© 2019 JdeJ' });
 });
 
-router.post('/login', assets.annonRoute, async (req, res, next) => {
+router.get('/login', assets.anonRoute, (req, res) => {
+  res.render('auth/login', { title: 'Log In' });
+});
+
+router.post('/login', assets.anonRoute, async (req, res, next) => {
   const { password, email } = req.body;
 
   if (password === '' || email === '') {
@@ -20,7 +24,7 @@ router.post('/login', assets.annonRoute, async (req, res, next) => {
   }
 
   try {
-    const userFound = await Model.findOne({ email });
+    const userFound = await User.findOne({ email });
     if (!userFound) {
       console.log("User doesn't exists");
       return res.redirect('/signup');
@@ -36,33 +40,37 @@ router.post('/login', assets.annonRoute, async (req, res, next) => {
   }
 });
 
-router.get('/signup', assets.annonRoute, (req, res) => {
-  res.render('auth/signup', { errorMessage: req.flash('error') });
+router.get('/signup', assets.anonRoute, (req, res) => {
+  res.render('auth/signup', { title: 'Sign Up' });
 });
 
-router.post('/signup', assets.annonRoute, async (req, res, next) => {
+router.post('/signup', assets.anonRoute, async (req, res, next) => {
   const { username, password, email } = req.body;
 
   if (username === '' || password === '' || email === '') {
-    req.flash('error', 'No empty filds allowed.');
+    req.flash('error', 'No empty fields allowed.');
     console.log('No empty filds allowed.');
     return res.redirect('/signup');
   }
 
   try {
-    const userFound = await Model.findOne({ email });
+    const userFound = await User.findOne({ email });
     if (userFound) {
       req.flash('error', `${email} already exists`);
       console.log(`${email} already exists`);
       return res.redirect('/signup');
     }
     const hashedpassword = bcrypt.hashSync(password, 10);
-    await Model.create({ username, password: hashedpassword, email });
+    await User.create({ username, email, password: hashedpassword });
     req.flash('success', 'User succesfully created.');
     return res.redirect('/');
   } catch (error) {
     next(error);
   }
+});
+
+router.get('/success', (req, res) => {
+  res.render('success', { title: 'Success' });
 });
 
 module.exports = router;

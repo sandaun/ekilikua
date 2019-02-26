@@ -8,7 +8,7 @@ module.exports = {
   },
   anonRoute: (req, res, next) => {
     if (req.session.currentUser) {
-      res.redirect('/');
+      res.redirect('/success');
     } else {
       next();
     }

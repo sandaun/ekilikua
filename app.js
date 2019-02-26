@@ -13,22 +13,20 @@ const MongoStore = require('connect-mongo')(session);
 const sassMiddleware = require('node-sass-middleware');
 
 // notifications handle
-// const { messages } = require('./assets');
+const { messages } = require('./assets');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 // mongodb connect
-// (async () => {
-//   try{
-//     await mongoose.connect(`${process.env.MONGODB_URI}${process.env.MONGODB_NAME}`, { useNewUrlParser: true });
-//     console.log(`Conected to ${process.env.MONGODB_NAME}`);
-//   }catch{
-//     err => {
-//       console.error(`Error conecting to ${process.env.MONGODB_NAME}. `, err);
-//     }
-//   }
-// })();N
+(async () => {
+  try {
+    const conection = await mongoose.connect(`${process.env.MONGODB_URI}`, { useNewUrlParser: true });
+    console.log(`Connected to Mongo! Database name: "${conection.connections[0].name}"`);
+  } catch (err) {
+    console.error('Error conecting to Mongo database.', err);
+  }
+})();
 
 const app = express();
 
@@ -46,25 +44,25 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(session({
-//   store: new MongoStore({
-//     mongooseConnection: mongoose.connection,
-//     ttl: 24 * 60 * 60, // 1 day
-//   }),
-//   secret: process.env.SESSION_SECRET,
-//   resave: true,
-//   saveUninitialized: true,
-//   cookie: {
-//     maxAge: 24 * 60 * 60 * 1000,
-//   },
-// }));
+app.use(session({
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60, // 1 day
+  }),
+  secret: process.env.SESSION_SECRET || 'starterKit',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000,
+  },
+}));
 // app.use((req, res, next) => {
 //   // app.locals.currentUser = req.session.currentUser;
 //   res.locals.currentUser = req.session.currentUser;
 //   next();
 // });
-// app.use(flash());
-// app.use(messages);
+app.use(flash());
+app.use(messages);
 app.use(sassMiddleware({
   src: path.join(__dirname, 'sass'),
   dest: path.join(__dirname, 'public'),
