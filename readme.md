@@ -89,33 +89,81 @@ It's a platform where you can find the classes of anything you want to learn and
 User model
 
 ```json
-username: String
-password: String
+ name: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true, unique: true },
+  avatar: {
+    type: String,
+    default: 'http://illustrationfriday.com/wp-content/uploads/2018/09/food-460x650.png',
+  },
+  classes: Array,
+}, {
+  timestamps: true,
+});
 ```
 
 Class model
 
 ```json
-owner: ObjectId<User>
-name: String
-description: String
-date: Date
-location: String
-attendees: [ObjectId<User>]
+title: String,
+  userID: {
+    type: ObjectId,
+    ref: 'User',
+  },  
+  categoryID: {
+    type: ObjectId,
+    ref: 'Category',
+    required: true,
+  },
+  subcategoryID: {
+    type: ObjectId,
+    ref: 'Category',
+    required: true,
+  },
+  level: {
+    type: String,
+    enum: ['ABC Principals', 'Amateur iniciation', 'Advanced', 'Madafaking Pro'],
+  },
+  description: String,
+  alumns: Array,
+  price: {
+    type: Number,
+    min: 1,
+  },
+  duration: {
+    type: Number,
+    min: 15,
+  },
+  created: {
+    type: Date,
+    default: Date.now,
+  },
+}, {
+  timestamps: true,
+});
 ```
 
 Categories model
 
 ```json
-username: String
-password: String
+  name: {
+    type: String,
+    enum: ['Academic', 'Sports', 'Music', 'Leisure'],
+  },
 ```
 
 Subcategories model
 
 ```json
-username: String
-password: String
+  name: {
+    type: String,
+    enum: ['Piano', 'Violin', 'Esqui', '...'], // Como lo hacemos para no mezclar
+  },
+  categoryID: {
+    type: ObjectId,
+    ref: 'Category',
+    required: true,
+  },
 ```
 
 ## Trello
