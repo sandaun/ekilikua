@@ -17,6 +17,10 @@ const { messages } = require('./assets');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+const classesRouter = require('./routes/classes');
+
+
 
 // mongodb connect
 (async () => {
@@ -72,6 +76,8 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/auth', authRouter);
+app.use('/classes', classesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
