@@ -24,7 +24,7 @@ const classSchema = new Schema({
     enum: ['ABC Principals', 'Amateur iniciation', 'Advanced', 'Madafaking Pro'],
   },
   description: String,
-  // alumns: Array,
+  alumns: Array,
   price: {
     type: Number,
     min: 1,
@@ -37,6 +37,8 @@ const classSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+}, {
+  timestamps: true,
 });
 
 const myModel = mongoose.model('Class', classSchema);

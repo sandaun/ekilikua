@@ -16,7 +16,7 @@ const userSchema = new Schema({
     type: String,
     default: 'http://illustrationfriday.com/wp-content/uploads/2018/09/food-460x650.png',
   },
-  // classes: Array,
+  classes: Array,
 }, {
   timestamps: true,
 });
