@@ -20,8 +20,6 @@ const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const classesRouter = require('./routes/classes');
 
-
-
 // mongodb connect
 (async () => {
   try {
@@ -60,11 +58,11 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000,
   },
 }));
-// app.use((req, res, next) => {
-//   // app.locals.currentUser = req.session.currentUser;
-//   res.locals.currentUser = req.session.currentUser;
-//   next();
-// });
+app.use((req, res, next) => {
+  // app.locals.currentUser = req.session.currentUser;
+  res.locals.currentUser = req.session.currentUser;
+  next();
+});
 app.use(flash());
 app.use(messages);
 app.use(sassMiddleware({
