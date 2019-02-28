@@ -7,7 +7,7 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res) => {
-  res.render('index', { title: 'JdeJ', copyright: '© 2019 JdeJ' });
+  res.render('index', { title: 'Ekilikua', copyright: '© 2019 Ekilikua' });
 });
 
 router.get('/login', assets.anonRoute, (req, res) => {
