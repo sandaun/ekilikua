@@ -4,7 +4,13 @@ const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 
 const mySchema = new Schema({
-  title: String,
+  name: String,
+  email: String,
+  password: String,
+  profile: {
+    type: String,
+    default: 'https://images.media-allrecipes.com/images/75131.jpg',
+  },
   level: {
     type: String,
     enum: ['asy Peasy', 'Amateur Chef', 'UltraPro Chef'],
