@@ -1,0 +1,24 @@
+<h2><%= currentUser.username %> Classes to attend</h2>
+<ul>
+  <% classes.forEach((class) => { %>
+    <li class="list-group-item">
+      <a href="/classes/<%= class._id %>">
+        <%= class.title %>
+      </a>
+      <p>Of <% class.categoryID %> <% class.subcategoryID %></p>
+      <p>The schedule is <% class.days%> <% class.schedule %></p>
+      <ul>
+        <% class.alumns.forEach((alumn) => { %>
+          <li>
+            <% alumn.name %>
+          </li>
+        <% }) %>
+      </ul>
+      <form action="/classes/<%= class._id %>/delete" method="post">
+        <input type="submit" value="Abandon class">
+      </form>
+    </li>
+  <% })%>
+</ul>
+<a href="/user/classes/add"></a>
+<p><a href="/">Go Home and see all classes</a></p>

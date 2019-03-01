@@ -1,0 +1,18 @@
+<h2>Your Profile</h2>
+<form action="/users/profile" method="post">
+  <label for="name">Name</label>
+  <input type="text" name="name" id="name" value="<%= currentUser.name %>">
+  <label for="email">Email</label>
+  <input type="text" name="email" id="email" value="<%= currentUser.email %>">
+  <label for="password">Password</label>
+  <input type="password" name="password" id="password" value="<%= currentUser.password %>">
+  <% if (!currentUser.description) {%>
+    <label for="description">Description</label>
+    <input type="description" name="description" id="description" value="Add your description">
+  <% } else {%>
+    <label for="description">Description</label>
+    <input type="description" name="description" id="description" value="<%= currentUser.description %>">
+  <% } %>
+  <input type="submit" value="Accept changes">
+</form>
+<p><a href="/">Cancel</a> changes and go Home</p>

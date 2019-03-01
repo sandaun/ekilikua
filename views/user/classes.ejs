@@ -1,0 +1,17 @@
+<h2> Class options</h2>
+<ul>
+  <li>
+    <% if (currentUser.classes.length > 0) { %>
+    <a href="/classes/models">What you are teaching</a>
+    <% } else { %>
+    <a href="/classes/newclass">Create a new class</a>
+    <% } %>
+  </li>
+  <li>
+    <a href="/classes/attending">The classes you are attending</a>
+  </li>
+  <li>
+    <a href="/classes/teaching">Booked classes to teach</a>
+  </li>
+</ul>
+<p><a href="/">Go back Home and see all classes</a></p>
