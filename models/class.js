@@ -8,7 +8,7 @@ const classSchema = new Schema({
   userID: {
     type: ObjectId,
     ref: 'User',
-  },  
+  }, 
   categoryID: {
     type: ObjectId,
     ref: 'Category',
@@ -22,6 +22,15 @@ const classSchema = new Schema({
   level: {
     type: String,
     enum: ['ABC Principals', 'Amateur iniciation', 'Advanced', 'Madafaking Pro'],
+  },
+  days: {
+    type: String,
+    enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+  },
+  schedule: {
+    type: Number,
+    min: 0,
+    max: 24,
   },
   description: String,
   alumns: Array,

@@ -12,6 +12,7 @@ const userSchema = new Schema({
   name: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true, unique: true },
+  description: String,
   avatar: {
     type: String,
     default: 'http://illustrationfriday.com/wp-content/uploads/2018/09/food-460x650.png',
