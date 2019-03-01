@@ -106,38 +106,38 @@ Class model
 
 ```json
 title: String,
-  userID: {
-    type: ObjectId,
-    ref: 'User',
-  },  
-  categoryID: {
-    type: ObjectId,
-    ref: 'Category',
-    required: true,
-  },
-  subcategoryID: {
-    type: ObjectId,
-    ref: 'Category',
-    required: true,
-  },
-  level: {
-    type: String,
-    enum: ['ABC Principals', 'Amateur iniciation', 'Advanced', 'Madafaking Pro'],
-  },
-  description: String,
-  alumns: Array,
-  price: {
-    type: Number,
-    min: 1,
-  },
-  duration: {
-    type: Number,
-    min: 15,
-  },
-  created: {
-    type: Date,
-    default: Date.now,
-  },
+userID: {
+  type: ObjectId,
+  ref: 'User',
+},  
+categoryID: {
+  type: ObjectId,
+  ref: 'Category',
+  required: true,
+},
+subcategoryID: {
+  type: ObjectId,
+  ref: 'Category',
+  required: true,
+},
+level: {
+  type: String,
+  enum: ['ABC Principals', 'Amateur iniciation', 'Advanced', 'Madafaking Pro'],
+},
+description: String,
+alumns: Array,
+price: {
+  type: Number,
+  min: 1,
+},
+duration: {
+  type: Number,
+  min: 15,
+},
+created: {
+  type: Date,
+  default: Date.now,
+},
 }, {
   timestamps: true,
 });
@@ -155,7 +155,7 @@ Categories model
 Subcategories model
 
 ```json
-  name: {
+  name: { 
     type: String,
     enum: ['Piano', 'Violin', 'Esqui', '...'], // Como lo hacemos para no mezclar
   },
