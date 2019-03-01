@@ -5,12 +5,12 @@ const User = require('../models/user');
 
 const router = express.Router();
 
-/* GET home page. */
-
+//Renders log in form
 router.get('/', assets.anonRoute, (req, res) => {
   res.render('auth/login', { title: 'Log In' });
 });
 
+//Submits login form
 router.post('/', assets.anonRoute, async (req, res, next) => {
   const { password, email } = req.body;
 
@@ -23,14 +23,16 @@ router.post('/', assets.anonRoute, async (req, res, next) => {
   try {
     const userFound = await User.findOne({ email });
     if (!userFound) {
+      req.flash('error', "User doesn't exist.");
       console.log("User doesn't exists");
       return res.redirect('/auth/signup');
     }
     if (bcrypt.compareSync(password, userFound.password)) {
       req.session.currentUser = userFound;
-      // return res.render('/index', { title: 'Ekilikua', copyright: '© 2019 Ekilikua', name: userFound.name });
+      req.flash('success', 'User succesfully logged.');
       return res.redirect('/');
     }
+    req.flash('error', 'Email or password incorrect.');
     console.log('Email or password incorrect.');
     return res.redirect('/auth');
   } catch (error) {
@@ -38,14 +40,16 @@ router.post('/', assets.anonRoute, async (req, res, next) => {
   }
 });
 
+//Renders sign up form
 router.get('/signup', assets.anonRoute, (req, res) => {
   res.render('auth/signup', { title: 'Sign Up' });
 });
 
+//Submits sign up form
 router.post('/signup', assets.anonRoute, async (req, res, next) => {
-  const { name, password, email } = req.body;
+  const { name, password, email, description } = req.body;
 
-  if (name === '' || password === '' || email === '') {
+  if (name === '' || password === '' || email === '' || description === '') {
     req.flash('error', 'No empty fields allowed.');
     console.log('No empty filds allowed.');
     return res.redirect('/signup');
@@ -59,7 +63,7 @@ router.post('/signup', assets.anonRoute, async (req, res, next) => {
       return res.redirect('/signup');
     }
     const hashedpassword = bcrypt.hashSync(password, 10);
-    await User.create({ name, email, password: hashedpassword });
+    await User.create({ name, email, description, password: hashedpassword });
     req.flash('success', 'User succesfully created.');
     return res.redirect('/auth');
   } catch (error) {
