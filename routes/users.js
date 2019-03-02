@@ -58,13 +58,9 @@ router.get('/classes', (req, res) => {
 router.get('/classes/own', async (req, res) => {
   const userID = res.locals.currentUser._id;
   try {
-    const { classes } = await User.find({ userID });
-    const userOwnClasses = [];
-    classes.forEach(async function (element) {
-      userOwnClasses.push((await Class.find({ element })));
-    });
-    console.log('User own classes: ', userOwnClasses);
-    res.render('user/classes/teaching', { userOwnClasses, title: 'Own classes' });
+    const { classes } = await User.find({ userID }).populate;
+    console.log('User own classes: ', classes);
+    res.render('user/classes/own', { classes, title: 'Own classes' });
   } catch (error) {
     next(error);
   }
@@ -104,7 +100,9 @@ router.post('/classes/new', async (req, res) => {
   const userID = res.locals.currentUser._id;
   const { title, category, subcategory, level, description, days, schedule, price, duration } = req.body;
   try {
-    await Class.create({ title, userID, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration });
+    const createdClass = await Class.create({ title, userID, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration });
+    const userModifiedData = await User.findByIdAndUpdate(userID, { $push: { classes: createdClass._id  } }, { new:true });
+    req.session.currentUser = userModifiedData;
     console.log('Class succesfully created.');
     res.redirect('/users/classes');
   } catch (error) {
