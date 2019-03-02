@@ -46,6 +46,10 @@ const classSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  signon: {
+    type: Boolean,
+    default: false,
+  },
 }, {
   timestamps: true,
 });
