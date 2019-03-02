@@ -8,7 +8,7 @@ const classSchema = new Schema({
   userID: {
     type: ObjectId,
     ref: 'User',
-  }, 
+  },
   categoryID: {
     type: ObjectId,
     ref: 'Category',

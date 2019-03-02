@@ -196,7 +196,10 @@ router.post('/classes/teaching/:classID', async (req, res) => {
 // User logout
 router.get('/logout', (req, res) => {
   req.session.destroy((err) => {
-    res.redirect('/');
+    if(err) {
+      return next(err);
+    }
+    return res.redirect('/');
   });
 });
 
