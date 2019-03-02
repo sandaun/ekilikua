@@ -1,6 +1,8 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 const assets = require('../assets');
 const User = require('../models/user');
+const Class = require('../models/class');
 
 const router = express.Router();
 router.use(assets.authRoute);
@@ -38,7 +40,7 @@ router.post('/profile', async (req, res) => {
     await User.findByIdAndUpdate(userID, { name, description, password: hashedpassword });
     req.flash('success', 'User succesfully updated.');
     console.log('User succesfully updated.');
-    return res.redirect('/');
+    return res.redirect('/users');
   } catch (error) {
     next(error);
   }
@@ -55,8 +57,8 @@ router.get('/classes/own', async (req, res) => {
   try {
     const { classes } = await User.find({ userID });
     const userOwnClasses = [];
-    classes.forEach(class => {
-      userOwnClasses.push(await Class.find({ class }));
+    classes.forEach(async function (element) {
+      userOwnClasses.push((await Class.find({ element })));
     });
     console.log('User own classes: ', userOwnClasses);
     res.render('/classes/teaching', { userOwnClasses, title: 'Own classes' });
@@ -155,8 +157,8 @@ router.get('/classes/teaching', async (req, res) => {
   try {
     const { classes } = await User.find({ userID });
     const userTeachingClasses = [];
-    classes.forEach(class => {
-      userTeachingClasses.push(await Class.find({ class }));
+    classes.forEach(async function (element) {
+      userTeachingClasses.push(await Class.find({ element }));
     });
     console.log('User teaching classes: ', userTeachingClasses);
     res.render('/classes/teaching', { userTeachingClasses, title: 'Classes to teach' });

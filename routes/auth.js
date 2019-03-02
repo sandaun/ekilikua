@@ -5,12 +5,12 @@ const User = require('../models/user');
 
 const router = express.Router();
 
-//Renders log in form
+// Renders log in form
 router.get('/', assets.anonRoute, (req, res) => {
   res.render('auth/login', { title: 'Log In' });
 });
 
-//Submits login form
+// Submits login form
 router.post('/', assets.anonRoute, async (req, res, next) => {
   const { password, email } = req.body;
 
@@ -40,12 +40,12 @@ router.post('/', assets.anonRoute, async (req, res, next) => {
   }
 });
 
-//Renders sign up form
+// Renders sign up form
 router.get('/signup', assets.anonRoute, (req, res) => {
   res.render('auth/signup', { title: 'Sign Up' });
 });
 
-//Submits sign up form
+// Submits sign up form
 router.post('/signup', assets.anonRoute, async (req, res, next) => {
   const { name, password, email, description } = req.body;
 
