@@ -7,9 +7,9 @@ const Class = require('../models/class');
 const router = express.Router();
 router.use(assets.authRoute);
 
-//User homepage
+// User homepage
 router.get('/', (req, res) => {
-  res.render('user/index');
+  res.render('user/index', { title: res.locals.currentUser.name });
 });
 
 // GETS the user profile landing page, where he can directly edit over his information (no image yet)
@@ -26,18 +26,21 @@ router.get('/profile', async (req, res) => {
 // POST submits profile edit form
 router.post('/profile', async (req, res) => {
   //el email no debería poder cambiarlo
-  const { name, description, password } = req.body;
+  //const { name, description, password } = req.body;
+  const { name, description } = req.body;
   const userID = res.locals.currentUser._id;
 
-  if (name === '' || password === '') {
+  if (name === '' || description === '') {
     req.flash('error', 'No empty fields allowed.');
     console.log('No empty filds allowed.');
     return res.redirect('/profile');
   }
 
   try {
-    const hashedpassword = bcrypt.hashSync(password, 10);
-    await User.findByIdAndUpdate(userID, { name, description, password: hashedpassword });
+    //const hashedpassword = bcrypt.hashSync(password, 10);
+    //await User.findByIdAndUpdate(userID, { name, description, password: hashedpassword });
+    const userModifiedData = await User.findByIdAndUpdate(userID, { name, description }, { new:true });
+    req.session.currentUser = userModifiedData;
     req.flash('success', 'User succesfully updated.');
     console.log('User succesfully updated.');
     return res.redirect('/users');
