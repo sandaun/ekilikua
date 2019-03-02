@@ -33,7 +33,7 @@ const classSchema = new Schema({
     max: 24,
   },
   description: String,
-  alumns: Array,
+  alumns: [{ type: ObjectId, ref: 'User' }],
   price: {
     type: Number,
     min: 1,
