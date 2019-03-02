@@ -64,7 +64,7 @@ router.get('/classes/own', async (req, res) => {
       userOwnClasses.push((await Class.find({ element })));
     });
     console.log('User own classes: ', userOwnClasses);
-    res.render('/classes/teaching', { userOwnClasses, title: 'Own classes' });
+    res.render('user/classes/teaching', { userOwnClasses, title: 'Own classes' });
   } catch (error) {
     next(error);
   }
@@ -76,7 +76,7 @@ router.get('/classes/own/:classID', async (req, res) => {
   try {
     const userOwnClass = await Class.find({ classID });
     console.log('Attending class: ', userOwnClass);
-    res.render('/classes/own/class', { userOwnClass, title: 'Own class' });
+    res.render('user/classes/own/class', { userOwnClass, title: 'Own class' });
   } catch (error) {
     next(error);
   }
@@ -88,7 +88,7 @@ router.post('/classes/own/:classID', async (req, res) => {
   try {
     await Class.findByIdAndDelete({ classID });
     console.log('Own class succesfully deleted.');
-    res.redirect('/classes/own');
+    res.redirect('user/classes/own');
   } catch (error) {
     next(error);
   }
@@ -96,17 +96,17 @@ router.post('/classes/own/:classID', async (req, res) => {
 
 //Form to create new own class
 router.get('/classes/new', async (req, res) => {
-  res.render('/classes/newclass');
+  res.render('user/classes/newclass', { title: 'New Class' });
 });
 
 //Submits form to create new own class for the user
 router.post('/classes/new', async (req, res) => {
   const userID = res.locals.currentUser._id;
-  const { title, categoryID, subcategoryID, level, description, price, duration } = req.body;
+  const { title, category, subcategory, level, description, days, schedule, price, duration } = req.body;
   try {
-    await Class.create({ title, userID, categoryID, subcategoryID, level, description, price, duration });
+    await Class.create({ title, userID, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration });
     console.log('Class succesfully created.');
-    res.redirect('user/classes');
+    res.redirect('/users/classes');
   } catch (error) {
     next(error);
   }
@@ -119,7 +119,7 @@ router.get('/classes/attending', async (req, res) => {
   try {
     const { classes:userAttendingClasses } = await Class.find({ userID });
     console.log('User attending clases: ', userAttendingClasses);
-    res.render('/classes/attending', { userAttendingClasses, title: 'Classes to Attend' });
+    res.render('user/classes/attending', { userAttendingClasses, title: 'Classes to Attend' });
   } catch (error) {
     next(error);
   }
@@ -133,7 +133,7 @@ router.get('/classes/attending/:classID', async (req, res) => {
     //discriminar en la busqueda en las que el user sea teacher
     const userAttendingClass = await Class.find({ classID });
     console.log('Attending class: ', userAttendingClass);
-    res.render('/classes/attending', { userAttendingClass, title: 'Class to Attend' });
+    res.render('user/classes/attending', { userAttendingClass, title: 'Class to Attend' });
   } catch (error) {
     next(error);
   }
@@ -147,7 +147,7 @@ router.post('/classes/attending/:classID', async (req, res) => {
     //borro el currentuser_ID de esa clase
     //const { classes:userAttendingClasses } = await Class.find({ classID });
     console.log('Succesfully leaved.');
-    res.redirect('/classes/attending');
+    res.redirect('user/classes/attending');
   } catch (error) {
     next(error);
   }
@@ -164,7 +164,7 @@ router.get('/classes/teaching', async (req, res) => {
       userTeachingClasses.push(await Class.find({ element }));
     });
     console.log('User teaching classes: ', userTeachingClasses);
-    res.render('/classes/teaching', { userTeachingClasses, title: 'Classes to teach' });
+    res.render('user/classes/teaching', { userTeachingClasses, title: 'Classes to teach' });
   } catch (error) {
     next(error);
   }
@@ -177,7 +177,7 @@ router.get('/classes/teaching/:classID', async (req, res) => {
   try {
     const userTeachingClass = await Class.find({ classID });
     console.log('User teaching class: ', userTeachingClass);
-    res.render('/classes/teaching', { userTeachingClass, title: 'Class to teach' });
+    res.render('user/classes/teaching', { userTeachingClass, title: 'Class to teach' });
   } catch (error) {
     next(error);
   }
@@ -190,7 +190,7 @@ router.post('/classes/teaching/:classID', async (req, res) => {
   try {
     await Class.findByIdAndDelete({ classID });
     console.log('Teaching class deleted.');
-    res.redirect('/classes/teaching');
+    res.redirect('user/classes/teaching');
   } catch (error) {
     next(error);
   }

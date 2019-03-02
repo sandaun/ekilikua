@@ -24,7 +24,7 @@
     "node-sass-middleware": "^0.11.0"
   },
   "devDependencies": {
-    "eslint": "^5.13.0",
+    "eslint": "^5.15.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
     "nodemon": "^1.18.10"

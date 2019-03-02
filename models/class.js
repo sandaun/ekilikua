@@ -9,16 +9,18 @@ const classSchema = new Schema({
     type: ObjectId,
     ref: 'User',
   },
-  categoryID: {
-    type: ObjectId,
-    ref: 'Category',
-    required: true,
-  },
-  subcategoryID: {
-    type: ObjectId,
-    ref: 'Category',
-    required: true,
-  },
+  categoryID: String,
+  subcategoryID: String,
+  // categoryID: {
+  //   type: ObjectId,
+  //   ref: 'Category',
+  //   required: true,
+  // },
+  // subcategoryID: {
+  //   type: ObjectId,
+  //   ref: 'Category',
+  //   required: true,
+  // },
   level: {
     type: String,
     enum: ['ABC Principals', 'Amateur iniciation', 'Advanced', 'Madafaking Pro'],
@@ -42,10 +44,6 @@ const classSchema = new Schema({
     type: Number,
     min: 15,
   },
-  created: {
-    type: Date,
-    default: Date.now,
-  },
   signon: {
     type: Boolean,
     default: false,
@@ -54,6 +52,4 @@ const classSchema = new Schema({
   timestamps: true,
 });
 
-const myModel = mongoose.model('Class', classSchema);
-
-module.exports = myModel;
+module.exports = mongoose.model('Class', classSchema);

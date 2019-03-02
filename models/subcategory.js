@@ -4,10 +4,7 @@ const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 
 const subcategorySchema = new Schema({
-  name: {
-    type: String,
-    enum: ['Piano', 'Violin', 'Esqui', '...'], // Como lo hacemos para no mezclar
-  },
+  name: String,
   categoryID: {
     type: ObjectId,
     ref: 'Category',
@@ -15,6 +12,6 @@ const subcategorySchema = new Schema({
   },
 });
 
-const myModel = mongoose.model('Subcategorie', subcategorySchema);
+const myModel = mongoose.model('Subcategory', subcategorySchema);
 
 module.exports = myModel;
