@@ -96,20 +96,20 @@ router.post('/classes/own/:classID/update', async (req, res, next) => {
   const { title, category, subcategory, level, description, days, schedule, price, duration } = req.body;
   try {
     const updatedClass = await Class.findByIdAndUpdate(classID, { title, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration }, { new:true });
-    console.log('Class succesfully updated:', updatedClass);
-    res.redirect('user/classes/own');
+    console.log('Class succesfully updated: ', updatedClass);
+    res.redirect('/users/classes/own');
   } catch (error) {
     next(error);
   }
 });
 
-//submits User classes: own
+// Delete user own class
 router.post('/classes/own/:classID/delete', async (req, res, next) => {
   const { classID } = req.params;
   try {
-    await Class.findByIdAndDelete(classID);
-    console.log('Own class succesfully deleted.');
-    res.redirect('user/classes/own');
+    const deletedClass = await Class.findByIdAndDelete(classID);
+    console.log('Own class succesfully deleted: ', deletedClass);
+    res.redirect('/users/classes/own');
   } catch (error) {
     next(error);
   }
@@ -129,7 +129,7 @@ router.post('/classes/new', async (req, res) => {
     const userModifiedData = await User.findByIdAndUpdate(userID, { $push: { classes: createdClass._id  } }, { new:true });
     req.session.currentUser = userModifiedData;
     console.log('Class succesfully created.');
-    res.redirect('/users/classes');
+    res.redirect('/users/classes/own');
   } catch (error) {
     next(error);
   }
