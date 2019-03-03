@@ -106,8 +106,11 @@ router.post('/classes/own/:classID/update', async (req, res, next) => {
 // Delete user own class
 router.post('/classes/own/:classID/delete', async (req, res, next) => {
   const { classID } = req.params;
+  const userID = res.locals.currentUser._id;
+
   try {
     const deletedClass = await Class.findByIdAndDelete(classID);
+    await User.findByIdAndUpdate(userID, { $pullAll: { classes: [classID] } }, { new: true });
     console.log('Own class succesfully deleted: ', deletedClass);
     res.redirect('/users/classes/own');
   } catch (error) {
@@ -115,7 +118,7 @@ router.post('/classes/own/:classID/delete', async (req, res, next) => {
   }
 });
 
-//Form to create new own class
+// Form to create new own class
 router.get('/classes/new', async (req, res) => {
   res.render('user/classes/newclass', { title: 'New Class' });
 });
@@ -138,7 +141,7 @@ router.post('/classes/new', async (req, res) => {
 //List of all user attending classes
 router.get('/classes/attending', async (req, res) => {
   const userID = res.locals.currentUser._id;
-  
+
   try {
     const { classes:userAttendingClasses } = await Class.find({ userID });
     console.log('User attending clases: ', userAttendingClasses);
@@ -151,7 +154,7 @@ router.get('/classes/attending', async (req, res) => {
 //View one user attending classes
 router.get('/classes/attending/:classID', async (req, res) => {
   const { classID } = req.params;
-  
+
   try {
     //discriminar en la busqueda en las que el user sea teacher
     const userAttendingClass = await Class.find({ classID });
