@@ -1,20 +1,16 @@
-<h2><%= currentUser.username %> Classes</h2>
+<h2><%= currentUser.name %> Classes</h2>
 <ul>
-  <% classes.forEach((class) => { %>
-    <li class="list-group-item">
-      <a href="/classes/<%= class._id %>">
-        <%= class.title %>
-      </a>
-      <p>Of <% class.categoryID %> <% class.subcategoryID %></p>
-      <p>The schedule is <% class.days%> <% class.schedule %></p>
-      <a href="/classes/<%= class._id %>/edit">
-        update
-      </a>
-      <form action="/classes/<%= class._id %>/delete" method="post">
+  <% classes.forEach((element) => { %>
+    <li>
+      <a href="/classes/<%= element._id %>"> <%= element.title %> </a>
+      <p>Of <%= element.categoryID %>, <%= element.subcategoryID %></p>
+      <p>The schedule is <%= element.days %> <%= element.schedule %></p>
+      <a href="/classes/<%= element._id %>/edit">update</a>
+      <form action="/classes/<%= element._id %>/delete" method="post">
         <input type="submit" value="delete">
       </form>
     </li>
-  <% })%>
+  <% }) %>
 </ul>
-<a href="/new"></a>
+<a href="classes/new">Create a new class</a>
 <p><a href="/">Go Home and see all classes</a></p>

@@ -58,7 +58,7 @@ router.get('/classes', (req, res) => {
 router.get('/classes/own', async (req, res) => {
   const userID = res.locals.currentUser._id;
   try {
-    const { classes } = await User.find({ userID }).populate;
+    const { classes } = await User.findById(userID).populate('classes');
     console.log('User own classes: ', classes);
     res.render('user/classes/own', { classes, title: 'Own classes' });
   } catch (error) {
@@ -79,7 +79,7 @@ router.get('/classes/own/:classID', async (req, res) => {
 });
 
 //submits User classes: own
-router.post('/classes/own/:classID', async (req, res) => {
+router.post('/classes/own/:classID/delete', async (req, res) => {
   const { classID } = req.params;
   try {
     await Class.findByIdAndDelete({ classID });
