@@ -1,0 +1,9 @@
+<h2><%= userOwnClass.title %></h2>
+<p>Of <%= userOwnClass.categoryID %>, <%= userOwnClass.subcategoryID %></p>
+<p>The schedule is <%= userOwnClass.days %> <%= userOwnClass.schedule %></p>
+<p>Price <%= userOwnClass.price %></p>
+<p>Duration <%= userOwnClass.duration %></p>
+<a href="<%= userOwnClass._id %>/update">update</a>
+<form action="/classes/<%= userOwnClass._id %>/delete" method="post">
+  <input type="submit" value="delete">
+</form>

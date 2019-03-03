@@ -54,8 +54,8 @@ router.get('/classes', (req, res) => {
   res.render('user/classes', { title: 'User classes' });
 });
 
-//User classes: own
-router.get('/classes/own', async (req, res) => {
+// List user classes own
+router.get('/classes/own', async (req, res, next) => {
   const userID = res.locals.currentUser._id;
   try {
     const { classes } = await User.findById(userID).populate('classes');
@@ -66,23 +66,51 @@ router.get('/classes/own', async (req, res) => {
   }
 });
 
-//User classes: own
-router.get('/classes/own/:classID', async (req, res) => {
+// View one user class
+router.get('/classes/own/:classID', async (req, res, next) => {
   const { classID } = req.params;
   try {
-    const userOwnClass = await Class.find({ classID });
-    console.log('Attending class: ', userOwnClass);
-    res.render('user/classes/own/class', { userOwnClass, title: 'Own class' });
+    const userOwnClass = await Class.findById(classID);
+    console.log('Own class: ', userOwnClass);
+    res.render('user/classes/classcard', { userOwnClass, title: 'Own class' });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Update one user class
+router.get('/classes/own/:classID/update', async (req, res, next) => {
+  const { classID } = req.params;
+  try {
+    const userOwnClass = await Class.findById(classID);
+    console.log('Own class: ', userOwnClass);
+    res.render('user/classes/update', { userOwnClass, title: 'Own class' });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Submits one user class update
+router.post('/classes/own/:classID/update', async (req, res, next) => {
+  const { classID } = req.params;
+  const userID = res.locals.currentUser._id;
+  const { title, category, subcategory, level, description, days, schedule, price, duration } = req.body;
+  try {
+    const createdClass = await Class.create({ title, userID, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration });
+    const userModifiedData = await User.findByIdAndUpdate(userID, { $push: { classes: createdClass._id  } }, { new:true });
+    req.session.currentUser = userModifiedData;
+    console.log('Class succesfully created.');
+    res.redirect('/users/classes');
   } catch (error) {
     next(error);
   }
 });
 
 //submits User classes: own
-router.post('/classes/own/:classID/delete', async (req, res) => {
+router.post('/classes/own/:classID/delete', async (req, res, next) => {
   const { classID } = req.params;
   try {
-    await Class.findByIdAndDelete({ classID });
+    await Class.findByIdAndDelete(classID);
     console.log('Own class succesfully deleted.');
     res.redirect('user/classes/own');
   } catch (error) {

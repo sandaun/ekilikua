@@ -2,15 +2,9 @@
 <ul>
   <% classes.forEach((element) => { %>
     <li>
-      <a href="/classes/<%= element._id %>"> <%= element.title %> </a>
-      <p>Of <%= element.categoryID %>, <%= element.subcategoryID %></p>
-      <p>The schedule is <%= element.days %> <%= element.schedule %></p>
-      <a href="/classes/<%= element._id %>/edit">update</a>
-      <form action="/classes/<%= element._id %>/delete" method="post">
-        <input type="submit" value="delete">
-      </form>
+      <a href="own/<%= element._id %>"> <%= element.title %> </a>
     </li>
   <% }) %>
 </ul>
 <a href="classes/new">Create a new class</a>
-<p><a href="/">Go Home and see all classes</a></p>
+<p><a href="/">Go Home</a></p>
