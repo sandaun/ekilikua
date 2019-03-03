@@ -93,14 +93,11 @@ router.get('/classes/own/:classID/update', async (req, res, next) => {
 // Submits one user class update
 router.post('/classes/own/:classID/update', async (req, res, next) => {
   const { classID } = req.params;
-  const userID = res.locals.currentUser._id;
   const { title, category, subcategory, level, description, days, schedule, price, duration } = req.body;
   try {
-    const createdClass = await Class.create({ title, userID, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration });
-    const userModifiedData = await User.findByIdAndUpdate(userID, { $push: { classes: createdClass._id  } }, { new:true });
-    req.session.currentUser = userModifiedData;
-    console.log('Class succesfully created.');
-    res.redirect('/users/classes');
+    const updatedClass = await Class.findByIdAndUpdate(classID, { title, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration }, { new:true });
+    console.log('Class succesfully updated:', updatedClass);
+    res.redirect('user/classes/own');
   } catch (error) {
     next(error);
   }
