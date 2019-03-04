@@ -138,59 +138,61 @@ router.post('/classes/new', async (req, res) => {
   }
 });
 
-//List of all user attending classes
-router.get('/classes/attending', async (req, res) => {
-  const userID = res.locals.currentUser._id;
+//List of all user learning classes
+router.get('/classes/learning', async (req, res) => {
+  const userID = res.locals.currentUser._id;  
 
   try {
-    const { classes:userAttendingClasses } = await Class.find({ userID });
-    console.log('User attending clases: ', userAttendingClasses);
-    res.render('user/classes/attending', { userAttendingClasses, title: 'Classes to Attend' });
+    const { classes:userLearningClasses } = await Class.find({ userID });
+    console.log('User learning clases: ', userLearningClasses);
+    res.render('user/classes/learning', { userLearningClasses, title: 'Classes to Attend' });
   } catch (error) {
     next(error);
   }
 });
 
-//View one user attending classes
-router.get('/classes/attending/:classID', async (req, res) => {
+//View one user learning classes
+router.get('/classes/learning/:classID', async (req, res) => {
   const { classID } = req.params;
 
   try {
     //discriminar en la busqueda en las que el user sea teacher
-    const userAttendingClass = await Class.find({ classID });
-    console.log('Attending class: ', userAttendingClass);
-    res.render('user/classes/attending', { userAttendingClass, title: 'Class to Attend' });
+    const userLearningClass = await Class.find({ classID });
+    console.log('learning class: ', userLearningClass);
+    res.render('user/classes/learning', { userLearningClass, title: 'Class to Attend' });
   } catch (error) {
     next(error);
   }
 });
 
 //Submits join/leave button
-router.post('/classes/attending/:classID', async (req, res) => {
+router.post('/classes/learning/:classID', async (req, res) => {
   const { classID } = req.params;
   
   try {
     //borro el currentuser_ID de esa clase
-    //const { classes:userAttendingClasses } = await Class.find({ classID });
+    //const { classes:userlearningClasses } = await Class.find({ classID });
     console.log('Succesfully leaved.');
-    res.redirect('user/classes/attending');
+    res.redirect('user/classes/learning');
   } catch (error) {
     next(error);
   }
 });
 
 //List of all user teaching classes
-router.get('/classes/teaching', async (req, res) => {
+router.get('/classes/teaching', async (req, res, next) => {
+
   const userID = res.locals.currentUser._id;
-  
   try {
-    const { classes } = await User.find({ userID });
-    const userTeachingClasses = [];
-    classes.forEach(async function (element) {
-      userTeachingClasses.push(await Class.find({ element }));
+    const { userOwnClasses } = await User.findById(userID).populate('classes');
+    const classes = [];
+    userOwnClasses.forEach((element) => {
+      if (element.alumns.length > 0) {
+        classes.push(element);
+      }
     });
-    console.log('User teaching classes: ', userTeachingClasses);
-    res.render('user/classes/teaching', { userTeachingClasses, title: 'Classes to teach' });
+    console.log('User own classes: ', classes);
+    res.render('user/classes/teaching', { classes, title: 'Teaching classes' });
   } catch (error) {
     next(error);
   }
@@ -209,13 +211,15 @@ router.get('/classes/teaching/:classID', async (req, res) => {
   }
 });
 
-//Submits join/leave button
-router.post('/classes/teaching/:classID', async (req, res) => {
+//Submits cancell button
+router.post('/classes/teaching/:classID', async (req, res, next) => {
   const { classID } = req.params;
-  
+  const userID = res.locals.currentUser._id;
+
   try {
-    await Class.findByIdAndDelete({ classID });
-    console.log('Teaching class deleted.');
+    const deletedClass = await Class.findByIdAndDelete(classID);
+    await User.findByIdAndUpdate(userID, { $pullAll: { classes: [classID] } }, { new: true });
+    console.log('Teaching class cancelled: ', deletedClass);
     res.redirect('user/classes/teaching');
   } catch (error) {
     next(error);
