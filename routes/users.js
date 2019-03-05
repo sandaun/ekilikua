@@ -144,7 +144,7 @@ router.get('/classes/attending', async (req, res, next) => {
   const userID = res.locals.currentUser._id;  
 
   try {
-    const { classes } = await Class.find({ alumns: [{ $in: [mongoose.Types.ObjectId(userID)] }] });
+    const classes = await Class.find({ alumns: { $in: [userID] } });
     console.log('User attending clases: ', classes);
     res.render('classes/classlist', { classes, view: 'attending' });
   } catch (error) {
