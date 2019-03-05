@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const assets = require('../assets');
 const User = require('../models/user');
@@ -123,7 +124,7 @@ router.get('/classes/new', async (req, res) => {
   res.render('user/classes/newclass', { title: 'New Class' });
 });
 
-//Submits form to create new own class for the user
+// Submits form to create new own class for the user
 router.post('/classes/new', async (req, res) => {
   const userID = res.locals.currentUser._id;
   const { title, category, subcategory, level, description, days, schedule, price, duration } = req.body;
@@ -138,12 +139,12 @@ router.post('/classes/new', async (req, res) => {
   }
 });
 
-//List of all user learning classes
-router.get('/classes/learning', async (req, res) => {
+// List of all user learning classes
+router.get('/classes/learning', async (req, res, next) => {
   const userID = res.locals.currentUser._id;  
 
   try {
-    const { classes:userLearningClasses } = await Class.find({ userID });
+    const { classes: userLearningClasses } = await Class.find({ alumns: [{ $in: [mongoose.Types.ObjectId(userID)] }] });
     console.log('User learning clases: ', userLearningClasses);
     res.render('user/classes/learning', { userLearningClasses, title: 'Classes to Attend' });
   } catch (error) {
@@ -151,12 +152,11 @@ router.get('/classes/learning', async (req, res) => {
   }
 });
 
-//View one user learning classes
-router.get('/classes/learning/:classID', async (req, res) => {
+// View one user learning classes
+router.get('/classes/learning/:classID', async (req, res, next) => {
   const { classID } = req.params;
 
   try {
-    //discriminar en la busqueda en las que el user sea teacher
     const userLearningClass = await Class.find({ classID });
     console.log('learning class: ', userLearningClass);
     res.render('user/classes/learning', { userLearningClass, title: 'Class to Attend' });
@@ -165,21 +165,21 @@ router.get('/classes/learning/:classID', async (req, res) => {
   }
 });
 
-//Submits join/leave button
-router.post('/classes/learning/:classID', async (req, res) => {
+// Submits leave button
+router.post('/classes/learning/:classID', async (req, res, next) => {
   const { classID } = req.params;
-  
+  const userID = res.locals.currentUser._id;
+
   try {
-    //borro el currentuser_ID de esa clase
-    //const { classes:userlearningClasses } = await Class.find({ classID });
-    console.log('Succesfully leaved.');
+    const deletedClass = await Class.findByIdAndUpdate(classID, { $pullAll: { alumns: [userID] } }, { new: true });
+    console.log('Succesfully leaved of: ', deletedClass);
     res.redirect('user/classes/learning');
   } catch (error) {
     next(error);
   }
 });
 
-//List of all user teaching classes
+// List of all user teaching classes
 router.get('/classes/teaching', async (req, res, next) => {
 
   const userID = res.locals.currentUser._id;
@@ -198,10 +198,10 @@ router.get('/classes/teaching', async (req, res, next) => {
   }
 });
 
-//View one user teaching classes
-router.get('/classes/teaching/:classID', async (req, res) => {
+// View one user teaching classes
+router.get('/classes/teaching/:classID', async (req, res, next) => {
   const { classID } = req.params;
-  
+
   try {
     const userTeachingClass = await Class.find({ classID });
     console.log('User teaching class: ', userTeachingClass);
@@ -211,7 +211,7 @@ router.get('/classes/teaching/:classID', async (req, res) => {
   }
 });
 
-//Submits cancell button
+// Submits cancell button
 router.post('/classes/teaching/:classID', async (req, res, next) => {
   const { classID } = req.params;
   const userID = res.locals.currentUser._id;
@@ -229,7 +229,7 @@ router.post('/classes/teaching/:classID', async (req, res, next) => {
 // User logout
 router.get('/logout', (req, res) => {
   req.session.destroy((err) => {
-    if(err) {
+    if (err) {
       return next(err);
     }
     return res.redirect('/');
