@@ -13,9 +13,18 @@
     </ul>
 </nav>
 <br>
-<h2> <%= view %> </h2>
+<% if (view === 'all') { %>
+  <h2>What do you want to learn today?</h2>
+<% } else if (view === 'own') { %>
+  <h2>Classes you own</h2>
+<% } else if (view === 'attending') { %>
+  <h2>Classes you are attending</h2>
+<% } else if (view === 'teaching') { %>
+  <h2>Classes you are teaching</h2>
+<% } %>
+
 <ul>
-  <% availableClasses.forEach((element) => { %>
+  <% classes.forEach((element) => { %>
     <li class="list-group-item">
       <a href="/classes/<%= element._id %>">
         <%= element.title %>
