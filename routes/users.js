@@ -50,6 +50,17 @@ router.post('/profile', async (req, res, next) => {
   }
 });
 
+// GETS the user card
+router.get('/:userID/profile', async (req, res, next) => {
+  const { userID } = req.params;
+  try {
+    const user = await User.findById(userID);
+    res.render('user/usercard', { user, view: 'user' });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Renders User classes (own, attending, learning) main view
 router.get('/classes', (req, res) => {
   res.render('user/classes', { title: 'User classes' });

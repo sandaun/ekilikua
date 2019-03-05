@@ -4,9 +4,9 @@ const Class = require('../models/class');
 const router = express.Router();
 
 // List of all available classes
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
-    const classes = await Class.find({});
+    const classes = await Class.find();
     console.log('All the available classes ', classes);
     res.render('classes/classlist', { classes, view: 'all' });
   } catch (error) {
@@ -14,11 +14,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
-  const { id } = req.params;
-  console.log(id);
+router.get('/:classID', async (req, res, next) => {
+  const { classID } = req.params;
   try {
-    const selectedClass = await Class.findById(id);
+    const selectedClass = await Class.findById(classID).populate('alumns');
     res.render('classes/classcard', { lesson: selectedClass, view: 'all' });
   } catch (error) {
     next(error);

@@ -24,10 +24,10 @@
 <% } %>
 
 <ul>
-  <% classes.forEach((element) => { %>
+  <% classes.forEach((lesson) => { %>
     <li class="list-group-item">
-      <a href="/classes/<%= element._id %>">
-        <%= element.title %>
+      <a href="/classes/<%= lesson._id %>">
+        <%= lesson.title %>
       </a>
     </li>
   <% })%>
