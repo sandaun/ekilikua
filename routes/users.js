@@ -139,26 +139,26 @@ router.post('/classes/new', async (req, res, next) => {
   }
 });
 
-// List of all user learning classes
-router.get('/classes/learning', async (req, res, next) => {
+// List of all user attending classes
+router.get('/classes/attending', async (req, res, next) => {
   const userID = res.locals.currentUser._id;  
 
   try {
     const { classes } = await Class.find({ alumns: [{ $in: [mongoose.Types.ObjectId(userID)] }] });
-    console.log('User learning clases: ', classes);
+    console.log('User attending clases: ', classes);
     res.render('classes/classlist', { classes, view: 'attending' });
   } catch (error) {
     next(error);
   }
 });
 
-// View one user learning classes
-router.get('/classes/learning/:classID', async (req, res, next) => {
+// View one user attending classes
+router.get('/classes/attending/:classID', async (req, res, next) => {
   const { classID } = req.params;
 
   try {
     const lesson = await Class.find({ classID });
-    console.log('learning class: ', lesson);
+    console.log('attending class: ', lesson);
     res.render('classes/classcard', { lesson, view: 'attending' });
   } catch (error) {
     next(error);
@@ -166,14 +166,14 @@ router.get('/classes/learning/:classID', async (req, res, next) => {
 });
 
 // Submits leave button
-router.post('/classes/learning/:classID', async (req, res, next) => {
+router.post('/classes/attending/:classID', async (req, res, next) => {
   const { classID } = req.params;
   const userID = res.locals.currentUser._id;
 
   try {
     const deletedClass = await Class.findByIdAndUpdate(classID, { $pullAll: { alumns: [userID] } }, { new: true });
     console.log('Succesfully leaved of: ', deletedClass);
-    res.redirect('user/classes/learning');
+    res.redirect('user/classes/attending');
   } catch (error) {
     next(error);
   }
