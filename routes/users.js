@@ -61,19 +61,19 @@ router.get('/classes/own', async (req, res, next) => {
   try {
     const { classes } = await User.findById(userID).populate('classes');
     console.log('User own classes: ', classes);
-    res.render('user/classes/own', { classes, title: 'Own classes' });
+    res.render('classes/classlist', { classes, view: 'own' });
   } catch (error) {
     next(error);
   }
 });
 
-// View one user class
+// View one own user class
 router.get('/classes/own/:classID', async (req, res, next) => {
   const { classID } = req.params;
   try {
-    const userOwnClass = await Class.findById(classID);
-    console.log('Own class: ', userOwnClass);
-    res.render('user/classes/classcard', { class: userOwnClass, title: 'Own class' });
+    const lesson = await Class.findById(classID);
+    console.log('Own class: ', lesson);
+    res.render('classes/classcard', { class: lesson, view: 'own' });
   } catch (error) {
     next(error);
   }
@@ -83,9 +83,9 @@ router.get('/classes/own/:classID', async (req, res, next) => {
 router.get('/classes/own/:classID/update', async (req, res, next) => {
   const { classID } = req.params;
   try {
-    const userOwnClass = await Class.findById(classID);
-    console.log('Own class: ', userOwnClass);
-    res.render('user/classes/update', { class: userOwnClass, title: 'Own class' });
+    const lesson = await Class.findById(classID);
+    console.log('Own class: ', lesson);
+    res.render('user/classes/update', { lesson, view: 'own' });
   } catch (error) {
     next(error);
   }
@@ -121,11 +121,11 @@ router.post('/classes/own/:classID/delete', async (req, res, next) => {
 
 // Form to create new own class
 router.get('/classes/new', async (req, res) => {
-  res.render('user/classes/newclass', { title: 'New Class' });
+  res.render('user/classes/newclass');
 });
 
 // Submits form to create new own class for the user
-router.post('/classes/new', async (req, res) => {
+router.post('/classes/new', async (req, res, next) => {
   const userID = res.locals.currentUser._id;
   const { title, category, subcategory, level, description, days, schedule, price, duration } = req.body;
   try {
@@ -146,7 +146,7 @@ router.get('/classes/learning', async (req, res, next) => {
   try {
     const { classes } = await Class.find({ alumns: [{ $in: [mongoose.Types.ObjectId(userID)] }] });
     console.log('User learning clases: ', classes);
-    res.render('user/classes/learning', { classes, title: 'Classes to Attend' });
+    res.render('classes/classlist', { classes, view: 'attending' });
   } catch (error) {
     next(error);
   }
@@ -157,9 +157,9 @@ router.get('/classes/learning/:classID', async (req, res, next) => {
   const { classID } = req.params;
 
   try {
-    const userLearningClass = await Class.find({ classID });
-    console.log('learning class: ', userLearningClass);
-    res.render('user/classes/learning', { class: userLearningClass, title: 'Class to Attend' });
+    const lesson = await Class.find({ classID });
+    console.log('learning class: ', lesson);
+    res.render('classes/classcard', { lesson, view: 'attending' });
   } catch (error) {
     next(error);
   }
@@ -192,7 +192,7 @@ router.get('/classes/teaching', async (req, res, next) => {
       }
     });
     console.log('User own classes: ', classes);
-    res.render('user/classes/teaching', { classes, title: 'Teaching classes' });
+    res.render('classes/classlist', { classes, view: 'teaching' });
   } catch (error) {
     next(error);
   }
@@ -203,9 +203,9 @@ router.get('/classes/teaching/:classID', async (req, res, next) => {
   const { classID } = req.params;
 
   try {
-    const userTeachingClass = await Class.find({ classID });
-    console.log('User teaching class: ', userTeachingClass);
-    res.render('user/classes/teaching', { class: userTeachingClass, title: 'Class to teach' });
+    const lesson = await Class.find({ classID });
+    console.log('User teaching class: ', lesson);
+    res.render('classes/classcard', { lesson, view: 'teaching' });
   } catch (error) {
     next(error);
   }
