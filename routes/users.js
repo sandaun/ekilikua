@@ -184,15 +184,15 @@ router.get('/classes/teaching', async (req, res, next) => {
 
   const userID = res.locals.currentUser._id;
   try {
-    const { userOwnClasses } = await User.findById(userID).populate('classes');
-    const classes = [];
-    userOwnClasses.forEach((element) => {
-      if (element.alumns.length > 0) {
-        classes.push(element);
+    const { classes } = await User.findById(userID).populate('classes');
+    const teachingClasses = [];
+    classes.forEach((lesson) => {
+      if (lesson.alumns.length > 0) {
+        teachingClasses.push(lesson);
       }
     });
-    console.log('User own classes: ', classes);
-    res.render('classes/classlist', { classes, view: 'teaching' });
+    console.log('User own classes: ', teachingClasses);
+    res.render('classes/classlist', { classes: teachingClasses, view: 'teaching' });
   } catch (error) {
     next(error);
   }
