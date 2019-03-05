@@ -3,23 +3,12 @@ const Class = require('../models/class');
 
 const router = express.Router();
 
-/* GET home page. */
-// router.get('/', (req, res, next) => {
-//   Class.find()
-//     .then((element) => {
-//       res.render('index', { element });
-//     })
-//     .catch((error) => {
-//       next(error);
-//     });
-// });
-
 // List of all available classes
 router.get('/', async (req, res) => {
   try {
     const availableClasses = await Class.find({});
     console.log('All the available classes ', availableClasses);
-    res.render('classes/index', { availableClasses, title: 'Choose your class' });
+    res.render('classes/classlist', { availableClasses, view: 'All' });
   } catch (error) {
     next(error);
   }
@@ -30,7 +19,7 @@ router.get('/:id', async (req, res, next) => {
   console.log(id);
   try {
     const selectedClass = await Class.findById(id);
-    res.render('classes/classcard', { selectedClass, title: selectedClass.title });
+    res.render('classes/classcard', { lesson: selectedClass, view: 'All' });
   } catch (error) {
     next(error);
   }

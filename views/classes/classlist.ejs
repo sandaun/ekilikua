@@ -1,0 +1,26 @@
+<nav>
+  <ul>
+      <% if (currentUser) { %>
+        <li><a href="/users/">Go to your homepage</a></li>
+        <li>
+          <a href="/users/logout">Log out</a>
+        </li>
+      <% } else { %>
+        <li>
+          <a href="/auth">Log in</a>
+        </li>
+      <% } %>
+    </ul>
+</nav>
+<br>
+<h2> <%= view %> </h2>
+<ul>
+  <% availableClasses.forEach((element) => { %>
+    <li class="list-group-item">
+      <a href="/classes/<%= element._id %>">
+        <%= element.title %>
+      </a>
+    </li>
+  <% })%>
+</ul>
+<p><a href="/">Home</a></p>

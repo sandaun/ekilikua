@@ -33,7 +33,7 @@ const classesRouter = require('./routes/classes');
 const app = express();
 
 // app title
-// app.locals.title = "";
+app.locals.title = 'Ekilikua';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
