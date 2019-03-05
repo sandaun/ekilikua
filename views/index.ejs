@@ -1,18 +1,23 @@
-<nav>
-  <% if (currentUser) { %>
-    <ul>
-      <li><a href="/users/profile">Edit your profile</a></li>
-      <li><a href="/users/classes">My Classes</a></li>
-    </ul>
-  <% } %>
-</nav>
 <h1>Eklilikua</h1>
 <% if (currentUser) { %>
 <p>Welcome <%= currentUser.name %></p>
-<a href="/users/logout">Log out</a>
-<% } else { %>
-<a href="/auth">Log in</a>
 <% } %>
+
+
+<nav>
+  <ul>
+      <% if (currentUser) { %>
+        <li><a href="/users/">Go to your homepage</a></li>
+        <li>
+          <a href="/users/logout">Log out</a>
+        </li>
+      <% } else { %>
+        <li>
+          <a href="/auth">Log in</a>
+        </li>
+      <% } %>
+    </ul>
+</nav>
 
 <p><%= copyright %></p>
 <!-- Partial include example -->

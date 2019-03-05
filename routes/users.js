@@ -14,18 +14,18 @@ router.get('/', (req, res) => {
 });
 
 // GETS the user profile landing page, where he can directly edit over his information (no image yet)
-router.get('/profile', async (req, res) => {
+router.get('/profile', async (req, res, next) => {
   const userID = res.locals.currentUser._id;
   try {
-    const userFound = await User.find({ userID });
-    res.render('user/profile', { userFound, title: 'Profile' });
+    const user = await User.findById( userID );
+    res.render('user/profile', { user, title: 'Profile' });
   } catch (error) {
     next(error);
   }
 });
 
 // POST submits profile edit form
-router.post('/profile', async (req, res) => {
+router.post('/profile', async (req, res, next) => {
   //el email no debería poder cambiarlo
   //const { name, description, password } = req.body;
   const { name, description } = req.body;
@@ -73,7 +73,7 @@ router.get('/classes/own/:classID', async (req, res, next) => {
   try {
     const userOwnClass = await Class.findById(classID);
     console.log('Own class: ', userOwnClass);
-    res.render('user/classes/classcard', { userOwnClass, title: 'Own class' });
+    res.render('user/classes/classcard', { class: userOwnClass, title: 'Own class' });
   } catch (error) {
     next(error);
   }
@@ -85,7 +85,7 @@ router.get('/classes/own/:classID/update', async (req, res, next) => {
   try {
     const userOwnClass = await Class.findById(classID);
     console.log('Own class: ', userOwnClass);
-    res.render('user/classes/update', { userOwnClass, title: 'Own class' });
+    res.render('user/classes/update', { class: userOwnClass, title: 'Own class' });
   } catch (error) {
     next(error);
   }
@@ -144,9 +144,9 @@ router.get('/classes/learning', async (req, res, next) => {
   const userID = res.locals.currentUser._id;  
 
   try {
-    const { classes: userLearningClasses } = await Class.find({ alumns: [{ $in: [mongoose.Types.ObjectId(userID)] }] });
-    console.log('User learning clases: ', userLearningClasses);
-    res.render('user/classes/learning', { userLearningClasses, title: 'Classes to Attend' });
+    const { classes } = await Class.find({ alumns: [{ $in: [mongoose.Types.ObjectId(userID)] }] });
+    console.log('User learning clases: ', classes);
+    res.render('user/classes/learning', { classes, title: 'Classes to Attend' });
   } catch (error) {
     next(error);
   }
@@ -159,7 +159,7 @@ router.get('/classes/learning/:classID', async (req, res, next) => {
   try {
     const userLearningClass = await Class.find({ classID });
     console.log('learning class: ', userLearningClass);
-    res.render('user/classes/learning', { userLearningClass, title: 'Class to Attend' });
+    res.render('user/classes/learning', { class: userLearningClass, title: 'Class to Attend' });
   } catch (error) {
     next(error);
   }
@@ -205,7 +205,7 @@ router.get('/classes/teaching/:classID', async (req, res, next) => {
   try {
     const userTeachingClass = await Class.find({ classID });
     console.log('User teaching class: ', userTeachingClass);
-    res.render('user/classes/teaching', { userTeachingClass, title: 'Class to teach' });
+    res.render('user/classes/teaching', { class: userTeachingClass, title: 'Class to teach' });
   } catch (error) {
     next(error);
   }
@@ -227,7 +227,7 @@ router.post('/classes/teaching/:classID', async (req, res, next) => {
 });
 
 // User logout
-router.get('/logout', (req, res) => {
+router.get('/logout', (req, res, next) => {
   req.session.destroy((err) => {
     if (err) {
       return next(err);
