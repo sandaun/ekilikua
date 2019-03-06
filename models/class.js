@@ -5,7 +5,7 @@ const { ObjectId } = Schema.Types;
 
 const classSchema = new Schema({
   title: String,
-  userID: {
+  professor: {
     type: ObjectId,
     ref: 'User',
   },

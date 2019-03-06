@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:classID', async (req, res, next) => {
   const { classID } = req.params;
   try {
-    const selectedClass = await Class.findById(classID).populate('alumns');
+    const selectedClass = await Class.findById(classID).populate('profesor alumns');
     res.render('classes/classcard', { lesson: selectedClass, view: 'all' });
   } catch (error) {
     next(error);

@@ -61,11 +61,6 @@ router.get('/:userID/profile', async (req, res, next) => {
   }
 });
 
-// Renders User classes (own, attending, learning) main view
-router.get('/classes', (req, res) => {
-  res.render('user/classes', { title: 'User classes' });
-});
-
 // List user classes own
 router.get('/classes/own', async (req, res, next) => {
   const userID = res.locals.currentUser._id;
@@ -82,9 +77,9 @@ router.get('/classes/own', async (req, res, next) => {
 router.get('/classes/own/:classID', async (req, res, next) => {
   const { classID } = req.params;
   try {
-    const lesson = await Class.findById(classID);
+    const lesson = await Class.findById(classID).populate('professor alumns');
     console.log('Own class: ', lesson);
-    res.render('classes/classcard', { class: lesson, view: 'own' });
+    res.render('classes/classcard', { lesson, view: 'own' });
   } catch (error) {
     next(error);
   }
@@ -168,7 +163,7 @@ router.get('/classes/attending/:classID', async (req, res, next) => {
   const { classID } = req.params;
 
   try {
-    const lesson = await Class.find({ classID });
+    const lesson = await Class.findById(classID).populate('professor alumns');
     console.log('attending class: ', lesson);
     res.render('classes/classcard', { lesson, view: 'attending' });
   } catch (error) {
@@ -214,7 +209,7 @@ router.get('/classes/teaching/:classID', async (req, res, next) => {
   const { classID } = req.params;
 
   try {
-    const lesson = await Class.find({ classID });
+    const lesson = await Class.findById(classID).populate('professor alumns');
     console.log('User teaching class: ', lesson);
     res.render('classes/classcard', { lesson, view: 'teaching' });
   } catch (error) {

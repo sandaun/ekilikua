@@ -1,5 +1,7 @@
 <h2><%= lesson.title %></h2>
 
+<p>Professor: <%= lesson.professor.name %></p>
+
 <p>Of <%= lesson.categoryID %>, <%= lesson.subcategoryID %></p>
 <p>The schedule is <%= lesson.days %> <%= lesson.schedule %></p>
 <p>Price <%= lesson.price %></p>
@@ -14,6 +16,7 @@
   <% }) %>
 </ul>
 
+<p></p>
 <a href="../users/classes/own/<%= lesson._id %>/update">update</a>
 <form action="../users/own/<%= lesson._id %>/delete" method="post">
   <input type="submit" value="delete">

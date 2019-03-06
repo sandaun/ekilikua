@@ -13,21 +13,30 @@
     </ul>
 </nav>
 <br>
-<% if (view === 'all') { %>
-  <h2>What do you want to learn today?</h2>
-<% } else if (view === 'own') { %>
-  <h2>Classes you own</h2>
-<% } else if (view === 'attending') { %>
-  <h2>Classes you are attending</h2>
-<% } else if (view === 'teaching') { %>
-  <h2>Classes you are teaching</h2>
-<% } %>
+
+<% switch (view) {
+  case 'all' : %>
+    <h2>What do you want to learn today?</h2>
+    <% break;
+  case 'own' : %>
+    <h2>Classes you want to teach</h2>
+    <% break;
+  case 'attending' : %>
+    <h2>Classes you are attending</h2>
+    <% break;
+    case 'teaching' : %>
+    <h2>Classes you are teaching</h2>
+    <% break; } %>
 
 <ul>
   <% classes.forEach((lesson) => { %>
     <li class="list-group-item">
-      <a href="/classes/<%= lesson._id %>">
-        <%= lesson.title %>
+      <% if (view === 'own' || view === 'attending' || view === 'teaching') { %>
+        <a href="../classes/<%= view %>/<%= lesson._id %>">
+      <% } else { %>
+        <a href="/classes/<%= lesson._id %>">
+      <% } %>
+      <%= lesson.title %>
       </a>
     </li>
   <% })%>
