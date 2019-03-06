@@ -11,7 +11,7 @@
 <ul>
   <% var booked = false; %>
   <% lesson.alumns.forEach( alumn => { %>
-    <% if (alumn.name === currentUser.name) {%>
+    <% if (currentUser && alumn.name === currentUser.name) {%>
       <% booked = true; %>
     <% } %>
     <li>
@@ -22,7 +22,8 @@
 
 <p></p>
 
-<% if (!(lesson.professor.name === currentUser.name)) {%>
+
+<% if (currentUser && !(lesson.professor.name === currentUser.name)) {%>
   <% if (!booked) {%>
     <a href="/classes/<%= lesson._id %>/join"> Join</a>
   <% } else { %>
@@ -32,9 +33,9 @@
 
 <p></p>
 
-<% if (lesson.professor.name === currentUser.name) {%>
-<a href="/users/classes/own/<%= lesson._id %>/update">update</a>
-<form action="/users/classes/own/<%= lesson._id %>/delete" method="post">
-  <input type="submit" value="delete">
-</form>
+<% if (currentUser && lesson.professor.name === currentUser.name) {%>
+  <a href="/users/classes/own/<%= lesson._id %>/update">update</a>
+  <form action="/users/classes/own/<%= lesson._id %>/delete" method="post">
+    <input type="submit" value="delete">
+  </form>
 <% } %>
