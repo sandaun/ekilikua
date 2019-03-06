@@ -34,10 +34,8 @@
       <% if (view === 'own' || view === 'attending' || view === 'teaching') { %>
         <a href="/users/classes/<%= view %>/<%= lesson._id %>">
       <% } else { %>
-        <a href="/classes/<%= lesson._id %>">
+        <%- include('../partials/miniclasscard.ejs', { lesson })%>
       <% } %>
-      <%= lesson.title %>
-      </a>
     </li>
   <% })%>
 </ul>

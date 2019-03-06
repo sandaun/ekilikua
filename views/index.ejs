@@ -18,7 +18,16 @@
       <% } %>
     </ul>
 </nav>
+<ul>
+  <% classes.forEach((lesson) => { %>
+    <li class="list-group-item">
+      <% if (view === 'own' || view === 'attending' || view === 'teaching') { %>
+        <a href="/users/classes/<%= view %>/<%= lesson._id %>">
+      <% } else { %>
+        <%- include('partials/miniclasscard.ejs', { lesson })%>
+      <% } %>
+    </li>
+  <% }) %>
+</ul>
 
 <p><%= copyright %></p>
-<!-- Partial include example -->
-<!-- <%- include('partials/form.ejs')%> -->
