@@ -22,7 +22,7 @@
   <% classes.forEach((lesson) => { %>
     <li class="list-group-item">
       <% var link = "/classes/"; %>
-      <%- include('partials/miniclasscard.ejs', { lesson, link })%>
+      <%- include('partials/miniclasscard', { lesson, link })%>
     </li>
   <% }) %>
 </ul>

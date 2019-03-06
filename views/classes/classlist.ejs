@@ -14,28 +14,29 @@
 </nav>
 <br>
 
+<% var link = "/users/classes/"; %>
 <% switch (view) {
   case 'all' : %>
     <h2>What do you want to learn today?</h2>
+    <% link += 'all/'; %>
     <% break;
   case 'own' : %>
     <h2>Classes you want to teach</h2>
+    <% link += 'own/'; %>
     <% break;
   case 'attending' : %>
     <h2>Classes you are attending</h2>
+    <% link += 'attending/'; %>
     <% break;
     case 'teaching' : %>
     <h2>Classes you are teaching</h2>
+    <% link += 'teaching/'; %>
     <% break; } %>
 
 <ul>
   <% classes.forEach((lesson) => { %>
     <li class="list-group-item">
-      <% if (view === 'own' || view === 'attending' || view === 'teaching') { %>
-        <a href="/users/classes/<%= view %>/<%= lesson._id %>">
-      <% } else { %>
-        <%- include('../partials/miniclasscard.ejs', { lesson })%>
-      <% } %>
+      <%- include('../partials/miniclasscard', { lesson, link })%>
     </li>
   <% })%>
 </ul>
