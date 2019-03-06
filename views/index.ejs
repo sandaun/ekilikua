@@ -21,11 +21,8 @@
 <ul>
   <% classes.forEach((lesson) => { %>
     <li class="list-group-item">
-      <% if (view === 'own' || view === 'attending' || view === 'teaching') { %>
-        <a href="/users/classes/<%= view %>/<%= lesson._id %>">
-      <% } else { %>
-        <%- include('partials/miniclasscard.ejs', { lesson })%>
-      <% } %>
+      <% var link = "/classes/"; %>
+      <%- include('partials/miniclasscard.ejs', { lesson, link })%>
     </li>
   <% }) %>
 </ul>
