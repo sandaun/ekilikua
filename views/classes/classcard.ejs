@@ -1,6 +1,6 @@
 <h2><%= lesson.title %></h2>
 
-<p>Professor: <%= lesson.professor.name %></p>
+<p>Professor: <a href="/users/<%= lesson.professor._id %>/profile"><%= lesson.professor.name %></a></p>
 
 <p>Of <%= lesson.categoryID %>, <%= lesson.subcategoryID %></p>
 <p>The schedule is <%= lesson.days %> <%= lesson.schedule %></p>
@@ -9,17 +9,32 @@
 <p>Alumnos: </p>
 
 <ul>
+  <% var booked = false; %>
   <% lesson.alumns.forEach( alumn => { %>
+    <% if (alumn.name === currentUser.name) {%>
+      <% booked = true; %>
+    <% } %>
     <li>
-        <a href="../users/<%= alumn._id %>/profile"><%= alumn.name %></a>
+        <a href="/users/<%= alumn._id %>/profile"><%= alumn.name %></a>
     </li>
   <% }) %>
 </ul>
 
 <p></p>
+
+<% if (!(lesson.professor.name === currentUser.name)) {%>
+  <% if (!booked) {%>
+    <a href="/classes/<%= lesson._id %>/join"> Join</a>
+  <% } else { %>
+    <a href="/classes/<%= lesson._id %>/leave"> Leave</a>
+  <% } %>
+<% } %>
+
+<p></p>
+
 <% if (lesson.professor.name === currentUser.name) {%>
-<a href="../own/<%= lesson._id %>/update">update</a>
-<form action="../users/own/<%= lesson._id %>/delete" method="post">
+<a href="/users/classes/own/<%= lesson._id %>/update">update</a>
+<form action="/users/classes/own/<%= lesson._id %>/delete" method="post">
   <input type="submit" value="delete">
 </form>
 <% } %>

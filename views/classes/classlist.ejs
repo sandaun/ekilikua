@@ -32,7 +32,7 @@
   <% classes.forEach((lesson) => { %>
     <li class="list-group-item">
       <% if (view === 'own' || view === 'attending' || view === 'teaching') { %>
-        <a href="../classes/<%= view %>/<%= lesson._id %>">
+        <a href="/users/classes/<%= view %>/<%= lesson._id %>">
       <% } else { %>
         <a href="/classes/<%= lesson._id %>">
       <% } %>
