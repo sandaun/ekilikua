@@ -1,5 +1,6 @@
 const express = require('express');
 const Class = require('../models/class');
+const User = require('../models/user');
 
 const router = express.Router();
 
@@ -28,8 +29,13 @@ router.get('/:classID', async (req, res, next) => {
 // Join one class
 router.get('/:classID/join', async (req, res, next) => {
   const { classID } = req.params;
+  const userID = res.locals.currentUser._id;
   try {
-    await Class.findByIdAndUpdate(classID, { $push: { alumns: [res.locals.currentUser._id] } }, { new: true });
+    const user = await User.findById(userID);
+    const lesson = await Class.findById(classID);
+    const kuas = user.kuas - lesson.price;
+    await User.findByIdAndUpdate(userID, { kuas });
+    await Class.findByIdAndUpdate(classID, { $push: { alumns: [userID] } }, { new: true });
     res.redirect(`/classes/${classID}`);
   } catch (error) {
     next(error);
@@ -39,8 +45,13 @@ router.get('/:classID/join', async (req, res, next) => {
 // Leave one class
 router.get('/:classID/leave', async (req, res, next) => {
   const { classID } = req.params;
+  const userID = res.locals.currentUser._id;
   try {
-    await Class.findByIdAndUpdate(classID, { $pullAll: { alumns: [res.locals.currentUser._id] } }, { new: true });
+    const user = await User.findById(userID);
+    const lesson = await Class.findById(classID);
+    const kuas = user.kuas + lesson.price;
+    await User.findByIdAndUpdate(userID, { kuas });
+    await Class.findByIdAndUpdate(classID, { $pullAll: { alumns: [userID] } }, { new: true });
     res.redirect(`/classes/${classID}`);
   } catch (error) {
     next(error);
