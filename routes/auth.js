@@ -30,7 +30,9 @@ router.post('/', assets.anonRoute, async (req, res, next) => {
     if (bcrypt.compareSync(password, userFound.password)) {
       req.session.currentUser = userFound;
       req.flash('success', 'User succesfully logged.');
-      return res.redirect('/');
+      // return res.redirect('/');
+      res.redirect(req.session.returnTo || '/');
+      delete req.session.returnTo;
     }
     req.flash('error', 'Email or password incorrect.');
     console.log('Email or password incorrect.');
