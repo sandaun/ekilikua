@@ -3,7 +3,7 @@ module.exports = {
     if (req.session.currentUser) {
       next();
     } else {
-      res.redirect('/login');
+      res.redirect('/auth');
     }
   },
   anonRoute: (req, res, next) => {
