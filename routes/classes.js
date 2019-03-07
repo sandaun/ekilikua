@@ -33,9 +33,12 @@ router.get('/:classID/join', async (req, res, next) => {
   try {
     const user = await User.findById(userID);
     const lesson = await Class.findById(classID);
-    const kuas = user.kuas - lesson.price;
-    await User.findByIdAndUpdate(userID, { kuas });
-    await Class.findByIdAndUpdate(classID, { $push: { alumns: [userID] } }, { new: true });
+    let kuas = user.kuas - lesson.price;
+    console.log(await User.findByIdAndUpdate(userID, { kuas }, { new: true }));
+    const professor = await User.findById(lesson.professor);
+    kuas = professor.kuas + lesson.price;
+    console.log(await User.findByIdAndUpdate(lesson.professor, { kuas }, { new: true }));
+    console.log(await Class.findByIdAndUpdate(classID, { $push: { alumns: [userID] } }, { new: true }));
     res.redirect(`/classes/${classID}`);
   } catch (error) {
     next(error);
@@ -49,9 +52,12 @@ router.get('/:classID/leave', async (req, res, next) => {
   try {
     const user = await User.findById(userID);
     const lesson = await Class.findById(classID);
-    const kuas = user.kuas + lesson.price;
-    await User.findByIdAndUpdate(userID, { kuas });
-    await Class.findByIdAndUpdate(classID, { $pullAll: { alumns: [userID] } }, { new: true });
+    let kuas = user.kuas + lesson.price;
+    console.log(await User.findByIdAndUpdate(userID, { kuas }, { new: true }));
+    const professor = await User.findById(lesson.professor);
+    kuas = professor.kuas - lesson.price;
+    console.log(await User.findByIdAndUpdate(lesson.professor, { kuas }, { new: true }));
+    console.log(await Class.findByIdAndUpdate(classID, { $pullAll: { alumns: [userID] } }, { new: true }));
     res.redirect(`/classes/${classID}`);
   } catch (error) {
     next(error);
