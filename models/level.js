@@ -6,6 +6,6 @@ const categorySchema = new Schema({
   name: String,
 });
 
-const myModel = mongoose.model('Category', categorySchema);
+const myModel = mongoose.model('Level', categorySchema);
 
 module.exports = myModel;

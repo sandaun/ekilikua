@@ -2,22 +2,49 @@
 <form action="/users/classes/new" method="post">
   <label for="title">Title</label>
   <input type="text" name="title" id="title">
+  
   <label for="category">Category</label>
   <input type="text" name="category" id="category">
-  <label for="subcategory">Subcategory</label>
-  <input type="text" name="subcategory" id="subcategory">
+
+  <label for="category">Category</label>
+  <select id="category" name="category">
+    <% categories.forEach((cat) => { %>
+      <option value="<%= cat.name %>"><%= cat.name %></option> 
+    <% })%>
+  </select>
+  
   <label for="level">Level</label>
-  <input type="text" name="level" id="level">
+  <select id="level" name="level">
+    <% levels.forEach((level) => { %>
+      <option value="<%= level.name %>"><%= level.name %></option> 
+    <% })%>
+  </select>
+  
   <label for="description">Description</label>
   <input type="text" name="description" id="description">
-  <label for="days">Days</label>
-  <input type="text" name="days" id="days">
+
+  <label for="days">Day</label>
+  <select id="days" name="days">
+    <option value="Monday">Monday</option>
+    <option value="Tuesday">Tuesday</option>
+    <option value="Wednesday">Wednesday</option>
+    <option value="Thursday">Thursday</option>
+    <option value="Friday">Friday</option>
+    <option value="Saturday">Saturday</option>
+    <option value="Sunday">Sunday</option>
+  </select>
+
   <label for="schedule">Schedule</label>
-  <input type="number" name="schedule" id="schedule">
+  <input type="date" id="schedule" name="schedule"
+         value="2018-07-22"
+         min="2019-01-01" max="2019-12-31">
+
   <label for="duration">Duration in minutes</label>
   <input type="number" name="duration" id="duration">
-  <label for="price">Price per class in €</label>
+  
+  <label for="price">Kuas</label>
   <input type="number" name="price" id="price">
+  
   <input type="submit" value="Accept changes">
 </form>
 <p><a href="/users">Cancel</a> changes and go Home</p>

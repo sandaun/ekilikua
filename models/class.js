@@ -10,21 +10,8 @@ const classSchema = new Schema({
     ref: 'User',
   },
   categoryID: String,
-  subcategoryID: String,
-  // categoryID: {
-  //   type: ObjectId,
-  //   ref: 'Category',
-  //   required: true,
-  // },
-  // subcategoryID: {
-  //   type: ObjectId,
-  //   ref: 'Category',
-  //   required: true,
-  // },
-  level: {
-    type: String,
-    enum: ['ABC Principals', 'Amateur iniciation', 'Advanced', 'Madafaking Pro'],
-  },
+  // subcategoryID: String,
+  level: String,
   days: {
     type: String,
     enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],

@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const assets = require('../assets');
 const User = require('../models/user');
 const Class = require('../models/class');
+const Category = require('../models/category');
+const Level = require('../models/level');
 
 const router = express.Router();
 router.use(assets.authRoute);
@@ -126,8 +128,15 @@ router.post('/classes/own/:classID/delete', async (req, res, next) => {
 });
 
 // Form to create new own class
-router.get('/classes/new', async (req, res) => {
-  res.render('user/classes/newclass');
+router.get('/classes/new', async (req, res, next) => {
+
+  try {
+    const categories = await Category.find();
+    const levels = await Level.find();
+    res.render('user/classes/newclass', { categories, levels });
+  } catch (error) {
+    next(error);
+  }
 });
 
 // Submits form to create new own class for the user
