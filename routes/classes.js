@@ -16,11 +16,27 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// // View for category search
+// router.get('/query', async (req, res, next) => {
+//   const { query } = req.query;
+//   try {
+//     const classes = await Class.find({ categoryID: query });
+//     console.log('Query classes ', classes);
+//     res.render('classes/searchlist', { classes, view: 'all' });
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+
 // View for category search
 router.get('/query', async (req, res, next) => {
   const { query } = req.query;
   try {
-    const classes = await Class.find({ categoryID: query });
+    const classes = await Class.find({ $or: [ { 'title' : { $regex: query }}, 
+                                              { 'categoryID' : { $regex: query }}, 
+                                              { 'level' : { $regex: query }}, 
+                                              { 'description' : { $regex: query }}]});
     console.log('Query classes ', classes);
     res.render('classes/searchlist', { classes, view: 'all' });
   } catch (error) {

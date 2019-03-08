@@ -1,4 +1,4 @@
-# Equilicuá
+# Ekilikuá
 
 ## Description
 
