@@ -15,14 +15,18 @@
   <br>
   
   <h2>Query results: </h2>
-
   
   <ul>
-    <% classes.forEach((lesson) => { %>
-      <li class="list-group-item">
-        <%- include('../partials/miniclasscard', { lesson, link: "/classes/" })%>
-      </li>
-    <% })%>
+    <% if (!(Array.isArray(classes))) { %>
+      <p>Oops! There is no result four your query. What about?..</p>
+      <%- include('../partials/miniclasscard', { lesson: classes, link: "/classes/" })%>
+    <% } else { %>
+      <% classes.forEach((lesson) => { %>
+        <li class="list-group-item">
+          <%- include('../partials/miniclasscard', { lesson, link: "/classes/" })%>
+        </li>
+      <% })%>
+    <% } %>
   </ul>
 
   <p><a href="/">Home</a></p>

@@ -19,13 +19,22 @@ router.get('/', async (req, res, next) => {
 // View for any word search
 router.get('/query', async (req, res, next) => {
   const { query } = req.query;
+  let found = true;
   try {
-    const classes = await Class.find({ $or: [ { 'title' : { $regex: new RegExp(query, "i") }}, 
+    let classes = await Class.find({ $or: [ { 'title' : { $regex: new RegExp(query, "i") }}, 
                                               { 'categoryID' : { $regex: new RegExp(query, "i") }}, 
                                               { 'level' : { $regex: new RegExp(query, "i") }}, 
                                               { 'description' : { $regex: new RegExp(query, "i") }}]});
     console.log('Query classes ', classes);
-    res.render('classes/searchlist', { classes, view: 'all' });
+
+    // If 0 coincidences, suggested class
+    if (classes.length === 0) {
+      found = false;
+      const random = Math.floor(Math.random() * await Class.count());
+      classes = await Class.findOne().skip(random);
+    }
+
+    res.render('classes/searchlist', { classes, found, view: 'all' });
   } catch (error) {
     next(error);
   }
