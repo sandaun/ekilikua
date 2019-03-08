@@ -1,6 +1,7 @@
 const express = require('express');
 const Class = require('../models/class');
 const User = require('../models/user');
+const assets = require('../assets');
 
 const router = express.Router();
 
@@ -27,18 +28,26 @@ router.get('/:classID', async (req, res, next) => {
 });
 
 // Join one class
-router.get('/:classID/join', async (req, res, next) => {
+router.get('/:classID/join', assets.authRoute, async (req, res, next) => {
   const { classID } = req.params;
   const userID = res.locals.currentUser._id;
   try {
     const user = await User.findById(userID);
     const lesson = await Class.findById(classID);
-    let kuas = user.kuas - lesson.price;
-    console.log(await User.findByIdAndUpdate(userID, { kuas }, { new: true }));
-    const professor = await User.findById(lesson.professor);
-    kuas = professor.kuas + lesson.price;
-    console.log(await User.findByIdAndUpdate(lesson.professor, { kuas }, { new: true }));
-    console.log(await Class.findByIdAndUpdate(classID, { $push: { alumns: [userID] } }, { new: true }));
+    let booked = false;
+    lesson.alumns.forEach((alumn) => {
+      if (alumn.name === user.name) {
+        booked = true;
+      }
+    });
+    if (booked) {
+      let kuas = user.kuas - lesson.price;
+      console.log(await User.findByIdAndUpdate(userID, { kuas }, { new: true }));
+      const professor = await User.findById(lesson.professor);
+      kuas = professor.kuas + lesson.price;
+      console.log(await User.findByIdAndUpdate(lesson.professor, { kuas }, { new: true }));
+      console.log(await Class.findByIdAndUpdate(classID, { $push: { alumns: [userID] } }, { new: true }));
+    }
     res.redirect(`/classes/${classID}`);
   } catch (error) {
     next(error);
@@ -46,7 +55,7 @@ router.get('/:classID/join', async (req, res, next) => {
 });
 
 // Leave one class
-router.get('/:classID/leave', async (req, res, next) => {
+router.get('/:classID/leave', assets.authRoute, async (req, res, next) => {
   const { classID } = req.params;
   const userID = res.locals.currentUser._id;
   try {

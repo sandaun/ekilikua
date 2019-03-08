@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Renders log in form
 router.get('/', assets.anonRoute, (req, res) => {
-  res.render('auth/login', { title: 'Log In' });
+  res.render('auth/login', { view: 'login' });
 });
 
 // Submits login form
@@ -30,7 +30,6 @@ router.post('/', assets.anonRoute, async (req, res, next) => {
     if (bcrypt.compareSync(password, userFound.password)) {
       req.session.currentUser = userFound;
       req.flash('success', 'User succesfully logged.');
-      // return res.redirect('/');
       res.redirect(req.session.returnTo || '/');
       delete req.session.returnTo;
     }
@@ -44,7 +43,7 @@ router.post('/', assets.anonRoute, async (req, res, next) => {
 
 // Renders sign up form
 router.get('/signup', assets.anonRoute, (req, res) => {
-  res.render('auth/signup', { title: 'Sign Up' });
+  res.render('auth/signup', { view: 'signup' });
 });
 
 // Submits sign up form

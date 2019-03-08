@@ -23,13 +23,13 @@
 <p></p>
 
 
-<% if (currentUser && !(lesson.professor.name === currentUser.name)) {%>
   <% if (!booked) {%>
     <a href="/classes/<%= lesson._id %>/join"> Join</a>
   <% } else { %>
     <a href="/classes/<%= lesson._id %>/leave"> Leave</a>
   <% } %>
-<% } %>
+
+
 
 <p></p>
 

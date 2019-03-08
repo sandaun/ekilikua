@@ -11,6 +11,7 @@ module.exports = {
     if (req.session.currentUser) {
       res.redirect('/');
     } else {
+      req.session.returnTo = req.session.returnTo || req.originalUrl;
       next();
     }
   },
@@ -19,7 +20,7 @@ module.exports = {
       if (req.session.currentUser.role === role) {
         next();
       } else {
-        res.redirect('/login');
+        res.redirect('/auth');
       }
     };
   },
