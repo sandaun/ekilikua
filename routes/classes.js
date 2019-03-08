@@ -16,6 +16,18 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// View for category search
+router.get('/query', async (req, res, next) => {
+  const { query } = req.query;
+  try {
+    const classes = await Class.find({ categoryID: query });
+    console.log('Query classes ', classes);
+    res.render('classes/searchlist', { classes, view: 'all' });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // View one class detail
 router.get('/:classID', async (req, res, next) => {
   const { classID } = req.params;
