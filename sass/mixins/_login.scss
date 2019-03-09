@@ -1,0 +1,44 @@
+@mixin login {
+  .vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+  
+    display: flex;
+    align-items: center;
+  }
+
+  .atsign {
+    background-color: white;
+  }
+
+  .jumbotron {
+    background-color: #AC51E1;
+  }
+
+  a {
+    color: rgb(248, 170, 0);
+  }
+
+  .card {
+    background-color: #AC51E1;
+    border: none;
+  }
+  .card-title {
+    color: white;
+    font-size: 3rem;
+  }
+
+  .card-text {
+    color: white;
+    font-size: 2rem;
+  }
+
+  .form-check-label {
+    color: white;
+  }
+  
+  p{
+    color: white;
+  }
+
+}

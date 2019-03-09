@@ -1,9 +1,38 @@
-<h2>Log In</h2>
-<form action="/auth" method="post">
-  <label for="email">Email</label>
-  <input type="text" name="email" id="email">
-  <label for="password">Password</label>
-  <input type="password" name="password" id="password">
-  <input type="submit" value="Log in">
-</form>
-<p>You don't have an account <a href="/auth/signup">Sign up</a>
+<div class="jumbotron vertical-center">
+  <div class="container">
+
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title text-center">Log in</h4>
+        <p class="card-text text-center">
+          Connect with the teachers around you or share your knowledges
+        </p>
+      </div>
+    </div>
+
+    <form class="w-100 p-3" class="form-inline" action="/auth" method="post">
+
+      <label class="sr-only" for="email">Email</label>
+      <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text atsign">@</div>
+        </div>
+        <input class="form-control form-control-lg" type="text" name="email" class="form-control" id="email" placeholder="batman@gotham.com">
+      </div>
+
+      <label class="sr-only" for="password">Password</label>
+      <input type="password" name="password" class="form-control mb-2 mr-sm-2 form-control-lg" id="password"  placeholder="password">
+
+
+      <div class="form-check mb-2 mr-sm-2">
+        <input class="form-check-input" type="checkbox" id="inlineFormCheck">
+        <label class="form-check-label" for="inlineFormCheck">
+          Remember me
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary mb-2">Connect</button>
+    </form>
+    <p>Don't have an account yet? Just <a href="/auth/signup">sign up</a> now</p>
+  </div>
+</div>
