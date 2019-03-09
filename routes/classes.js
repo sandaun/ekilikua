@@ -57,20 +57,42 @@ router.get('/:classID/join', assets.authRoute, async (req, res, next) => {
   const userID = res.locals.currentUser._id;
   try {
     const user = await User.findById(userID);
-    const lesson = await Class.findById(classID);
+    let lesson = await Class.findById(classID).populate('professor alumns');
     let booked = false;
+    let kuas;
     lesson.alumns.forEach((alumn) => {
       if (alumn.name === user.name) {
         booked = true;
       }
     });
-    if (booked) {
-      let kuas = user.kuas - lesson.price;
-      console.log(await User.findByIdAndUpdate(userID, { kuas }, { new: true }));
-      const professor = await User.findById(lesson.professor);
-      kuas = professor.kuas + lesson.price;
-      console.log(await User.findByIdAndUpdate(lesson.professor, { kuas }, { new: true }));
-      console.log(await Class.findByIdAndUpdate(classID, { $push: { alumns: [userID] } }, { new: true }));
+    if (!booked) {
+      // Add user to alumns array
+      lesson = await Class.findByIdAndUpdate(classID, { $push: { alumns: [userID] } }, { new: true });
+
+      // Professor receive kuas
+      if (lesson.alumns.length === 1) {
+        const professor = await User.findById(lesson.professor);
+        kuas = professor.kuas + lesson.price;
+        await User.findByIdAndUpdate(lesson.professor, { kuas }, { new: true });
+        const paid = user.kuas - lesson.price;
+        await User.findByIdAndUpdate(userID, { kuas: paid }, { new: true });
+      } else {
+        // Shared price calc
+        kuas = lesson.price / lesson.alumns.length;
+
+        // Alumn pay kuas
+        let paid = user.kuas - kuas;
+        await User.findByIdAndUpdate(userID, { kuas: paid }, { new: true });
+
+        // Classmates receive share price
+        const classmates = lesson.alumns.filter(al => al._id.toString() !== userID);
+        const sharedPrice = kuas / classmates.length;
+        classmates.forEach(async (id) => {
+          const compi = await User.findById(id._id.toString());
+          paid = compi.kuas + sharedPrice;
+          await User.findByIdAndUpdate(compi.id, { kuas: paid }, { new: true });
+        });
+      }
     }
     res.redirect(`/classes/${classID}`);
   } catch (error) {
@@ -86,11 +108,11 @@ router.get('/:classID/leave', assets.authRoute, async (req, res, next) => {
     const user = await User.findById(userID);
     const lesson = await Class.findById(classID);
     let kuas = user.kuas + lesson.price;
-    console.log(await User.findByIdAndUpdate(userID, { kuas }, { new: true }));
+    await User.findByIdAndUpdate(userID, { kuas }, { new: true });
     const professor = await User.findById(lesson.professor);
     kuas = professor.kuas - lesson.price;
-    console.log(await User.findByIdAndUpdate(lesson.professor, { kuas }, { new: true }));
-    console.log(await Class.findByIdAndUpdate(classID, { $pullAll: { alumns: [userID] } }, { new: true }));
+    await User.findByIdAndUpdate(lesson.professor, { kuas }, { new: true });
+    await Class.findByIdAndUpdate(classID, { $pullAll: { alumns: [userID] } }, { new: true });
     res.redirect(`/classes/${classID}`);
   } catch (error) {
     next(error);

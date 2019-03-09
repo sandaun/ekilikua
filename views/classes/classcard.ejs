@@ -8,10 +8,11 @@
 <p>Duration <%= lesson.duration %></p>
 <p>Alumnos: </p>
 
+<% if (currentUser) { %>
 <ul>
   <% var booked = false; %>
   <% lesson.alumns.forEach( alumn => { %>
-    <% if (currentUser && alumn.name === currentUser.name) {%>
+    <% if (alumn.name === currentUser.name) {%>
       <% booked = true; %>
     <% } %>
     <li>
@@ -19,6 +20,7 @@
     </li>
   <% }) %>
 </ul>
+<% } %>
 
 <p></p>
 
