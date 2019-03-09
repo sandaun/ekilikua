@@ -1,0 +1,25 @@
+<h2><%= lesson.title %></h2>
+
+<form action="/users/classes/own/<%= lesson._id %>/update" method="post">
+  <label for="title">Title</label>
+  <input type="text" name="title" id="title" value="<%= lesson.title %>">
+  <label for="category">Category</label>
+  <input type="text" name="category" id="category" value="<%= lesson.categoryID %>">
+  <label for="subcategory">Subcategory</label>
+  <input type="text" name="subcategory" id="subcategory" value="<%= lesson.subcategoryID %>">
+  <label for="level">Level</label>
+  <input type="text" name="level" id="level" value="<%= lesson.level %>">
+  <label for="description">Description</label>
+  <input type="text" name="description" id="description" value="<%= lesson.description %>">
+  <label for="days">Days</label>
+  <input type="text" name="days" id="days" value="<%= lesson.days %>">
+  <label for="schedule">Schedule</label>
+  <input type="number" name="schedule" id="schedule" value="<%= lesson.schedule %>">
+  <label for="duration">Duration in minutes</label>
+  <input type="number" name="duration" id="duration" value="<%= lesson.duration %>">
+  <label for="price">Price per class in €</label>
+  <input type="number" name="price" id="price" value="<%= lesson.price %>">
+  <input type="submit" value="Accept changes">
+</form>
+
+<p><a href="/users">Cancel</a> changes and go Home</p>

@@ -1,0 +1,46 @@
+<nav>
+  <ul>
+      <% if (currentUser) { %>
+        <li><a href="/users/">Go to your homepage</a></li>
+        <li>
+          <a href="/users/logout">Log out</a>
+        </li>
+      <% } else { %>
+        <li>
+          <a href="/auth">Log in</a>
+        </li>
+      <% } %>
+    </ul>
+</nav>
+<br>
+
+<% var link = "/users/classes/"; %>
+<% switch (view) {
+  case 'all' : %>
+    <h2>What do you want to learn today?</h2>
+    <% link += 'all/'; %>
+    <% break;
+  case 'own' : %>
+    <h2>Classes you want to teach</h2>
+    <% link += 'own/'; %>
+    <% break;
+  case 'attending' : %>
+    <h2>Classes you are attending</h2>
+    <% link += 'attending/'; %>
+    <% break;
+    case 'teaching' : %>
+    <h2>Classes you are teaching</h2>
+    <% link += 'teaching/'; %>
+    <% break; } %>
+
+<ul>
+  <% classes.forEach((lesson) => { %>
+    <li class="list-group-item">
+      <%- include('../partials/miniclasscard', { lesson, link })%>
+    </li>
+  <% })%>
+</ul>
+<% if (view === 'own') { %>
+  <a href="/users/classes/new">New class</a>
+<% } %>
+<p><a href="/">Home</a></p>

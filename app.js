@@ -17,6 +17,8 @@ const { messages } = require('./assets');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+const classesRouter = require('./routes/classes');
 
 // mongodb connect
 (async () => {
@@ -31,7 +33,7 @@ const usersRouter = require('./routes/users');
 const app = express();
 
 // app title
-// app.locals.title = "";
+app.locals.title = 'Ekilikua';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,11 +58,11 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000,
   },
 }));
-// app.use((req, res, next) => {
-//   // app.locals.currentUser = req.session.currentUser;
-//   res.locals.currentUser = req.session.currentUser;
-//   next();
-// });
+app.use((req, res, next) => {
+  // app.locals.currentUser = req.session.currentUser;
+  res.locals.currentUser = req.session.currentUser;
+  next();
+});
 app.use(flash());
 app.use(messages);
 app.use(sassMiddleware({
@@ -72,6 +74,8 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/auth', authRouter);
+app.use('/classes', classesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

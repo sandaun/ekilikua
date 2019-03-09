@@ -1,10 +1,11 @@
 <h2>Sign Up</h2>
-<form action="/signup" method="post">
+<form action="/auth/signup" method="post">
   <label for="name">Name</label>
-  <input type="text" name="username" id="name">
+  <input type="text" name="name" id="name">
   <label for="email">Email</label>
   <input type="text" name="email" id="email">
   <label for="password">Password</label>
-  <input type="text" name="password" id="password">
+  <input type="password" name="password" id="password">
   <input type="submit" value="Sign Up">
 </form>
+<p>You already have an account <a href="/auth">Log in</a>

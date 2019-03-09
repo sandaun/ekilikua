@@ -3,13 +3,15 @@ module.exports = {
     if (req.session.currentUser) {
       next();
     } else {
-      res.redirect('/login');
+      req.session.returnTo = req.originalUrl;
+      res.redirect('/auth');
     }
   },
   anonRoute: (req, res, next) => {
     if (req.session.currentUser) {
-      res.redirect('/success');
+      res.redirect('/');
     } else {
+      req.session.returnTo = req.session.returnTo || req.originalUrl;
       next();
     }
   },
@@ -18,7 +20,7 @@ module.exports = {
       if (req.session.currentUser.role === role) {
         next();
       } else {
-        res.redirect('/login');
+        res.redirect('/auth');
       }
     };
   },
