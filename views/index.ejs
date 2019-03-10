@@ -42,7 +42,7 @@
     <div class="login-div">
         <% if (currentUser) { %>
           <button onclick="location.href='/users/'" type="button" class="btn btn-primary mt-4 mb-2 home-user-button">Go to your homepage</button>
-          <p>or <a href="/users/logout">Log out</a></p>
+          <p class="login-card-text">or <a href="/users/logout">Log out</a></p>
         <% } else { %>
           <button onclick="location.href='/auth/'" type="button" class="btn btn-primary mt-4 mb-2 login-button">Log in</button> 
           <p class="login-card-text">or <a href="/auth/signup">Sign up</a></p>    
