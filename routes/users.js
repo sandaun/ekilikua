@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const moment = require('moment');
 const assets = require('../assets');
 const User = require('../models/user');
 const Class = require('../models/class');
@@ -95,7 +96,7 @@ router.get('/classes/own/:classID/update', async (req, res, next) => {
     console.log('Own class: ', lesson);
     const categories = await Category.find();
     const levels = await Level.find();
-    res.render('user/classes/update', { lesson, categories, levels, view: 'own' });
+    res.render('user/classes/update', { lesson, categories, levels, moment, view: 'own' });
   } catch (error) {
     next(error);
   }
@@ -106,7 +107,7 @@ router.post('/classes/own/:classID/update', async (req, res, next) => {
   const { classID } = req.params;
   const { title, category, subcategory, level, description, days, schedule, price, duration, repeat } = req.body;
   try {
-    const updatedClass = await Class.findByIdAndUpdate(classID, { title, userID, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration, repeat }, { new:true });
+    const updatedClass = await Class.findByIdAndUpdate(classID, { title, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration, repeat }, { new:true });
     console.log('Class succesfully updated: ', updatedClass);
     res.redirect('/users/classes/own');
   } catch (error) {

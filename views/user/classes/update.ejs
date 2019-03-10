@@ -34,9 +34,9 @@
   <br>
 
   <label for="schedule">Schedule</label>
-  <input type="date" id="schedule" name="schedule" max="2019-12-31">
+  <input type="date" id="schedule" name="schedule" max="2019-12-31" value="<%= moment(lesson.schedule).format('YYYY-MM-DD') %>">
   <script>setMinScheduleDate();</script>
-  <script>convertDateToString( <%= lesson.schedule %> );</script>
+ 
   <br>
 
 
@@ -68,13 +68,6 @@
     <option value="Sunday">Sunday</option>
   </select>
   <br>
-
-
-
-
-
-  
-  
   
   <label for="duration">Duration in minutes</label>
   <input type="number" name="duration" id="duration" value="<%= lesson.duration %>">
