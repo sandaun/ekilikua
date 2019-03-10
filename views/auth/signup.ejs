@@ -1,11 +1,35 @@
-<h2>Sign Up</h2>
-<form action="/auth/signup" method="post">
-  <label for="name">Name</label>
-  <input type="text" name="name" id="name">
-  <label for="email">Email</label>
-  <input type="text" name="email" id="email">
-  <label for="password">Password</label>
-  <input type="password" name="password" id="password">
-  <input type="submit" value="Sign Up">
-</form>
-<p>You already have an account <a href="/auth">Log in</a>
+<div class="jumbotron vertical-center">
+  <div class="container">
+
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title text-center">Sign up</h4>
+        <p class="card-text text-center">
+          Connect with the teachers around you or share your knowledges
+        </p>
+      </div>
+    </div>
+
+    <form class="w-100 p-3" class="form-inline" action="/auth/signup" method="post">
+
+      <label class="sr-only" for="name">Name</label>
+      <div class="input-group mb-2 mr-sm-2">
+        <input class="form-control form-control-lg" type="text" name="name" class="form-control" id="name" placeholder="name">
+      </div>
+
+      <label class="sr-only" for="email">Email</label>
+      <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text atsign">@</div>
+        </div>
+        <input class="form-control form-control-lg" type="text" name="email" class="form-control" id="email" placeholder="email">
+      </div>
+
+      <label class="sr-only" for="password">Password</label>
+      <input type="password" name="password" class="form-control mb-2 mr-sm-2 form-control-lg" id="password"  placeholder="password">
+
+      <button type="submit" class="btn btn-primary mb-2">Create account</button>
+    </form>
+    <p>If you already have an account just <a href="/auth">Log in</a></p>
+  </div>
+</div>

@@ -1,10 +1,10 @@
 @import '../mixins/variables';
-@import '../mixins/reset';
+// @import '../mixins/reset';
 @import '../mixins/login';
 // @import '../mixins/signup';
 // @import '../mixins/classcard';
 
-@include reset;
+// @include reset;
 @include login;
 // @include signup;
 // @include classcard;
