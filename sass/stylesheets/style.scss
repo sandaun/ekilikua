@@ -1,12 +1,16 @@
 @import '../mixins/variables';
 // @import '../mixins/reset';
 @import '../mixins/login';
-// @import '../mixins/signup';
+@import '../mixins/signup';
+@import '../mixins/home';
+@import '../mixins/miniclasscard';
 // @import '../mixins/classcard';
 
 // @include reset;
 @include login;
-// @include signup;
+@include signup;
+@include home;
+@include miniclasscard;
 // @include classcard;
 
 // body {

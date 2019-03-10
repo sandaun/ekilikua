@@ -15,15 +15,89 @@
 a {
   color: #f8aa00; }
 
-.card {
+.login-card {
   background-color: #AC51E1;
   border: none; }
 
-.card-title {
+.login-card-title {
   color: white;
   font-size: 3rem; }
 
-.card-text, .form-check-label, p {
+.login-card-text, .form-check-label {
+  color: white; }
+
+.full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw; }
+
+.vertical-center {
+  min-height: 100%;
+  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh;
+  /* These two lines are counted as one :-)       */
+  display: flex;
+  align-items: center; }
+
+.jumbotron {
+  background-color: #AC51E1; }
+
+a {
+  color: #f8aa00; }
+
+.signup-card {
+  background-color: #AC51E1;
+  border: none; }
+
+.signup-card-title {
+  color: white;
+  font-size: 3rem; }
+
+.signup-card-text {
+  color: white; }
+
+.vertical-center {
+  min-height: 100%;
+  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh;
+  /* These two lines are counted as one :-)       */
+  display: flex;
+  align-items: center; }
+
+.jumbotron {
+  background-color: #AC51E1; }
+
+a {
+  color: #f8aa00; }
+
+.home-card {
+  background-color: #AC51E1;
+  border: none; }
+
+.home-card-title {
+  color: white;
+  font-size: 3rem; }
+
+.home-card-text {
+  color: white; }
+
+.login-div {
+  text-align: center; }
+
+.login-button, .home-user-button {
+  width: 70%; }
+
+.miniclasscard-card {
+  background-color: #AC51E1;
+  border: none; }
+
+.miniclasscard-card-title {
+  color: white; }
+
+.miniclasscard-card-text {
   color: white; }
 
 h4 {

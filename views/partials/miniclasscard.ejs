@@ -1,6 +1,7 @@
-<div>
-  <h3><%= lesson.title %></h3>
-  <p> <%= lesson.description %> </p>
-  <button onclick="location.href='<%= link %><%= lesson._id %>'" type="button">View</button> 
+<div class="card mt-4 miniclasscard-card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title miniclasscard-card-title"><%= lesson.title %></h5>
+    <p class="card-text miniclasscard-card-text"><%= lesson.description %></p>
+    <a href="<%= link %><%= lesson._id %>" class="btn btn-primary">View</a>
+  </div>
 </div>
-<br>
