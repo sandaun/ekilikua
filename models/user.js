@@ -4,12 +4,6 @@ const { Schema } = mongoose;
 const { ObjectId } = Schema.Types;
 
 const userSchema = new Schema({
-  // username: { type: String, required: true, unique: true },
-  // password: { type: String, required: true },
-  // username: { type: String },
-  // email: { type: String },
-  // password: { type: String },
-
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true},
@@ -21,7 +15,6 @@ const userSchema = new Schema({
   classes: [{ type: ObjectId, ref: 'Class' }],
   kuas: {
     type: Number,
-    min: 0,
     default: 200,
   },
 }, {

@@ -93,7 +93,9 @@ router.get('/classes/own/:classID/update', async (req, res, next) => {
   try {
     const lesson = await Class.findById(classID);
     console.log('Own class: ', lesson);
-    res.render('user/classes/update', { lesson, view: 'own' });
+    const categories = await Category.find();
+    const levels = await Level.find();
+    res.render('user/classes/update', { lesson, categories, levels, view: 'own' });
   } catch (error) {
     next(error);
   }
@@ -102,9 +104,9 @@ router.get('/classes/own/:classID/update', async (req, res, next) => {
 // Submits one user class update
 router.post('/classes/own/:classID/update', async (req, res, next) => {
   const { classID } = req.params;
-  const { title, category, subcategory, level, description, days, schedule, price, duration } = req.body;
+  const { title, category, subcategory, level, description, days, schedule, price, duration, repeat } = req.body;
   try {
-    const updatedClass = await Class.findByIdAndUpdate(classID, { title, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration }, { new:true });
+    const updatedClass = await Class.findByIdAndUpdate(classID, { title, userID, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration, repeat }, { new:true });
     console.log('Class succesfully updated: ', updatedClass);
     res.redirect('/users/classes/own');
   } catch (error) {
@@ -142,9 +144,9 @@ router.get('/classes/new', async (req, res, next) => {
 // Submits form to create new own class for the user
 router.post('/classes/new', async (req, res, next) => {
   const userID = res.locals.currentUser._id;
-  const { title, category, subcategory, level, description, days, schedule, price, duration } = req.body;
+  const { title, category, subcategory, level, description, days, schedule, price, duration, repeat } = req.body;
   try {
-    const createdClass = await Class.create({ title, userID, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration });
+    const createdClass = await Class.create({ title, userID, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration, repeat });
     const userModifiedData = await User.findByIdAndUpdate(userID, { $push: { classes: createdClass._id  } }, { new:true });
     req.session.currentUser = userModifiedData;
     console.log('Class succesfully created.');

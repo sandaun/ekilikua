@@ -21,10 +21,10 @@ router.get('/query', async (req, res, next) => {
   const { query } = req.query;
   let found = true;
   try {
-    let classes = await Class.find({ $or: [ { 'title' : { $regex: new RegExp(query, "i") }}, 
-                                              { 'categoryID' : { $regex: new RegExp(query, "i") }}, 
-                                              { 'level' : { $regex: new RegExp(query, "i") }}, 
-                                              { 'description' : { $regex: new RegExp(query, "i") }}]});
+    let classes = await Class.find({ $or: [{ 'title' : { $regex: new RegExp(query, "i") }}, 
+                                           { 'categoryID' : { $regex: new RegExp(query, "i") }}, 
+                                           { 'level' : { $regex: new RegExp(query, "i") }}, 
+                                           { 'description' : { $regex: new RegExp(query, "i") }}]});
     console.log('Query classes ', classes);
 
     // If 0 coincidences, suggested class
@@ -58,40 +58,45 @@ router.get('/:classID/join', assets.authRoute, async (req, res, next) => {
   try {
     const user = await User.findById(userID);
     let lesson = await Class.findById(classID).populate('professor alumns');
-    let booked = false;
-    let kuas;
-    lesson.alumns.forEach((alumn) => {
-      if (alumn.name === user.name) {
-        booked = true;
-      }
-    });
-    if (!booked) {
-      // Add user to alumns array
-      lesson = await Class.findByIdAndUpdate(classID, { $push: { alumns: [userID] } }, { new: true });
 
-      // Professor receive kuas
-      if (lesson.alumns.length === 1) {
-        const professor = await User.findById(lesson.professor);
-        kuas = professor.kuas + lesson.price;
-        await User.findByIdAndUpdate(lesson.professor, { kuas }, { new: true });
-        const paid = user.kuas - lesson.price;
-        await User.findByIdAndUpdate(userID, { kuas: paid }, { new: true });
-      } else {
-        // Shared price calc
-        kuas = lesson.price / lesson.alumns.length;
+    if (user.name === lesson.professor.name) {
+      console.log("Proffesor can't join his own class.");
+    } else {
+      let booked = false;
+      let kuas;
+      lesson.alumns.forEach((alumn) => {
+        if (alumn.name === user.name) {
+          booked = true;
+        }
+      });
+      if (!booked) {
+        // Add user to alumns array
+        lesson = await Class.findByIdAndUpdate(classID, { $push: { alumns: [userID] } }, { new: true });
 
-        // Alumn pay kuas
-        let paid = user.kuas - kuas;
-        await User.findByIdAndUpdate(userID, { kuas: paid }, { new: true });
+        // Professor receive kuas
+        if (lesson.alumns.length === 1) {
+          const professor = await User.findById(lesson.professor);
+          kuas = professor.kuas + lesson.price;
+          await User.findByIdAndUpdate(lesson.professor, { kuas }, { new: true });
+          const paid = user.kuas - lesson.price;
+          await User.findByIdAndUpdate(userID, { kuas: paid }, { new: true });
+        } else {
+          // Shared price calc
+          kuas = lesson.price / lesson.alumns.length;
 
-        // Classmates receive share price
-        const classmates = lesson.alumns.filter(al => al._id.toString() !== userID);
-        const sharedPrice = kuas / classmates.length;
-        classmates.forEach(async (id) => {
-          const compi = await User.findById(id._id.toString());
-          paid = compi.kuas + sharedPrice;
-          await User.findByIdAndUpdate(compi.id, { kuas: paid }, { new: true });
-        });
+          // Alumn pay kuas
+          let paid = user.kuas - kuas;
+          await User.findByIdAndUpdate(userID, { kuas: paid }, { new: true });
+
+          // Classmates receive share price
+          const classmates = lesson.alumns.filter(al => al._id.toString() !== userID);
+          const sharedPrice = kuas / classmates.length;
+          classmates.forEach(async (id) => {
+            const compi = await User.findById(id._id.toString());
+            paid = compi.kuas + sharedPrice;
+            await User.findByIdAndUpdate(compi.id, { kuas: paid }, { new: true });
+          });
+        }
       }
     }
     res.redirect(`/classes/${classID}`);
