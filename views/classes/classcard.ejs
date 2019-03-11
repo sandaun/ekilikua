@@ -1,6 +1,5 @@
 <!--Main layout-->
 <div class="container dark-grey-text">
-
   <!--Grid row-->
   <div class="row wow fadeIn">
 
@@ -28,6 +27,7 @@
         </div>
 
         <h2><%= lesson.title %></h2>
+        <h3><% lesson.level %></h3>
         <p class="lead font-weight-bold">Professor: <a href="/users/<%= lesson.professor._id %>/profile"><%= lesson.professor.name %></a></p>
         <hr>
         
@@ -69,14 +69,17 @@
         <% } %>
 
         <% if (currentUser) { %>
-        <ul>
+        <ul class="list-group">
           <% var booked = false; %>
           <% lesson.alumns.forEach( alumn => { %>
             <% if (alumn.name === currentUser.name) {%>
               <% booked = true; %>
             <% } %>
-            <li>
+            <li class="list-group-item avatar-list">
+              <div class="avatar-list-item">
+                <img src="<%= alumn.avatar %>" alt="alumn avatar" class="img-fluid rounded-circle img-little-avatar">
                 <a href="/users/<%= alumn._id %>/profile"><%= alumn.name %></a>
+              </div>
             </li>
           <% }) %>
         </ul>
