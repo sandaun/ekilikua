@@ -55,8 +55,8 @@
 .jumbotron {
   background-color: #AA269F; }
 
-a {
-  color: #f8aa00; }
+.signup-login > a {
+  color: #FFDD5A; }
 
 .login-card {
   background-color: #AA269F;
@@ -88,9 +88,6 @@ a {
 .jumbotron {
   background-color: #AC51E1; }
 
-a {
-  color: #f8aa00; }
-
 .signup-card {
   background-color: #AC51E1;
   border: none; }
@@ -113,7 +110,7 @@ a {
 .jumbotron {
   background-color: #AA269F; }
 
-a {
+.home > a {
   color: #FFDD5A; }
 
 .home-card {

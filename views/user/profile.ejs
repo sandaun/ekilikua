@@ -1,20 +1,34 @@
-<h2>Your Profile</h2>
+<div class="col-md-6 mb-4 img-professor">
+  <img src="<%= user.avatar %>" class="img-fluid img-professor" alt="user avatar">
+</div>
 
-<form action="/users/profile" method="post">
-  <label for="name">Name</label>
-  <input type="text" name="name" id="name" value="<%= user.name %>">
-  <!-- <label for="password">Password</label>
-  <input type="password" name="password" id="password" value=""> -->
-  <% if (!user.description) {%>
-    <label for="description">Description</label>
-    <input type="description" name="description" id="description" value="Add your description">
-  <% } else {%>
-    <label for="description">Description</label>
-    <input type="description" name="description" id="description" value="<%= user.description %>">
-  <% } %>
-  <input type="submit" value="Accept changes">
-</form>
+ <!--Grid column-->
+ <div class="col-md-6 mb-4">
 
-<p>You have <%= user.kuas %> kuas.</p>
+ <!--Content-->
+  <div class="p-4">
+    <h2>Your Profile</h2>
+    <form action="/users/profile" method="post">
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" value="<%= user.name %>">
+      <br>
+      <!-- <label for="password">Password</label>
+      <input type="password" name="password" id="password" value=""> -->
+      <% if (!user.description) {%>
+        <label for="description">Description</label> 
+        <input type="description" name="description" id="description" class="edit-description" value="Add your description">
+      <% } else {%>
+        <label for="description">Description</label>
+        <br>
+        <input type="description" name="description" id="description" class="edit-description" value="<%= user.description %>">
+      <% } %>
+      <br>
+      <input type="submit" value="Accept changes">
+    </form>
+    
+    <p>You have <%= user.kuas %> kuas.</p>
+    
+    <p><a href="/users/">Cancel</a> changes and go Home</p>
+  </div>
+ </div>
 
-<p><a href="/users/">Cancel</a> changes and go Home</p>
