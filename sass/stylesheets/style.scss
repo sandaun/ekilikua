@@ -4,6 +4,7 @@
 @import '../mixins/signup';
 @import '../mixins/home';
 @import '../mixins/miniclasscard';
+@import '../mixins/classcard';
 // @import '../mixins/classcard';
 
 // @include reset;
@@ -19,5 +20,29 @@
 
 a {
   color: $violet;
+}
+
+.background-violet {
+  background-color: $violet
+}
+
+.background-orange {
+  background-color: $orange
+}
+
+.background-yellow {
+  background-color: $yellow
+}
+
+.color-violet {
+  color: $violet
+}
+
+.color-orange {
+  color: $orange
+}
+
+.color-yellow {
+  color: $yellow
 }
 

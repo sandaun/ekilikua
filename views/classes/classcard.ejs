@@ -20,10 +20,10 @@
 
         <div class="mb-3">
           <a href="">
-            <span class="badge purple mr-1"><%= lesson.categoryID %></span>
+            <span class="badge background-violet mr-1 category"><%= lesson.categoryID %></span>
           </a>
           <a href="">
-            <span class="badge orange mr-1"><%= lesson.subcategoryID %></span>
+            <span class="badge background-orange mr-1 category"><%= lesson.subcategoryID %></span>
           </a>
         </div>
 
@@ -47,7 +47,7 @@
 
         <p class="lead">
           <span class="mr-1">
-            <i class="fas fa-calendar-alt"></i>
+            <i class="fas fa-calendar-alt icon-space"></i>
             <span>The schedule is <%= lesson.days %> <%= lesson.schedule %></span>
           </span>
         </p>
@@ -55,9 +55,9 @@
         <p><%= lesson.description %></p>
 
         <% if (lesson.alumns.length === 0) {%>
-          <p>Sooooo much learning in this class, are you ready? </p>
+          <p class="color-orange">Sooooo much learning in this class, are you ready? </p>
         <% } else { %>
-          <p>The alumns of this class are:</p>
+          <p class="color-orange">The alumns of this class are:</p>
         <% } %>
 
         <% if (currentUser) { %>
