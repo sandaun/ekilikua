@@ -1,5 +1,16 @@
-<h2><%= user.name %></h2>
+<div class="col-md-6 mb-4 img-professor">
+  <img src="<%= user.avatar %>" class="img-fluid img-professor" alt="user avatar">
+</div>
 
-<p><%= user.description %></p>
+ <!--Grid column-->
+ <div class="col-md-6 mb-4">
 
-<p><a href="/">Go home</a></p>
+ <!--Content-->
+  <div class="p-4">
+    <h2><%= user.name %></h2>
+    <p><%= user.description %></p>
+    <p class="color-violet"><a href="/">Go home</a></p>
+  </div>
+ </div>
+ 
+
