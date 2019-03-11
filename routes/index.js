@@ -10,8 +10,6 @@ router.get('/', async (req, res, next) => {
     console.log('All the available classes ', classes);
     res.render('index',
       {
-        title: 'Ekilikua',
-        copyright: '© 2019 Ekilikua',
         classes,
         view: 'all',
       });

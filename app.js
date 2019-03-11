@@ -34,6 +34,7 @@ const app = express();
 
 // app title
 app.locals.title = 'Ekilikua';
+app.locals.copyright = '© 2019 Ekilikua';
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
