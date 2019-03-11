@@ -51,6 +51,15 @@
   </div>
 </div>
 
+<div class="wrap">
+  <form action="/classes/query" method="get" class="home-search">
+    <input type="text" name="query" id="" placeholder="Knowledge search" class="searchTerm">
+    <!-- <input type="submit" class="searchButton"> -->
+    <button type="submit" class="searchButton"><i class="fa fa-search"></i></button>
+  </form>
+</div>
+
+
 <div class="home-class-list container">
   <h2 class="home-class-list-title">What do you want to learn today?</h2>
   <% classes.forEach((lesson) => { %>
@@ -58,12 +67,5 @@
       <%- include('partials/miniclasscard', { lesson, link })%>
   <% }) %>
 </div>
-
-<p></p>
-
-<form action="/classes/query" method="get">
-  <input type="text" name="query" id="">
-  <input type="submit" value="Knowledge search">
-</form>
 
 <p><%= copyright %></p>
