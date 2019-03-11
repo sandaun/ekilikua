@@ -8,26 +8,24 @@
  <!--Content-->
   <div class="p-4">
     <h2>Your Profile</h2>
+    <p>You have <span class="color-violet"><%= user.kuas %> kuas</span>.</p>
     <form action="/users/profile" method="post">
       <label for="name">Name:</label>
       <input type="text" name="name" id="name" value="<%= user.name %>">
       <br>
       <!-- <label for="password">Password</label>
-      <input type="password" name="password" id="password" value=""> -->
+      <input class="profile-input" type="password" name="password" id="password" value=""> -->
       <% if (!user.description) {%>
         <label for="description">Description</label> 
-        <input type="description" name="description" id="description" class="edit-description" value="Add your description">
+        <input class="profile-input" type="description" name="description" id="description" class="edit-description" value="Add your description">
       <% } else {%>
         <label for="description">Description</label>
         <br>
-        <input type="description" name="description" id="description" class="edit-description" value="<%= user.description %>">
+        <input class="profile-input" type="description" name="description" id="description" class="edit-description" value="<%= user.description %>">
       <% } %>
       <br>
-      <input type="submit" value="Accept changes">
+      <input class="btn button" type="submit" value="Accept changes">
     </form>
-    
-    <p>You have <%= user.kuas %> kuas.</p>
-    
     <p><a href="/users/">Cancel</a> changes and go Home</p>
   </div>
  </div>
