@@ -30,13 +30,21 @@
         <h2><%= lesson.title %></h2>
         <p class="lead font-weight-bold">Professor: <a href="/users/<%= lesson.professor._id %>/profile"><%= lesson.professor.name %></a></p>
         <hr>
+        
         <p class="lead">
           <span class="mr-1">
-            <i class="fas fa-money-bill-wave icon-space"></i>
-            <del>200 K$</del>
-          </span>
-          <span><%= lesson.price %> K$</span>
+          <i class="fas fa-money-bill-wave icon-space"></i>
+          <% if (lesson.alumns.length < 2) {%>
+            <span><%= lesson.price %> K$ per class</span>
+          <% } else { %>
+            <span class="mr-1">
+              <del><%= lesson.price %> K$</del>
+            </span>
+            <span><%= lesson.price/lesson.alumns.length %> K$ per class</span>
+          <% } %>
+        </span>
         </p>
+        
 
         <p class="lead">
           <span class="mr-1">
