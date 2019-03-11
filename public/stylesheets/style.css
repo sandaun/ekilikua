@@ -1,3 +1,14 @@
+.miniclasscard-card {
+  margin: 2rem 1rem;
+  padding: 0 0.25rem; }
+
+.card-title-own {
+  color: #AA269F; }
+
+.button {
+  background-color: #AA269F;
+  color: #fff; }
+
 .vertical-center {
   min-height: 100%;
   /* Fallback for browsers do NOT support vh unit */
@@ -10,13 +21,13 @@
   background-color: white; }
 
 .jumbotron {
-  background-color: #AC51E1; }
+  background-color: #AA269F; }
 
 a {
   color: #f8aa00; }
 
 .login-card {
-  background-color: #AC51E1;
+  background-color: #AA269F;
   border: none; }
 
 .login-card-title {
@@ -68,13 +79,13 @@ a {
   align-items: center; }
 
 .jumbotron {
-  background-color: #AC51E1; }
+  background-color: #AA269F; }
 
 a {
   color: #f8aa00; }
 
 .home-card {
-  background-color: #AC51E1;
+  background-color: #AA269F;
   border: none; }
 
 .home-card-title {
@@ -112,14 +123,14 @@ a {
 .searchTerm {
   float: left;
   width: 100%;
-  border: 2px solid #AC51E1;
+  border: 2px solid #AA269F;
   padding: 5px;
   border-radius: 5px;
   outline: none;
-  color: #AC51E1; }
+  color: #AA269F; }
 
 .searchTerm:focus {
-  color: #AC51E1; }
+  color: #AA269F; }
 
 .searchButton {
   position: absolute;
@@ -134,17 +145,7 @@ a {
   cursor: pointer;
   font-size: 20px; }
 
-.miniclasscard-card {
-  background-color: #AC51E1;
-  border: none; }
-
-.miniclasscard-card-title {
-  color: white; }
-
-.miniclasscard-card-text {
-  color: white; }
-
-h4 {
-  color: #b30015; }
+.container {
+  padding: 0px; }
 
 /*# sourceMappingURL=style.css.map */

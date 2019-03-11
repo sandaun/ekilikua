@@ -1,15 +1,14 @@
-@mixin miniclasscard {
-  .miniclasscard-card {
-    background-color: #AC51E1;
-    border: none;
-  }
-  .miniclasscard-card-title {
-    color: white;
-    // font-size: 3rem;
-  }
-
-  .miniclasscard-card-text {
-    color: white;
-  }
- 
+.miniclasscard-card {
+  margin: 2rem 1rem;
+  padding: 0 0.25rem;
 }
+
+.card-title-own {
+  color: $violet;
+}
+
+.button {
+  background-color: $violet;
+  color: #fff;
+}
+

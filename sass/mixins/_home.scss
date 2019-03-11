@@ -8,7 +8,7 @@
   }
 
   .jumbotron {
-    background-color: #AC51E1;
+    background-color: $violet;
   }
 
   a {
@@ -16,7 +16,7 @@
   }
 
   .home-card {
-    background-color: #AC51E1;
+    background-color: $violet;
     border: none;
   }
   .home-card-title {
@@ -62,15 +62,15 @@
   .searchTerm {
     float: left;
     width: 100%;
-    border: 2px solid #AC51E1;
+    border: 2px solid $violet;
     padding: 5px;
     border-radius: 5px;
     outline: none;
-    color: #AC51E1;
+    color: $violet;
   }
   
   .searchTerm:focus{
-    color: #AC51E1;
+    color: $violet;
   }
 
   .searchButton {
