@@ -1,10 +1,90 @@
-<nav>
-  <% if (currentUser) { %>
-    <ul>
-      <li><a href="/users/profile">Edit your profile</a></li>
-      <li><a href="/users/classes/own">What I teach</a></li>
-      <li><a href="/users/classes/attending">Classes to attend</a></li>
-      <li><a href="/users/classes/teaching">Classes to teach</a></li>
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark navbar-background scrolling-navbar">
+<div class="container">
+
+  <!-- Brand -->
+  <a class="navbar-brand waves-effect" href="/">
+    <strong class="white-text">Ekilikua</strong>
+  </a>
+
+  <!-- Collapse -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Links -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <!-- Left -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-effect" href="/">Home
+        <span class="sr-only">(current)</span>
+        </a>
+        </li>
+      <% if (currentUser) { %>
+      <li class="nav-item">
+        <a class="nav-link waves-effect" href="/users/profile">Edit your profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-effect" href="/users/logout">Log out</a>
+      </li>
+      <% } %>
     </ul>
-  <% } %>
+  </div>
+
+</div>
 </nav>
+<!-- Navbar -->
+
+<!-- This is used to see the cards right below the navbar -->
+<div style="margin-bottom: 4.2rem;"></div>
+
+<!-- Card -->
+<div class="card miniclasscard-card">
+  <!-- Card image -->
+  <!-- <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap"> -->
+  <!-- Card content -->
+  <div class="card-body">
+    <!-- Title -->
+    <h4 class="card-title card-title-own">Own classes</h4>
+    <!-- Text -->
+    <p class="card-text">Check your own created classes</p>
+    <!-- Button -->
+    <a href="/users/classes/own" class="btn button">See more</a>
+  </div>
+</div>
+<!-- Card -->
+
+<!-- Card -->
+<div class="card miniclasscard-card">
+  <!-- Card image -->
+  <!-- <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap"> -->
+  <!-- Card content -->
+  <div class="card-body">
+    <!-- Title -->
+    <h4 class="card-title card-title-own">Attending classes</h4>
+    <!-- Text -->
+    <p class="card-text">Check the classes you are attending</p>
+    <!-- Button -->
+    <a href="/users/classes/attending" class="btn button">See more</a>
+  </div>
+</div>
+<!-- Card -->
+
+<!-- Card -->
+<div class="card miniclasscard-card">
+  <!-- Card image -->
+  <!-- <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap"> -->
+  <!-- Card content -->
+  <div class="card-body">
+    <!-- Title -->
+    <h4 class="card-title card-title-own">Teaching classes</h4>
+    <!-- Text -->
+    <p class="card-text">Check the classes you are teaching</p>
+    <!-- Button -->
+    <a href="/users/classes/teaching" class="btn button">See more</a>
+  </div>
+</div>
+<!-- Card -->
