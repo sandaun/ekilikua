@@ -51,12 +51,13 @@
   </div>
 </div>
 
-<ul>
+<div class="home-class-list container">
+  <h2 class="home-class-list-title">What do you want to learn today?</h2>
   <% classes.forEach((lesson) => { %>
       <% const link = "/classes/"; %>
       <%- include('partials/miniclasscard', { lesson, link })%>
   <% }) %>
-</ul>
+</div>
 
 <p></p>
 
