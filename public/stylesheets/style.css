@@ -19,6 +19,14 @@
 .navbar.navbar-light .navbar-nav .nav-item .nav-link {
   color: white; }
 
+.category {
+  padding: 0.5rem;
+  font-size: 0.85rem; }
+
+.icon-space {
+  margin-right: 1rem;
+  margin-bottom: 0; }
+
 .vertical-center {
   min-height: 100%;
   /* Fallback for browsers do NOT support vh unit */
@@ -138,5 +146,26 @@ a {
 
 .container {
   padding: 0px; }
+
+a {
+  color: #AA269F; }
+
+.background-violet {
+  background-color: #AA269F; }
+
+.background-orange {
+  background-color: #FD6E42; }
+
+.background-yellow {
+  background-color: #FFDD5A; }
+
+.color-violet {
+  color: #AA269F; }
+
+.color-orange {
+  color: #FD6E42; }
+
+.color-yellow {
+  color: #FFDD5A; }
 
 /*# sourceMappingURL=style.css.map */
