@@ -9,16 +9,15 @@
   background-color: #AA269F;
   color: #fff; }
 
-.category {
-  padding: 0.5rem;
-  font-size: 0.85rem; }
+.classlist-class-list-title {
+  text-align: center;
+  margin-top: 4rem; }
 
-.orange {
-  background-color: #FD6E42; }
+.navbar-background {
+  background-color: #AA269F; }
 
-.icon-space {
-  margin-right: 1rem;
-  margin-bottom: 0; }
+.navbar.navbar-light .navbar-nav .nav-item .nav-link {
+  color: white; }
 
 .vertical-center {
   min-height: 100%;
@@ -139,26 +138,5 @@ a {
 
 .container {
   padding: 0px; }
-
-a {
-  color: #AA269F; }
-
-.background-violet {
-  background-color: #AA269F; }
-
-.background-orange {
-  background-color: #FD6E42; }
-
-.background-yellow {
-  background-color: #FFDD5A; }
-
-.color-violet {
-  color: #AA269F; }
-
-.color-orange {
-  color: #FD6E42; }
-
-.color-yellow {
-  color: #FFDD5A; }
 
 /*# sourceMappingURL=style.css.map */
