@@ -1,40 +1,109 @@
-<h2><%= lesson.title %></h2>
+<!--Main layout-->
+<div class="container dark-grey-text">
 
-<p>Professor: <a href="/users/<%= lesson.professor._id %>/profile"><%= lesson.professor.name %></a></p>
+  <!--Grid row-->
+  <div class="row wow fadeIn">
 
-<p>Of <%= lesson.categoryID %>, <%= lesson.subcategoryID %></p>
-<p>The schedule is <%= lesson.days %> <%= lesson.schedule %></p>
-<p>Price <%= lesson.price %></p>
-<p>Duration <%= lesson.duration %></p>
-<p>Alumnos: </p>
+    <!--Grid column-->
+    <div class="col-md-6 mb-4 img-professor">
 
-<% if (currentUser) { %>
-<ul>
-  <% var booked = false; %>
-  <% lesson.alumns.forEach( alumn => { %>
-    <% if (alumn.name === currentUser.name) {%>
-      <% booked = true; %>
-    <% } %>
-    <li>
-        <a href="/users/<%= alumn._id %>/profile"><%= alumn.name %></a>
-    </li>
-  <% }) %>
-</ul>
-<% } %>
+      <img src="<%= lesson.professor.avatar %>" class="img-fluid img-professor" alt="">
 
-<p></p>
+    </div>
+    <!--Grid column-->
 
-<% if (!booked) {%>
-  <a href="/classes/<%= lesson._id %>/join"> Join</a>
-<% } else { %>
-  <a href="/classes/<%= lesson._id %>/leave"> Leave</a>
-<% } %>
+    <!--Grid column-->
+    <div class="col-md-6 mb-4">
 
-<p></p>
+      <!--Content-->
+      <div class="p-4">
 
-<% if (currentUser && lesson.professor.name === currentUser.name) {%>
-  <a href="/users/classes/own/<%= lesson._id %>/update">update</a>
-  <form action="/users/classes/own/<%= lesson._id %>/delete" method="post">
-    <input type="submit" value="delete">
-  </form>
-<% } %>
+        <div class="mb-3">
+          <a href="">
+            <span class="badge purple mr-1"><%= lesson.categoryID %></span>
+          </a>
+          <a href="">
+            <span class="badge orange mr-1"><%= lesson.subcategoryID %></span>
+          </a>
+        </div>
+
+        <h2><%= lesson.title %></h2>
+        <p class="lead font-weight-bold">Professor: <a href="/users/<%= lesson.professor._id %>/profile"><%= lesson.professor.name %></a></p>
+        <hr>
+        <p class="lead">
+          <span class="mr-1">
+            <i class="fas fa-money-bill-wave icon-space"></i>
+            <del>200 K$</del>
+          </span>
+          <span><%= lesson.price %> K$</span>
+        </p>
+
+        <p class="lead">
+          <span class="mr-1">
+            <i class="fas fa-clock icon-space"></i>
+            <span><%= lesson.duration %> min of duration</span>
+          </span>
+        </p>
+
+        <p class="lead">
+          <span class="mr-1">
+            <i class="fas fa-calendar-alt"></i>
+            <span>The schedule is <%= lesson.days %> <%= lesson.schedule %></span>
+          </span>
+        </p>
+
+        <p><%= lesson.description %></p>
+
+        <% if (lesson.alumns.length === 0) {%>
+          <p>Sooooo much learning in this class, are you ready? </p>
+        <% } else { %>
+          <p>The alumns of this class are:</p>
+        <% } %>
+
+        <% if (currentUser) { %>
+        <ul>
+          <% var booked = false; %>
+          <% lesson.alumns.forEach( alumn => { %>
+            <% if (alumn.name === currentUser.name) {%>
+              <% booked = true; %>
+            <% } %>
+            <li>
+                <a href="/users/<%= alumn._id %>/profile"><%= alumn.name %></a>
+            </li>
+          <% }) %>
+        </ul>
+        <% } %>
+        
+        <p></p>
+        
+        <% if (!booked) {%>
+          <a href="/classes/<%= lesson._id %>/join" class="btn button"> Join</a>
+        <% } else { %>
+          <a href="/classes/<%= lesson._id %>/leave" class="btn button"> Leave</a>
+        <% } %>
+        
+        <p></p>
+        
+        <% if (currentUser && lesson.professor.name === currentUser.name) {%>
+          <a href="/users/classes/own/<%= lesson._id %>/update">update</a>
+          <form action="/users/classes/own/<%= lesson._id %>/delete" method="post">
+            <input type="submit" value="delete">
+          </form>
+        <% } %>
+
+      </div>
+      <!--Content-->
+
+    </div>
+    <!--Grid column-->
+
+  </div>
+  <!--Grid row-->
+
+
+</div>
+<!--Main layout-->
+
+
+</footer>
+<!--/.Footer-->
