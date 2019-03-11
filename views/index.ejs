@@ -44,22 +44,33 @@
           <button onclick="location.href='/users/'" type="button" class="btn btn-primary mt-4 mb-2 home-user-button">Go to your homepage</button>
           <p class="login-card-text">or <a href="/users/logout">Log out</a></p>
         <% } else { %>
-          <button onclick="location.href='/auth/'" type="button" class="btn btn-primary mt-4 mb-2 login-button">Log in</button> 
+          <button onclick="location.href='/auth/'" type="button" class="btn button-noviolet mt-4 mb-2 login-button">Log in</button> 
           <p class="login-card-text">or <a href="/auth/signup">Sign up</a></p>    
         <% } %>
     </div>
   </div>
 </div>
 
-<div class="wrap">
+<h2 class="home-class-list-title">What do you want to learn today?</h2>
+
+<!-- Search form -->
+<div class="active-pink-4 mb-4 justify-content-center searchForm">
   <form action="/classes/query" method="get" class="home-search">
-    <input type="text" name="query" id="" placeholder="Knowledge search" class="searchTerm">
-    <button type="submit" class="searchButton"><i class="fas fa-search"></i></button>
+    <input type="text" name="query" id="" class="form-control" placeholder="Knowledge search" aria-label="Search">
   </form>
 </div>
 
+<!-- OLD Search form -->
+<!-- 
+  <div class="wrap">
+    <form action="/classes/query" method="get" class="home-search">
+      <input type="text" name="query" id="" placeholder="Knowledge search" class="searchTerm">
+      <button type="submit" class="searchButton"><i class="fas fa-search"></i></button>
+    </form>
+  </div>
+-->
+
 <div class="home-class-list container">
-  <h2 class="home-class-list-title">What do you want to learn today?</h2>
   <div class="col-12">
     <% classes.forEach((lesson) => { %>
     <% const link = "/classes/"; %>
@@ -68,4 +79,4 @@
   </div> 
 </div>
 
-<p><%= copyright %></p>
+<p class="copyright"><%= copyright %></p>

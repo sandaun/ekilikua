@@ -12,7 +12,7 @@
   }
 
   a {
-    color: rgb(248, 170, 0);
+    color: $yellow;
   }
 
   .home-card {
@@ -44,46 +44,67 @@
 
   .home-class-list-title {
     text-align: center;
+    margin: 2rem auto;
   }
 
-  .wrap{
-    width: 70%;
+  .active-pink-4 input[type=text]:focus:not([readonly]) {
+    border: 1px solid $violet;
+    box-shadow: 0 0 0 1px $violet;
+  }
+
+  .searchForm {
+    display: flex;
     justify-content: center;
-    padding: 0.2rem;
-    padding-left: 2rem;
-    padding-bottom: 3rem;
   }
 
-  .home-search {
-    width: 100%;
-    position: relative
+  .copyright {
+    padding-top: 0.5rem;
+    display: flex;
+    justify-content: center;
   }
 
-  .searchTerm {
-    float: left;
-    width: 100%;
-    border: 2px solid $violet;
-    padding: 5px;
-    border-radius: 5px;
-    outline: none;
-    color: $violet;
+  .button-noviolet {
+    background-color: $orange;
   }
+
+  // .wrap{
+  //   width: 70%;
+  //   justify-content: center;
+  //   padding: 0.2rem;
+  //   padding-left: 2rem;
+  //   padding-bottom: 3rem;
+  // }
+
+  // .home-search {
+  //   width: 100%;
+  //   position: relative
+  // }
+
+  // .searchTerm {
+  //   float: left;
+  //   width: 100%;
+  //   border: 2px solid $violet;
+  //   padding: 5px;
+  //   border-radius: 5px;
+  //   outline: none;
+  //   color: $violet;
+  // }
   
-  .searchTerm:focus{
-    color: $violet;
-  }
+  // .searchTerm:focus{
+  //   color: $violet;
+  // }
 
-  .searchButton {
-    position: absolute;  
-    right: -50px;
-    width: 40px;
-    height: 36px;
-    border: 2px solid #00B4CC;
-    background: #00B4CC;
-    text-align: center;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 20px;
-  }
+  // .searchButton {
+  //   position: absolute;  
+  //   right: -50px;
+  //   width: 40px;
+  //   height: 36px;
+  //   border: 2px solid $yellow;
+  //   background: $yellow;
+  //   text-align: center;
+  //   color: #fff;
+  //   border-radius: 5px;
+  //   cursor: pointer;
+  //   font-size: 20px;
+  // }
 }
