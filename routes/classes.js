@@ -1,7 +1,9 @@
 const express = require('express');
+const moment = require('moment');
 const Class = require('../models/class');
 const User = require('../models/user');
 const assets = require('../assets');
+
 
 const router = express.Router();
 
@@ -45,7 +47,7 @@ router.get('/:classID', async (req, res, next) => {
   const { classID } = req.params;
   try {
     const selectedClass = await Class.findById(classID).populate('professor alumns');
-    res.render('classes/classcard', { lesson: selectedClass, view: 'all' });
+    res.render('classes/classcard', { lesson: selectedClass, moment, view: 'all' });
   } catch (error) {
     next(error);
   }

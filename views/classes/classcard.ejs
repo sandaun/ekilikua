@@ -56,7 +56,7 @@
         <p class="lead">
           <span class="mr-1">
             <i class="fas fa-calendar-alt icon-space"></i>
-            <span>The schedule is <%= lesson.days %> <%= lesson.schedule %></span>
+            <span><%= lesson.days %> <%= moment(lesson.schedule).format('DD') %>th of  <%= moment(lesson.schedule).format('MMMM') %></span>
           </span>
         </p>
 
