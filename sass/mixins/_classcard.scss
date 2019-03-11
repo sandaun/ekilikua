@@ -1,3 +1,7 @@
+.classcard a {
+  color: $violet;
+}
+
 .category {
   padding: 0.5rem;
   font-size: 0.85rem;
@@ -14,13 +18,10 @@
 }
 
 .img-little-avatar {
-  max-width: 20%;
+  width: 20%;
 }
 
 .list-group-item {
   border: none!important;
-}
-
-.avatar-list {
-  display: flex;
+  padding: .5rem 1rem;
 }
