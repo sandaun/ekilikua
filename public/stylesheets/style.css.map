@@ -10,7 +10,7 @@
 		"../../sass/mixins/_home.scss",
 		"../../sass/mixins/_miniclasscard.scss",
 		"../../sass/mixins/_classlist.scss",
-		"../../sass/mixins/_classcard.scss",
+		"../../sass/mixins/_class.scss",
 		"../../sass/mixins/_profile.scss"
 	],
 	"names": [],
