@@ -1,44 +1,29 @@
-@mixin login {
-  .vertical-center {
-    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-    min-height: 100vh; /* These two lines are counted as one :-)       */
-  
-    display: flex;
-    align-items: center;
-  }
+.avatar {
+  vertical-align: middle;
+  text-align: center;
+  padding: 0.5em;
+}
 
-  .atsign {
-    background-color: white;
-  }
+.avatar>img{
+  width: 25vh;
+  height: 25vh;
+  margin: 0 auto;
+  border-radius: 50%;
+}
 
-  .jumbotron {
-    background-color: $violet;
-  }
+.submit {
+  background-color: #4285f4;
+  color: #ffffff;
+}
 
-  .signup-login > a {
-    color: $yellow;
-  }
+.a-color{
+  color: #4285f4;
+}
 
-  .login-card {
-    background-color: $violet;
-    border: none;
-  }
-  .login-card-title {
-    color: white;
-    font-size: 3rem;
-  }
+.social-color{
+  color: #4285f4;
+}
 
-  .login-card-text, .form-check-label {
-    color: white;
-  }
-
-  .full-width {
-    width: 100vw;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
-  }
-
+.login-text-color {
+  color: white;
 }

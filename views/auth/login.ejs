@@ -1,22 +1,22 @@
-<div class="container fullwith fullheight">
+<div class="container fullwith fullheight background-violet">
   <div class="row fullwith fullheight justify-content-center">
     <form class="text-center p-5 col-12" action="/auth" method="post">
       <div class="avatar align-items-center">
         <img src="/images/login.jpg" alt="">
       </div>
-      <p class="h4 mb-4 mt-4">Log in</p>
+      <p class="h4 mb-4 mt-4 login-text-color">Log in</p>
       <!-- Email -->
       <input type="email" name="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
       <!-- Password -->
       <input type="password" name="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
       <!-- Sign in button -->
-      <button class="btn btn-info btn-block my-4" type="submit">Log in</button>
+      <button class="btn btn-block my-4 submit" type="submit">Log in</button>
       <!-- Register -->
-      <p>Not a member?
-          <a href="/auth/signup">Sign up</a>
+      <p class="login-text-color">Not a member?
+          <a href="/auth/signup" class="a-color">Sign up</a>
       </p>
       <!-- Social login -->
-      <p>or sign in with:</p>
+      <p class="login-text-color">or sign in with:</p>
   
       <a type="button" class="light-blue-text mx-2">
           <i class="fab fa-facebook-f"></i>
