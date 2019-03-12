@@ -3,6 +3,7 @@ require('dotenv').config();
 const createError = require('http-errors');
 const flash = require('connect-flash');
 const express = require('express');
+const favicon = require('serve-favicon');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -43,6 +44,7 @@ app.set('layout', 'layouts/main');
 
 // middlewares
 app.use(expressLayouts);
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
