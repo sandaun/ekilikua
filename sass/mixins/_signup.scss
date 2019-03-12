@@ -1,27 +1,16 @@
-@mixin signup {
-  .vertical-center {
-    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-    min-height: 100vh; /* These two lines are counted as one :-)       */
-  
-    display: flex;
-    align-items: center;
-  }
+.submit {
+  background-color: #4285f4;
+  color: #ffffff;
+}
 
-  .jumbotron {
-    background-color: #AC51E1;
-  }
+.a-color{
+  color: #4285f4;
+}
 
-  .signup-card {
-    background-color: #AC51E1;
-    border: none;
-  }
-  .signup-card-title {
-    color: white;
-    font-size: 3rem;
-  }
+.social-color{
+  color: #4285f4;
+}
 
-  .signup-card-text {
-    color: white;
-  }
- 
+.signup-text-color {
+  color: white;
 }

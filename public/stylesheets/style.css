@@ -22,6 +22,19 @@
 .login-text-color {
   color: white; }
 
+.submit {
+  background-color: #4285f4;
+  color: #ffffff; }
+
+.a-color {
+  color: #4285f4; }
+
+.social-color {
+  color: #4285f4; }
+
+.signup-text-color {
+  color: white; }
+
 .miniclasscard-card {
   margin: 2rem 1rem;
   padding: 0 0.25rem; }
