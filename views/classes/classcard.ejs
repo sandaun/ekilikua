@@ -86,25 +86,32 @@
         <% } %>
         
         <p></p>
-        
-        <% if (!booked) {%>
-          <a href="/classes/<%= lesson._id %>/join" class="btn button"> Join</a>
-        <% } else { %>
-          <a href="/classes/<%= lesson._id %>/leave" class="btn button"> Leave</a>
-        <% } %>
-        
-        <p></p>
-        
-        <% if (currentUser && lesson.professor.name === currentUser.name) {%>
-          <a href="/users/classes/own/<%= lesson._id %>/update">update</a>
-          <form action="/users/classes/own/<%= lesson._id %>/delete" method="post">
-            <input type="submit" value="delete">
-          </form>
-        <% } %>
 
+        
+        
+        
       </div>
       <!--Content-->
-
+      
+      <div class="row no-gutters align-items-center">
+        <div class="col-4">
+          <% if (!booked) {%>
+            <a href="/classes/<%= lesson._id %>/join" class="btn button other-button">Join</a>
+          <% } else { %>
+            <a href="/classes/<%= lesson._id %>/leave" class="btn button other-button">Leave</a>
+          <% } %>
+        </div>
+        <% if (currentUser && lesson.professor.name === currentUser.name) {%>
+          <div class="col-4">
+            <a href="/users/classes/own/<%= lesson._id %>/update" class="btn button other-button">Update</a>
+          </div>
+          <div class="col-4">
+            <form action="/users/classes/own/<%= lesson._id %>/delete" method="post">
+              <input type="submit" value="Delete"  class="btn button delete-button">
+            </form>
+          </div>
+        <% } %>
+      </div>
     </div>
     <!--Grid column-->
 
