@@ -22,8 +22,8 @@
 <div class="home-class-list container">
   <div class="col-12">
     <% classes.forEach((lesson) => { %>
-    <% const link = "/classes/"; %>
-    <%- include('../partials/miniclasscard', { lesson, link })%>
+      <% const link = "/classes/"; %>
+      <%- include('../partials/miniclasscard', { lesson, link })%>
     <% }) %>
   </div> 
 </div>

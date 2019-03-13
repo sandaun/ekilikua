@@ -1,18 +1,19 @@
 <%- include('../partials/navbar')%>
   
-<h2>Query results: </h2>
+<h2 class="classlist-class-list-title container">KNOWLEDGE SEARCH </h2>
 
-<ul>
-  <% if (!(Array.isArray(classes))) { %>
-    <p>Oops! There is no result four your query. What about?..</p>
-    <br>
-    <%- include('../partials/miniclasscard', { lesson: classes, link: "/classes/" })%>
-  <% } else { %>
-    <% classes.forEach((lesson) => { %>
-      <li class="list-group-item">
-        <%- include('../partials/miniclasscard', { lesson, link: "/classes/" })%>
-      </li>
-    <% })%>
-  <% } %>
-</ul>
-  
+<div class="home-class-list container">
+  <div class="col-12">
+    <% if (!(Array.isArray(classes))) { %>
+      <br>
+      <p class="card-text text-center text-black">Oops! There is no result four your search. What about?..</p>
+      <br>
+      <%- include('../partials/miniclasscard', { lesson: classes, link: "/classes/" })%>
+    <% } else { %>
+      <% classes.forEach((lesson) => { %>
+        <% const link = "/classes/"; %>
+        <%- include('../partials/miniclasscard', { lesson, link })%>
+      <% }) %>
+    <% } %>
+  </div> 
+</div>
