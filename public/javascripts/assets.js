@@ -1,3 +1,15 @@
+$('body').css('padding-top', parseInt($('#main-navbar').css("height"))+5);
+
+// $(document).ready(function(){
+//     $(window).resize(function () { 
+//         $('body').css('padding-top', parseInt($('#main-navbar').css("height"))+10);
+//     });
+    
+//     $(window).on(function () { 
+//         $('body').css('padding-top', parseInt($('#main-navbar').css("height"))+10);        
+//     });
+// });
+
 function enableRepeatSchedule() {
 
   const items = document.getElementsByClassName("scheduleItem");
