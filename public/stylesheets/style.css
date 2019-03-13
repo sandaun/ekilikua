@@ -47,8 +47,7 @@
   color: #fff !important; }
 
 .classlist-class-list-title {
-  text-align: center;
-  margin-top: 4rem; }
+  text-align: center; }
 
 .navbar-background {
   background-color: #AA269F; }
@@ -144,9 +143,7 @@
   justify-content: center; }
 
 .copyright {
-  padding-top: 0.5rem;
-  display: flex;
-  justify-content: center; }
+  text-align: center; }
 
 .button-noviolet {
   background-color: #FD6E42; }
