@@ -12,7 +12,7 @@
     <!--Grid column-->
 
     <!--Grid column-->
-    <div class="col-md-6 mb-4">
+    <div class="col-md-6">
 
       <!--Content-->
       <div class="p-4">
@@ -85,39 +85,22 @@
         </ul>
         <% } %>
         
-        <p></p>
-
-        
-        
-        
+        <p></p>  
       </div>
-      <!--Content-->
-      
-      <div class="row no-gutters align-items-center">
-        <div class="col-4">
+      <!--Buttons-->
+    </div>
+        <div class="d-flex flex-row justify-content-center align-items-center w-100 ml-3 mb-3">
           <% if (!booked) {%>
             <a href="/classes/<%= lesson._id %>/join" class="btn button other-button">Join</a>
           <% } else { %>
             <a href="/classes/<%= lesson._id %>/leave" class="btn button other-button">Leave</a>
           <% } %>
-        </div>
-        <% if (currentUser && lesson.professor.name === currentUser.name) {%>
-          <div class="col-4">
+  
+          <% if (currentUser && lesson.professor.name === currentUser.name) {%>
             <a href="/users/classes/own/<%= lesson._id %>/update" class="btn button other-button">Update</a>
-          </div>
-          <div class="col-4">
             <form action="/users/classes/own/<%= lesson._id %>/delete" method="post">
               <input type="submit" value="Delete"  class="btn button delete-button">
             </form>
-          </div>
-        <% } %>
-      </div>
-    </div>
-    <!--Grid column-->
-
-  </div>
-  <!--Grid row-->
-
-
+          <% } %>
+        </div>
 </div>
-<!--Main layout-->
