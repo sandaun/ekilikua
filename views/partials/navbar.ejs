@@ -1,37 +1,44 @@
 <nav id="main-navbar" class="navbar fixed-top navbar-expand-lg navbar-dark navbar-background scrolling-navbar">
   <div class="container">
     <!-- Brand -->
-    <a class="navbar-brand waves-effect" href="/">
-      <strong class="white-text">Ekilikua</strong>
-    </a>
     
     <!-- Collapse -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <a class="nav-link p-0" href="#">
-          <img src="<%= currentUser.avatar%>" class="rounded-circle z-depth-0" alt="avatar image" height="35">
-        </a>
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand waves-effect" href="#">
+      <strong class="white-text">Ekilikua</strong>
+    </a>
     </button>
-    
+        
+    <% if (currentUser) { %>
+      <a class="nav-link p-0" href="/users/profile">
+        <img src="<%= currentUser.avatar%>" class="rounded-circle z-depth-0" alt="avatar image" height="35">      
+      </a>
+    <% } %>
+
     <!-- Links -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <!-- Left -->
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link waves-effect" href="/users">Dashboard
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="/">Home</a>
           <span class="sr-only">(current)</span>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link waves-effect" href="/users">Your classes
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link waves-effect" href="new">New class</a>
         </li>
         <% if (currentUser) { %>
-        <li class="nav-item">
-          <a class="nav-link waves-effect" href="/users/profile">Edit your profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link waves-effect" href="/users/logout">Log out</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="/users/logout">Log out</a>
+          </li>
+        <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="/auth">Log in</a>
+          </li>
         <% } %>
       </ul>
     </div>
