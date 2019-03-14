@@ -63,16 +63,16 @@
         <p><%= lesson.description %></p>
 
         <% if (lesson.alumns.length === 0) {%>
-          <p class="color-orange">Sooooo much learning in this class, are you ready? </p>
+          <p class="color-orange">No one is on this class yet, but there is sooooo much learning here, are you ready to join?</p>
         <% } else { %>
-          <p class="color-orange">The alumns of this class are:</p>
+          <p class="color-orange">The alumns of this class are: </p>
         <% } %>
 
         <% if (currentUser) { %>
         <ul class="list-group">
           <% var booked = false; %>
           <% lesson.alumns.forEach( alumn => { %>
-            <% if (alumn.name === currentUser.name) {%>
+            <% if (alumn._id == currentUser._id) {%>
               <% booked = true; %>
             <% } %>
             <li class="list-group-item avatar-list">
@@ -89,14 +89,15 @@
       </div>
       <!--Buttons-->
     </div>
-        <div class="d-flex flex-row justify-content-center align-items-center w-100 ml-3 mb-3">
-          <% if (!booked) {%>
-            <a href="/classes/<%= lesson._id %>/join" class="btn button other-button">Join</a>
+        <div class="d-flex flex-row justify-content-center align-items-center w-100 mb-3">
+          <% if (booked) {%>
+            <a href="/classes/<%= lesson._id %>/leave" class="btn button delete-button">Leave</a>
           <% } else { %>
-            <a href="/classes/<%= lesson._id %>/leave" class="btn button other-button">Leave</a>
+            <% if (!(currentUser._id == lesson.professor._id)) { %>
+              <a href="/classes/<%= lesson._id %>/join" class="btn button">Join</a>
+            <% } %>
           <% } %>
-  
-          <% if (currentUser && lesson.professor.name === currentUser.name) {%>
+          <% if (currentUser && lesson.professor._id == currentUser._id) {%>
             <a href="/users/classes/own/<%= lesson._id %>/update" class="btn button other-button">Update</a>
             <form action="/users/classes/own/<%= lesson._id %>/delete" method="post">
               <input type="submit" value="Delete"  class="btn button delete-button">
