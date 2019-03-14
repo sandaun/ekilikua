@@ -1,27 +1,32 @@
 <div class="msg-container">
   <% infoMessages && infoMessages.forEach((message) => { %>
     <div class="alerts alert-info">
-    <%- message %>
+      <i class="fas fa-info-circle alerts-icon" style="color: blue;"></i>
+      <span><%- message %></span>
     </div>
-    <% })
-    dangerMessages && dangerMessages.forEach((message) => { %>
+  <% })
+  dangerMessages && dangerMessages.forEach((message) => { %>
     <div class="alerts alert-danger">
-    <%- message %>
+      <i class="fas fa-times-circle alerts-icon" style="color: red;"></i>
+      <span><%- message %></span>
     </div>
-    <% })
-    errorMessages && errorMessages.forEach((message) => { %>
+  <% })
+  errorMessages && errorMessages.forEach((message) => { %>
     <div class="alerts alert-danger">
-    <%- message %>
+      <i class="fas fa-times-circle alerts-icon" style="color: red;"></i>
+      <span><%- message %></span>
     </div>
-    <% })
-    successMessages && successMessages.forEach((message) => { %>
+  <% })
+  successMessages && successMessages.forEach((message) => { %>
     <div class="alerts alert-success">
-    <%- message %>
+      <i class="fas fa-check-circle alerts-icon" style="color: green;"></i>
+      <span><%- message %></span>
     </div>
-    <% })
-    warningMessages && warningMessages.forEach((message) => { %>
+  <% })
+  warningMessages && warningMessages.forEach((message) => { %>
     <div class="alerts alert-warning">
-    <%- message %>
+      <i class="fas fa-exclamation-circle alerts-icon" style="color: yellow;"></i>
+      <span><%- message %></span>
     </div>
   <% }) %>
 </div>

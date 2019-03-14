@@ -11,6 +11,6 @@ $(document).ready(function(){
     $('#footer').css('margin-top', ((docHeight - footerTop) - 30) + 'px');
   }
 
-  // $(".alert").first().hide().fadeIn(200).delay(2000).fadeOut(1000, function () { $(this).remove(); });
+  $(".alerts").first().hide().fadeIn(200).delay(2000).fadeOut(1000, function () { $(this).remove(); });
 
 });

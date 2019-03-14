@@ -110,6 +110,9 @@
   border-radius: .25rem;
   text-align: center; }
 
+.alerts-icon {
+  padding-right: 1em; }
+
 .vertical-center {
   min-height: 100%;
   /* Fallback for browsers do NOT support vh unit */
