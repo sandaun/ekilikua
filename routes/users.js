@@ -56,7 +56,7 @@ router.get('/:userID/profile', async (req, res, next) => {
   const { userID } = req.params;
   try {
     const user = await User.findById(userID);
-    res.render('user/usercard', { user, view: 'user' });
+    res.render('user/usercard', { user, view: 'user', title: `Profile: ${user.name}`});
   } catch (error) {
     next(error);
   }
