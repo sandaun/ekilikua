@@ -129,12 +129,21 @@
 
 .jumbotron {
   background-image: url("https://images.unsplash.com/photo-1528605105345-5344ea20e269?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+  background-size: cover;
+  padding: 0;
   z-index: 1; }
 
 .degrade {
   background: linear-gradient(#AA269F, #FD6E42);
-  z-index: 2;
-  opacity: 0.5; }
+  opacity: 0.7;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 2; }
+
+.opacity {
+  z-index: 3;
+  position: absolute; }
 
 .home > a {
   color: #FFDD5A; }
@@ -178,6 +187,9 @@
 
 .button-noviolet {
   background-color: #FD6E42; }
+
+body {
+  font-family: 'Quicksand', sans-serif; }
 
 .container {
   padding: 0px;
