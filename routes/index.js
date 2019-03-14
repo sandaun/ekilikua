@@ -7,9 +7,9 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     const classes = await Class.find();
-    if (req.session.currentUser) {
-      req.flash('success', `Wellcome ${req.session.currentUser.name}`);
-    }
+    // if (req.session.currentUser) {
+    //   req.flash('success', `Wellcome ${req.session.currentUser.name}`);
+    // }
     res.render('index', { classes, view: 'all' });
   } catch (error) {
     next(error);

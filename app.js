@@ -52,7 +52,7 @@ app.use(cookieParser());
 app.use(session({
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60, // 1 day
+    ttl: 24 * 60 * 60 * 1000, // 1 day
   }),
   secret: process.env.SESSION_SECRET || 'starterKit',
   resave: true,

@@ -16,23 +16,24 @@ router.post('/', assets.anonRoute, async (req, res, next) => {
 
   if (password === '' || email === '') {
     req.flash('error', 'Email or password empty.');
-    return res.redirect('/auth');
+    res.redirect('/auth');
   }
 
   try {
     const userFound = await User.findOne({ email });
     if (!userFound) {
       req.flash('error', "User doesn't exist.");
-      return res.redirect('/auth/signup');
+      res.redirect('/auth/signup');
     }
     if (bcrypt.compareSync(password, userFound.password)) {
       req.session.currentUser = userFound;
-      req.flash('success', 'User succesfully logged.');
-      res.redirect(req.session.returnTo || '/');
-      delete req.session.returnTo;
+      req.flash('error', 'User succesfully logged.');
+      // setTimeout(() => delete req.session.returnTo, 1000);
+      return res.redirect(req.session.returnTo || '/');
+      // delete req.session.returnTo;
     }
     req.flash('error', 'Email or password incorrect.');
-    return res.redirect('/auth');
+    res.redirect('/auth');
   } catch (error) {
     next(error);
   }

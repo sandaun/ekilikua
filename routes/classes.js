@@ -98,8 +98,8 @@ router.get('/:classID/join', assets.authRoute, async (req, res, next) => {
           });
         }
       }
+      req.flash('success', 'Congratulations you will learn new knowledge.');
     }
-    req.flash('success', 'Congratulations you will learn new knowledge.');
     res.redirect(`/classes/${classID}`);
   } catch (error) {
     next(error);

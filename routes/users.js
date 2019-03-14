@@ -116,9 +116,9 @@ router.post('/classes/own/:classID/delete', async (req, res, next) => {
   const userID = res.locals.currentUser._id;
 
   try {
-    const deletedClass = await Class.findByIdAndDelete(classID);
+    const { name } = await Class.findByIdAndDelete(classID);
     await User.findByIdAndUpdate(userID, { $pullAll: { classes: [classID] } }, { new: true });
-    req.flash('success', `Class ${deletedClass.name} succesfully deleted.`);
+    req.flash('success', `Class ${name} succesfully deleted.`);
     res.redirect('/users/classes/own');
   } catch (error) {
     next(error);
@@ -139,11 +139,11 @@ router.get('/classes/new', async (req, res, next) => {
 
 // Submits form to create new own class for the user
 router.post('/classes/new', async (req, res, next) => {
-  const userID = res.locals.currentUser._id;
+  const professor = res.locals.currentUser._id;
   const { title, category, subcategory, level, description, days, schedule, price, duration, repeat } = req.body;
   try {
-    const createdClass = await Class.create({ title, userID, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration, repeat });
-    const userModifiedData = await User.findByIdAndUpdate(userID, { $push: { classes: createdClass._id  } }, { new:true });
+    const createdClass = await Class.create({ title, professor, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration, repeat });
+    const userModifiedData = await User.findByIdAndUpdate(professor, { $push: { classes: createdClass._id  } }, { new:true });
     req.session.currentUser = userModifiedData;
     req.flash('success', `Class ${title} succesfully created.`);
     res.redirect('/users/classes/own');
@@ -237,13 +237,17 @@ router.post('/classes/teaching/:classID', async (req, res, next) => {
 
 // User logout
 router.get('/logout', (req, res, next) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return next(err);
-    }
-    req.flash('success', 'We miss you.');
-    return res.redirect('/');
-  });
+  const { name } = req.session.currentUser;
+  delete req.session.currentUser;
+  req.flash('success', `We will miss you ${name}`);
+  return res.redirect('/');
+
+  // req.session.destroy((err) => {
+  //   if (err) {
+  //     return next(err);
+  //   }
+  //   return res.redirect('/');
+  // });
 });
 
 module.exports = router;
