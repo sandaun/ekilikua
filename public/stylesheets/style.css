@@ -89,6 +89,9 @@
 .p-4 {
   padding: 1.5rem 1.5rem 0rem 1.5rem !important; }
 
+.button-myclasses {
+  padding: 0.5rem 1rem; }
+
 .profile-input {
   width: 100%;
   height: 8rem;
