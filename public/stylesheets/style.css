@@ -97,6 +97,19 @@
 .md-form label {
   color: #AA269F !important; }
 
+.msg-container {
+  width: 100%;
+  display: flex;
+  justify-content: center; }
+
+.alerts {
+  position: absolute;
+  z-index: 10;
+  padding: .75rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  text-align: center; }
+
 .vertical-center {
   min-height: 100%;
   /* Fallback for browsers do NOT support vh unit */

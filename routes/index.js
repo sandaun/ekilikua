@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     const classes = await Class.find();
-    console.log('All the available classes ', classes);
+    req.flash('error', 'Esos mensajes buenos ñeeeeeee');
     res.render('index',
       {
         classes,

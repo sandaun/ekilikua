@@ -7,7 +7,10 @@ $(document).ready(function(){
   var footerHeight = $('#footer').height();
   var footerTop = $('#footer').position().top + footerHeight;
 
-  if (footerTop < docHeight)
-      $('#footer').css('margin-top', ((docHeight - footerTop) - 30) + 'px');
+  if (footerTop < docHeight){
+    $('#footer').css('margin-top', ((docHeight - footerTop) - 30) + 'px');
+  }
+
+  // $(".alert").first().hide().fadeIn(200).delay(2000).fadeOut(1000, function () { $(this).remove(); });
 
 });
