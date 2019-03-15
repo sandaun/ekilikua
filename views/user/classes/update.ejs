@@ -80,14 +80,16 @@
           <option value="Sunday">Sunday</option>
         </select>
       -->
-      <div class="md-form form-sm">
-        <label for="duration">Duration in minutes</label>
-        <input type="number" name="duration" id="duration" class="form-control form-control-sm" value="<%= lesson.duration %>">
-      </div>
-      
-      <div class="md-form form-sm">
-        <label for="price">Price per class in Kuas</label>
-        <input type="number" name="price" id="price" class="form-control form-control-sm" value="<%= lesson.price %>">
+      <div class="d-flex">
+        <div class="md-form form-sm mr-4">
+          <label for="duration">Duration in minutes</label>
+          <input type="number" name="duration" id="duration" class="form-control form-control-sm" value="<%= lesson.duration %>">
+        </div>
+        
+        <div class="md-form form-sm">
+          <label for="price">Price per class in K$</label>
+          <input type="number" name="price" id="price" class="form-control form-control-sm" value="<%= lesson.price %>">
+        </div>
       </div>
 
       <div class="text-center mt-4 mb-2">
