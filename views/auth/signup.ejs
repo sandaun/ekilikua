@@ -2,12 +2,13 @@
     <div class="row fullwith fullheight justify-content-center">
       <form class="text-center p-5" action="/auth/signup" method="post">
 
-          <p class="h4 mb-4 signup-text-color">Sign up</p>
+          <p class="h4 signup-text-color">Sign up</p>
+          <p class="h5 mb-4 signup-text-color">It's free and always be.</p>
 
           <div class="form-row mb-4">
               <div class="col">
                   <!-- First name -->
-                  <input type="text" id="defaultRegisterFormFirstName" name="name" class="form-control" placeholder="Name">
+                  <input type="text" id="defaultRegisterFormFirstName" name="name" class="form-control mt-4" placeholder="Name">
               </div>
           </div>
 
@@ -44,3 +45,4 @@
       </form>
     </div>
   </div>
+  <%- include('../partials/backbutton.ejs')%>

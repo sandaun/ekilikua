@@ -12,7 +12,7 @@
     <!--Grid column-->
 
     <!--Grid column-->
-    <div class="col-md-6 mb-4">
+    <div class="col-md-6">
 
       <!--Content-->
       <div class="p-4">
@@ -35,12 +35,12 @@
           <span class="mr-1">
           <i class="fas fa-money-bill-wave icon-space"></i>
           <% if (lesson.alumns.length < 2) {%>
-            <span><%= lesson.price %> K$ per class</span>
+            <span class="color-black"><%= lesson.price %> K$ per class</span>
           <% } else { %>
             <span class="mr-1">
-              <del><%= lesson.price %> K$</del>
+              <del class="color-black"><%= lesson.price %> K$</del>
             </span>
-            <span><%= lesson.price/lesson.alumns.length %> K$ per class</span>
+            <span class="color-black"><%= lesson.price/lesson.alumns.length %> K$ per class</span>
           <% } %>
         </span>
         </p>
@@ -49,68 +49,60 @@
         <p class="lead">
           <span class="mr-1">
             <i class="fas fa-clock icon-space"></i>
-            <span><%= lesson.duration %> min of duration</span>
+            <span class="color-black"><%= lesson.duration %> min of duration</span>
           </span>
         </p>
 
         <p class="lead">
           <span class="mr-1">
             <i class="fas fa-calendar-alt icon-space"></i>
-            <span><%= lesson.days %> <%= moment(lesson.schedule).format('DD') %>th of  <%= moment(lesson.schedule).format('MMMM') %></span>
+            <span class="color-black"><%= lesson.days %> <%= moment(lesson.schedule).format('DD') %>th of  <%= moment(lesson.schedule).format('MMMM') %></span>
           </span>
         </p>
 
         <p><%= lesson.description %></p>
 
         <% if (lesson.alumns.length === 0) {%>
-          <p class="color-orange">Sooooo much learning in this class, are you ready? </p>
+          <p class="color-orange">No one is on this class yet, but there is sooooo much learning here, are you ready to join?</p>
         <% } else { %>
-          <p class="color-orange">The alumns of this class are:</p>
+          <p class="color-orange">The alumns of this class are: </p>
         <% } %>
 
         <% if (currentUser) { %>
         <ul class="list-group">
           <% var booked = false; %>
           <% lesson.alumns.forEach( alumn => { %>
-            <% if (alumn.name === currentUser.name) {%>
+            <% if (alumn._id == currentUser._id) {%>
               <% booked = true; %>
             <% } %>
             <li class="list-group-item avatar-list">
               <div class="avatar-list-item">
-                <img src="<%= alumn.avatar %>" alt="alumn avatar" class="img-fluid rounded-circle img-little-avatar">
-                <a href="/users/<%= alumn._id %>/profile"><%= alumn.name %></a>
+                <a href="/users/<%= alumn._id %>/profile"><img src="<%= alumn.avatar %>" alt="alumn avatar" class="img-fluid rounded-circle img-little-avatar"></a>
+                <a href="/users/<%= alumn._id %>/profile" class="ml-2"><%= alumn.name %></a>
               </div>
             </li>
           <% }) %>
         </ul>
         <% } %>
         
-        <p></p>
-        
-        <% if (!booked) {%>
-          <a href="/classes/<%= lesson._id %>/join" class="btn button"> Join</a>
-        <% } else { %>
-          <a href="/classes/<%= lesson._id %>/leave" class="btn button"> Leave</a>
-        <% } %>
-        
-        <p></p>
-        
-        <% if (currentUser && lesson.professor.name === currentUser.name) {%>
-          <a href="/users/classes/own/<%= lesson._id %>/update">update</a>
-          <form action="/users/classes/own/<%= lesson._id %>/delete" method="post">
-            <input type="submit" value="delete">
-          </form>
-        <% } %>
-
+        <p></p>  
       </div>
-      <!--Content-->
-
+      <!--Buttons-->
     </div>
-    <!--Grid column-->
-
-  </div>
-  <!--Grid row-->
-
-
+        <div class="d-flex flex-row justify-content-center align-items-center w-100 mb-3">
+          <% if (booked) {%>
+            <a href="/classes/<%= lesson._id %>/leave" class="btn button delete-button">Leave</a>
+          <% } else { %>
+            <% if (!(currentUser._id == lesson.professor._id)) { %>
+              <a href="/classes/<%= lesson._id %>/join" class="btn button">Join</a>
+            <% } %>
+          <% } %>
+          <% if (currentUser && lesson.professor._id == currentUser._id) {%>
+            <a href="/users/classes/own/<%= lesson._id %>/update" class="btn button other-button">Update</a>
+            <form action="/users/classes/own/<%= lesson._id %>/delete" method="post">
+              <input type="submit" value="Delete"  class="btn delete-button">
+            </form>
+          <% } %>
+        </div>
 </div>
-<!--Main layout-->
+<%- include('../partials/backbutton.ejs')%>

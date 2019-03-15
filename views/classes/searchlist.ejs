@@ -1,33 +1,20 @@
-<nav>
-    <ul>
-      <% if (currentUser) { %>
-        <li><a href="/users/">Go to your homepage</a></li>
-        <li>
-          <a href="/users/logout">Log out</a>
-        </li>
-      <% } else { %>
-        <li>
-          <a href="/auth">Log in</a>
-        </li>
-      <% } %>
-    </ul>
-  </nav>
-  <br>
+<%- include('../partials/navbar')%>
   
-  <h2>Query results: </h2>
-  
-  <ul>
+<h2 class="classlist-class-list-title container">KNOWLEDGE SEARCH </h2>
+
+<div class="home-class-list container">
+  <div class="col-12">
     <% if (!(Array.isArray(classes))) { %>
-      <p>Oops! There is no result four your query. What about?..</p>
+      <br>
+      <p class="card-text text-center text-black">Oops! There is no result four your search. What about?..</p>
+      <br>
       <%- include('../partials/miniclasscard', { lesson: classes, link: "/classes/" })%>
     <% } else { %>
       <% classes.forEach((lesson) => { %>
-        <li class="list-group-item">
-          <%- include('../partials/miniclasscard', { lesson, link: "/classes/" })%>
-        </li>
-      <% })%>
+        <% const link = "/classes/"; %>
+        <%- include('../partials/miniclasscard', { lesson, link })%>
+      <% }) %>
     <% } %>
-  </ul>
-
-  <p><a href="/">Home</a></p>
-  
+  </div> 
+</div>
+<%- include('../partials/backbutton.ejs')%>

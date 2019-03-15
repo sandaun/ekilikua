@@ -7,8 +7,25 @@
 @import '../mixins/classlist';
 @import '../mixins/class';
 @import '../mixins/profile';
+@import '../mixins/alert';
 
 @include home;
+
+body {
+  font-family: 'Quicksand', sans-serif;
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
+span {
+  color: $violet;
+}
+
+.lead > span {
+  color: $orange;
+}
 
 .container {
   padding: 0px;
@@ -40,14 +57,18 @@
 }
 
 .color-violet {
-  color: #AA269F; 
+  color: $violet; 
 }
 
 .color-orange {
-  color: #FD6E42; 
+  color: $orange; 
 }
 
 .color-yellow {
-  color: #FFDD5A; 
+  color: $yellow; 
+}
+
+.color-black {
+  color: $black!important; 
 }
 

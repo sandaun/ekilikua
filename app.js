@@ -25,7 +25,7 @@ const classesRouter = require('./routes/classes');
 (async () => {
   try {
     const conection = await mongoose.connect(`${process.env.MONGODB_URI}`, { useNewUrlParser: true });
-    console.log(`Connected to Mongo! Database name: "${conection.connections[0].name}"`);
+    console.log(`Connected to Mongo! Database name: "${conection.connections[0].db.s.databaseName}"`);
   } catch (err) {
     console.error('Error conecting to Mongo database.', err);
   }
@@ -52,7 +52,7 @@ app.use(cookieParser());
 app.use(session({
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60, // 1 day
+    ttl: 24 * 60 * 60 * 1000, // 1 day
   }),
   secret: process.env.SESSION_SECRET || 'starterKit',
   resave: true,
@@ -66,8 +66,6 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.session.currentUser;
   next();
 });
-app.use(flash());
-app.use(messages);
 app.use(sassMiddleware({
   src: path.join(__dirname, 'sass'),
   dest: path.join(__dirname, 'public'),
@@ -75,6 +73,8 @@ app.use(sassMiddleware({
   sourceMap: true,
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
+app.use(messages);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);

@@ -7,26 +7,46 @@
 
  <!--Content-->
   <div class="p-4">
-    <h2>Your Profile</h2>
-    <p>You have <span class="color-violet"><%= user.kuas %> K$</span>.</p>
+    <h2>Your Profile, <%= user.name %></h2>
+    <p>You have <span class="color-orange"><%= user.kuas %> K$</span>.</p>
     <form action="/users/profile" method="post">
+      <!-- Material input subject -->
+      <div class="md-form form-sm">
+        <input type="text" name="name" id="name" class="form-control form-control-sm" value="<%= user.name %>">
+        <label for="name">Name</label>
+      </div>
+      <!-- 
       <label for="name">Name:</label>
       <input type="text" name="name" id="name" value="<%= user.name %>" class="edit-description">
       <br>
+      -->
       <!-- <label for="password">Password</label>
       <input class="profile-input" type="password" name="password" id="password" value=""> -->
       <% if (!user.description) {%>
-        <label for="description">Description</label> 
-        <input class="profile-input" type="description" name="description" id="description" class="edit-description" value="Add your description">
+        <div class="md-form form-sm">
+          <textarea type="text" id="description"  name="description" class="md-textarea form-control"></textarea>
+          <label for="description">Description</label>
+        </div>
+        <!-- 
+          <label for="description">Description</label> 
+          <input class="profile-input" type="description" name="description" id="description" class="edit-description" value="Add your description">
+        -->
       <% } else {%>
+      <!-- Material textarea message -->
+        <div class="md-form form-sm">
+          <textarea type="description" id="description" name="description" class="md-textarea form-control"><%= user.description %></textarea>
+          <label for="description">Description</label>
+        </div>
+      <!-- 
         <label for="description">Description</label>
-        <br>
-        <input class="profile-input" type="description" name="description" id="description" class="edit-description" value="<%= user.description %>">
+        <input class="profile-input" type="description" name="description" id="description" class="edit-description" value="<%= user.description %>"> 
+        -->
       <% } %>
-      <br>
-      <input class="btn button" type="submit" value="Accept changes">
+      <div class="text-center mt-4 mb-2">
+        <input class="btn button" type="submit" value="Accept changes">
+        <p><a href="/users/" class="color-orange">Cancel</a> changes and go Home</p>
+      </div>
     </form>
-    <p><a href="/users/">Cancel</a> changes and go Home</p>
   </div>
  </div>
-
+ <%- include('../partials/backbutton.ejs')%>

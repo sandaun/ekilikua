@@ -40,24 +40,29 @@
   padding: 0 0.25rem; }
 
 .card-title-own {
-  color: #AA269F; }
+  color: #F50089; }
 
 .button {
-  background-color: #AA269F;
+  background-color: #F50089;
   color: #fff !important; }
 
 .classlist-class-list-title {
   text-align: center;
-  margin-top: 4rem; }
+  margin: auto 1rem; }
 
 .navbar-background {
-  background-color: #AA269F; }
+  background-color: #F50089; }
 
 .navbar.navbar-light .navbar-nav .nav-item .nav-link {
   color: white; }
 
+.text-black {
+  color: black;
+  margin: 1rem;
+  text-align: center; }
+
 .classcard a {
-  color: #AA269F; }
+  color: #F50089; }
 
 .category {
   padding: 0.5rem;
@@ -78,10 +83,48 @@
   border: none !important;
   padding: .5rem 1rem; }
 
+.other-button {
+  background-color: #FFDD5A;
+  color: black !important; }
+
+.delete-button {
+  background-color: #FD6E42; }
+
+.p-4 {
+  padding: 1.5rem 1.5rem 0rem 1.5rem !important; }
+
+.button-myclasses {
+  padding: 0.5rem 1rem; }
+
+.frequency {
+  margin-top: 0; }
+
 .profile-input {
   width: 100%;
   height: 8rem;
   margin-bottom: 1rem; }
+
+.md-form input[type=date], .md-form input[type=datetime-local], .md-form input[type=email], .md-form input[type=number], .md-form input[type=password], .md-form input[type=search-md], .md-form input[type=search], .md-form input[type=tel], .md-form input[type=text], .md-form input[type=time], .md-form input[type=url], .md-form textarea.md-textarea {
+  border-bottom: 1px solid #F50089; }
+
+.md-form label {
+  color: #F50089 !important; }
+
+.msg-container {
+  width: 100%;
+  display: flex;
+  justify-content: center; }
+
+.alerts {
+  position: absolute;
+  z-index: 10;
+  padding: .75rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  text-align: center; }
+
+.alerts-icon {
+  padding-right: 1em; }
 
 .vertical-center {
   min-height: 100%;
@@ -92,13 +135,31 @@
   align-items: center; }
 
 .jumbotron {
-  background-color: #AA269F; }
+  background-image: url("https://images.unsplash.com/photo-1528605105345-5344ea20e269?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+  background-position: center;
+  background-position-x: 70%;
+  background-position-y: center;
+  background-size: cover;
+  padding: 0;
+  z-index: 1; }
+
+.degrade {
+  background: linear-gradient(#F50089, #FD6E42);
+  opacity: 0.7;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 2; }
+
+.opacity {
+  z-index: 3;
+  position: absolute; }
 
 .home > a {
   color: #FFDD5A; }
 
 .home-card {
-  background-color: #AA269F;
+  background-color: #F50089;
   border: none; }
 
 .home-card-title {
@@ -111,8 +172,15 @@
 .login-div {
   text-align: center; }
 
-.login-button, .home-user-button {
-  width: 70%; }
+.home-button {
+  width: 70%;
+  border: 2px solid white; }
+
+.home-button:hover {
+  max-width: 70%;
+  background-color: #FFEFE9;
+  color: #FD6E42;
+  font-weight: bold; }
 
 .home-class-list {
   display: flex;
@@ -121,23 +189,30 @@
 
 .home-class-list-title {
   text-align: center;
-  margin: 2rem auto; }
+  margin: 2rem 0.7rem; }
 
 .active-pink-4 input[type=text]:focus:not([readonly]) {
-  border: 1px solid #AA269F;
-  box-shadow: 0 0 0 1px #AA269F; }
+  border: 1px solid #F50089;
+  box-shadow: 0 0 0 1px #F50089; }
 
 .searchForm {
   display: flex;
   justify-content: center; }
 
 .copyright {
-  padding-top: 0.5rem;
-  display: flex;
-  justify-content: center; }
+  text-align: center; }
 
-.button-noviolet {
-  background-color: #FD6E42; }
+body {
+  font-family: 'Quicksand', sans-serif; }
+
+h3 {
+  font-size: 1.3rem; }
+
+span {
+  color: #F50089; }
+
+.lead > span {
+  color: #FD6E42; }
 
 .container {
   padding: 0px;
@@ -154,7 +229,7 @@
   padding: 0; }
 
 .background-violet {
-  background-color: #AA269F; }
+  background-color: #F50089; }
 
 .background-orange {
   background-color: #FD6E42; }
@@ -163,12 +238,15 @@
   background-color: #FFDD5A; }
 
 .color-violet {
-  color: #AA269F; }
+  color: #F50089; }
 
 .color-orange {
   color: #FD6E42; }
 
 .color-yellow {
   color: #FFDD5A; }
+
+.color-black {
+  color: black !important; }
 
 /*# sourceMappingURL=style.css.map */

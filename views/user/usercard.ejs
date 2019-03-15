@@ -9,8 +9,15 @@
   <div class="p-4">
     <h2><%= user.name %></h2>
     <p><%= user.description %></p>
-    <p class="color-violet"><a href="/">Go home</a></p>
+    <div class="d-flex flex-row justify-content-center align-items-center w-100 mb-3">
+      <a href="/" class="btn button">Go home</a>
+      <% if (locals.currentUser._id == user._id) { %>
+        <a href="/users/profile" class="btn other-button">Update</a>
+      <% } %>
+    </div>
   </div>
+  
+  
  </div>
- 
+ <%- include('../partials/backbutton.ejs')%>
 

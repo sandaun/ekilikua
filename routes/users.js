@@ -36,7 +36,6 @@ router.post('/profile', async (req, res, next) => {
 
   if (name === '' || description === '') {
     req.flash('error', 'No empty fields allowed.');
-    console.log('No empty filds allowed.');
     return res.redirect('/profile');
   }
 
@@ -45,8 +44,7 @@ router.post('/profile', async (req, res, next) => {
     //await User.findByIdAndUpdate(userID, { name, description, password: hashedpassword });
     const userModifiedData = await User.findByIdAndUpdate(userID, { name, description }, { new:true });
     req.session.currentUser = userModifiedData;
-    req.flash('success', 'User succesfully updated.');
-    console.log('User succesfully updated.');
+    req.flash('success', `User ${name} succesfully updated.`);
     return res.redirect('/users');
   } catch (error) {
     next(error);
@@ -58,7 +56,7 @@ router.get('/:userID/profile', async (req, res, next) => {
   const { userID } = req.params;
   try {
     const user = await User.findById(userID);
-    res.render('user/usercard', { user, view: 'user' });
+    res.render('user/usercard', { user, view: 'user', title: `Profile: ${user.name}`});
   } catch (error) {
     next(error);
   }
@@ -69,7 +67,6 @@ router.get('/classes/own', async (req, res, next) => {
   const userID = res.locals.currentUser._id;
   try {
     const { classes } = await User.findById(userID).populate('classes');
-    console.log('User own classes: ', classes);
     res.render('classes/classlist', { classes, view: 'own' });
   } catch (error) {
     next(error);
@@ -81,7 +78,6 @@ router.get('/classes/own/:classID', async (req, res, next) => {
   const { classID } = req.params;
   try {
     const lesson = await Class.findById(classID).populate('professor alumns');
-    console.log('Own class: ', lesson);
     res.render('classes/classcard', { lesson, view: 'own' });
   } catch (error) {
     next(error);
@@ -93,7 +89,6 @@ router.get('/classes/own/:classID/update', async (req, res, next) => {
   const { classID } = req.params;
   try {
     const lesson = await Class.findById(classID);
-    console.log('Own class: ', lesson);
     const categories = await Category.find();
     const levels = await Level.find();
     res.render('user/classes/update', { lesson, categories, levels, moment, view: 'own' });
@@ -108,7 +103,7 @@ router.post('/classes/own/:classID/update', async (req, res, next) => {
   const { title, category, subcategory, level, description, days, schedule, price, duration, repeat } = req.body;
   try {
     const updatedClass = await Class.findByIdAndUpdate(classID, { title, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration, repeat }, { new:true });
-    console.log('Class succesfully updated: ', updatedClass);
+    req.flash('success', `Class ${title} succesfully updated.`);
     res.redirect('/users/classes/own');
   } catch (error) {
     next(error);
@@ -121,9 +116,9 @@ router.post('/classes/own/:classID/delete', async (req, res, next) => {
   const userID = res.locals.currentUser._id;
 
   try {
-    const deletedClass = await Class.findByIdAndDelete(classID);
+    const { name } = await Class.findByIdAndDelete(classID);
     await User.findByIdAndUpdate(userID, { $pullAll: { classes: [classID] } }, { new: true });
-    console.log('Own class succesfully deleted: ', deletedClass);
+    req.flash('success', `Class ${name} succesfully deleted.`);
     res.redirect('/users/classes/own');
   } catch (error) {
     next(error);
@@ -144,13 +139,13 @@ router.get('/classes/new', async (req, res, next) => {
 
 // Submits form to create new own class for the user
 router.post('/classes/new', async (req, res, next) => {
-  const userID = res.locals.currentUser._id;
+  const professor = res.locals.currentUser._id;
   const { title, category, subcategory, level, description, days, schedule, price, duration, repeat } = req.body;
   try {
-    const createdClass = await Class.create({ title, userID, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration, repeat });
-    const userModifiedData = await User.findByIdAndUpdate(userID, { $push: { classes: createdClass._id  } }, { new:true });
+    const createdClass = await Class.create({ title, professor, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration, repeat });
+    const userModifiedData = await User.findByIdAndUpdate(professor, { $push: { classes: createdClass._id  } }, { new:true });
     req.session.currentUser = userModifiedData;
-    console.log('Class succesfully created.');
+    req.flash('success', `Class ${title} succesfully created.`);
     res.redirect('/users/classes/own');
   } catch (error) {
     next(error);
@@ -163,7 +158,6 @@ router.get('/classes/attending', async (req, res, next) => {
 
   try {
     const classes = await Class.find({ alumns: { $in: [userID] } });
-    console.log('User attending clases: ', classes);
     res.render('classes/classlist', { classes, view: 'attending' });
   } catch (error) {
     next(error);
@@ -176,7 +170,6 @@ router.get('/classes/attending/:classID', async (req, res, next) => {
 
   try {
     const lesson = await Class.findById(classID).populate('professor alumns');
-    console.log('attending class: ', lesson);
     res.render('classes/classcard', { lesson, view: 'attending' });
   } catch (error) {
     next(error);
@@ -190,7 +183,7 @@ router.post('/classes/attending/:classID', async (req, res, next) => {
 
   try {
     const deletedClass = await Class.findByIdAndUpdate(classID, { $pullAll: { alumns: [userID] } }, { new: true });
-    console.log('Succesfully leaved of: ', deletedClass);
+    req.flash('success', `Succesfully leave of ${deletedClass.title}`);
     res.redirect('user/classes/attending');
   } catch (error) {
     next(error);
@@ -209,7 +202,6 @@ router.get('/classes/teaching', async (req, res, next) => {
         teachingClasses.push(lesson);
       }
     });
-    console.log('User own classes: ', teachingClasses);
     res.render('classes/classlist', { classes: teachingClasses, view: 'teaching' });
   } catch (error) {
     next(error);
@@ -222,7 +214,6 @@ router.get('/classes/teaching/:classID', async (req, res, next) => {
 
   try {
     const lesson = await Class.findById(classID).populate('professor alumns');
-    console.log('User teaching class: ', lesson);
     res.render('classes/classcard', { lesson, view: 'teaching' });
   } catch (error) {
     next(error);
@@ -237,7 +228,7 @@ router.post('/classes/teaching/:classID', async (req, res, next) => {
   try {
     const deletedClass = await Class.findByIdAndDelete(classID);
     await User.findByIdAndUpdate(userID, { $pullAll: { classes: [classID] } }, { new: true });
-    console.log('Teaching class cancelled: ', deletedClass);
+    req.flash('success', `Class ${deletedClass.tittle} succesfully cancelled.`);
     res.redirect('user/classes/teaching');
   } catch (error) {
     next(error);
@@ -246,12 +237,17 @@ router.post('/classes/teaching/:classID', async (req, res, next) => {
 
 // User logout
 router.get('/logout', (req, res, next) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return next(err);
-    }
-    return res.redirect('/');
-  });
+  const { name } = req.session.currentUser;
+  delete req.session.currentUser;
+  req.flash('success', `We will miss you ${name}`);
+  return res.redirect('/');
+
+  // req.session.destroy((err) => {
+  //   if (err) {
+  //     return next(err);
+  //   }
+  //   return res.redirect('/');
+  // });
 });
 
 module.exports = router;

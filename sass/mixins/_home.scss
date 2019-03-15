@@ -7,8 +7,38 @@
     align-items: center;
   }
 
+  // .jumbotron {
+  //   background-image: url("https://images.unsplash.com/photo-1528605105345-5344ea20e269?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+  // }
+
   .jumbotron {
-    background-color: $violet;
+    background-image: url("https://images.unsplash.com/photo-1528605105345-5344ea20e269?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+    background-position: center;
+    background-position-x: 70%;
+    background-position-y: center;
+    background-size: cover;
+    padding: 0;
+    z-index: 1;
+  }
+// Idea of how to make a gradient over an image
+  // body{
+  //   $colorStart: rgba(0,0,0,0);
+  //   $colorEnd: rgba(0,0,0,0.8);
+  //   @include background-image(linear-gradient(to bottom, $colorStart, $colorEnd), url("bg.jpg"));
+  // }
+
+  .degrade {
+    background: linear-gradient($violet, $orange);
+    opacity: 0.7;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+  }
+
+  .opacity {
+    z-index: 3;
+    position: absolute;
   }
 
   .home > a {
@@ -31,9 +61,17 @@
   .login-div {
     text-align: center;
   }
-
-  .login-button, .home-user-button {
+  
+  .home-button {
     width: 70%;
+    border: 2px solid white; 
+  }
+
+  .home-button:hover {
+    max-width: 70%;
+    background-color: #FFEFE9; 
+    color: $orange;
+    font-weight: bold;
   }
 
   .home-class-list {
@@ -44,7 +82,7 @@
 
   .home-class-list-title {
     text-align: center;
-    margin: 2rem auto;
+    margin: 2rem 0.7rem;
   }
 
   .active-pink-4 input[type=text]:focus:not([readonly]) {
@@ -58,53 +96,6 @@
   }
 
   .copyright {
-    padding-top: 0.5rem;
-    display: flex;
-    justify-content: center;
+    text-align: center;
   }
-
-  .button-noviolet {
-    background-color: $orange;
-  }
-
-  // .wrap{
-  //   width: 70%;
-  //   justify-content: center;
-  //   padding: 0.2rem;
-  //   padding-left: 2rem;
-  //   padding-bottom: 3rem;
-  // }
-
-  // .home-search {
-  //   width: 100%;
-  //   position: relative
-  // }
-
-  // .searchTerm {
-  //   float: left;
-  //   width: 100%;
-  //   border: 2px solid $violet;
-  //   padding: 5px;
-  //   border-radius: 5px;
-  //   outline: none;
-  //   color: $violet;
-  // }
-  
-  // .searchTerm:focus{
-  //   color: $violet;
-  // }
-
-  // .searchButton {
-  //   position: absolute;  
-  //   right: -50px;
-  //   width: 40px;
-  //   height: 36px;
-  //   border: 2px solid $yellow;
-  //   background: $yellow;
-  //   text-align: center;
-  //   color: #fff;
-  //   border-radius: 5px;
-  //   cursor: pointer;
-  //   font-size: 20px;
-  // }
 }

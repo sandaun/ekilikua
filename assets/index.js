@@ -15,15 +15,15 @@ module.exports = {
       next();
     }
   },
-  roleCheck: (role) => {
-    return (req, res, next) => {
-      if (req.session.currentUser.role === role) {
-        next();
-      } else {
-        res.redirect('/auth');
-      }
-    };
-  },
+  // roleCheck: (role) => {
+  //   return (req, res, next) => {
+  //     if (req.session.currentUser.role === role) {
+  //       next();
+  //     } else {
+  //       res.redirect('/auth');
+  //     }
+  //   };
+  // },
   messages: (req, res, next) => {
     res.locals.errorMessages = req.flash('error');
     res.locals.infoMessages = req.flash('info');
