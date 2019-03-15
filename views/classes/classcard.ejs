@@ -35,12 +35,12 @@
           <span class="mr-1">
           <i class="fas fa-money-bill-wave icon-space"></i>
           <% if (lesson.alumns.length < 2) {%>
-            <span><%= lesson.price %> K$ per class</span>
+            <span class="color-black"><%= lesson.price %> K$ per class</span>
           <% } else { %>
             <span class="mr-1">
-              <del><%= lesson.price %> K$</del>
+              <del class="color-black"><%= lesson.price %> K$</del>
             </span>
-            <span><%= lesson.price/lesson.alumns.length %> K$ per class</span>
+            <span class="color-black"><%= lesson.price/lesson.alumns.length %> K$ per class</span>
           <% } %>
         </span>
         </p>
@@ -49,14 +49,14 @@
         <p class="lead">
           <span class="mr-1">
             <i class="fas fa-clock icon-space"></i>
-            <span><%= lesson.duration %> min of duration</span>
+            <span class="color-black"><%= lesson.duration %> min of duration</span>
           </span>
         </p>
 
         <p class="lead">
           <span class="mr-1">
             <i class="fas fa-calendar-alt icon-space"></i>
-            <span><%= lesson.days %> <%= moment(lesson.schedule).format('DD') %>th of  <%= moment(lesson.schedule).format('MMMM') %></span>
+            <span class="color-black"><%= lesson.days %> <%= moment(lesson.schedule).format('DD') %>th of  <%= moment(lesson.schedule).format('MMMM') %></span>
           </span>
         </p>
 
