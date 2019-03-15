@@ -65,7 +65,11 @@
         <% if (lesson.alumns.length === 0) {%>
           <p class="color-orange">No one is on this class yet, but there is sooooo much learning here, are you ready to join?</p>
         <% } else { %>
-          <p class="color-orange">The alumns of this class are: </p>
+          <% if (!currentUser) {%>
+            <p class="color-orange">The are <%= lesson.alumns.length %> alums in this class.</p>
+          <% } else { %>
+            <p class="color-orange">The alumns of this class are: </p>
+          <% } %>
         <% } %>
 
         <% if (currentUser) { %>
