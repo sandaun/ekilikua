@@ -1,84 +1,102 @@
-<h2><%= lesson.title %></h2>
+<div class="col-md-6 mb-4">
+  <div class="p-4">
+    <h2><span><%= lesson.title %></span></h2>
+    <br>
+    
+    <form action="/users/classes/own/<%= lesson._id %>/update" method="post">
+      <div class="md-form form-sm">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" class="form-control form-control-sm" value="<%= lesson.title %>">
+      </div>
+      <div class="md-form form-sm ">
+        <textarea type="text" name="description" id="description" class="md-textarea form-control" value="<%= lesson.description %>"><%= lesson.description %></textarea>
+        <label for="description">Description</label>
+      </div>
 
-<form action="/users/classes/own/<%= lesson._id %>/update" method="post">
-  <label for="title">Title</label>
-  <input type="text" name="title" id="title" value="<%= lesson.title %>">
-  <br>
-  
-  <label for="description">Description</label>
-  <input type="text" name="description" id="description" value="<%= lesson.description %>">
-  <br>
-  
-  <label for="category">Category</label>
-  <select id="category" name="category">
-    <% categories.forEach((cat) => { %>
-      <% if (cat.name === lesson.categoryID) {%>
-        <option value="<%= cat.name %>" selected><%= cat.name %></option>
+      <div class="md-form form-sm">
+        <h6><span>Category</span></h6>
+        <!-- <label for="category">Category</label> -->
+        <select id="category" name="category" class="form-control form-control-sm">
+          <% categories.forEach((cat) => { %>
+            <% if (cat.name === lesson.categoryID) {%>
+              <option value="<%= cat.name %>" selected><%= cat.name %></option>
+            <% } else { %>
+              <option value="<%= cat.name %>"><%= cat.name %></option>
+            <% } %>      
+          <% })%>
+        </select>
+      </div>
+
+      <div class="md-form form-sm">
+        <h6><span>Level</span></h6>
+        <!-- <label for="level">Level</label> -->
+        <select id="level" name="level" class="form-control form-control-sm">
+          <% levels.forEach((level) => { %>
+            <% if (level.name === lesson.level) {%>
+              <option value="<%= level.name %>" selected><%= level.name %></option>
+            <% } else { %>
+              <option value="<%= level.name %>"><%= level.name %></option>
+            <% } %>      
+          <% })%>
+        </select>
+      </div>
+    
+      <div class="md-form form-sm">  
+        <h6><span>Schedule</span></h6>
+        <!-- <label for="schedule">Schedule</label> -->
+        <input type="date" id="schedule" name="schedule" max="2019-12-31" value="<%= moment(lesson.schedule).format('YYYY-MM-DD') %>">
+        <script>setMinScheduleDate();</script>
+      </div>
+    
+    
+      <% if (lesson.repeat === "Not") {%>
+        <input type="checkbox" id="repeat" onChange="enableRepeatSchedule()">
       <% } else { %>
-        <option value="<%= cat.name %>"><%= cat.name %></option>
-      <% } %>      
-    <% })%>
-  </select>
-  <br>
+        <input type="checkbox" id="repeat" onChange="enableRepeatSchedule()" enabled>
+      <% } %> 
+      <label for="repeat">Repeat</label>
 
-  <label for="level">Level</label>
-  <select id="level" name="level">
-    <% levels.forEach((level) => { %>
-      <% if (level.name === lesson.level) {%>
-        <option value="<%= level.name %>" selected><%= level.name %></option>
-      <% } else { %>
-        <option value="<%= level.name %>"><%= level.name %></option>
-      <% } %>      
-    <% })%>
-  </select>
-  <br>
+      <div class="md-form form-sm frequency">
+        <select id="frequency" name="repeat" class="scheduleItem" disabled>
+          <option value="Not">Not</option>
+          <option value="Daily">Daily</option>
+          <option value="Weekly">Weekly</option>
+          <!-- 
+            <option value="Monthly">Monthly</option>
+            <option value="Yearly">Yearly</option>
+          -->
+        </select>
+      </div>
 
-  <label for="schedule">Schedule</label>
-  <input type="date" id="schedule" name="schedule" max="2019-12-31" value="<%= moment(lesson.schedule).format('YYYY-MM-DD') %>">
-  <script>setMinScheduleDate();</script>
- 
-  <br>
+      <!-- 
+        <select id="days" name="days" class="scheduleItem" disabled>
+          <option value="Not">Not</option>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
+        </select>
+      -->
+      <div class="md-form form-sm">
+        <label for="duration">Duration in minutes</label>
+        <input type="number" name="duration" id="duration" class="form-control form-control-sm" value="<%= lesson.duration %>">
+      </div>
+      
+      <div class="md-form form-sm">
+        <label for="price">Price per class in Kuas</label>
+        <input type="number" name="price" id="price" class="form-control form-control-sm" value="<%= lesson.price %>">
+      </div>
 
+      <div class="text-center mt-4 mb-2">
+        <input type="submit" class="btn button" value="Accept changes">
+        <p><a href="/users" class="color-orange">Cancel</a> changes and go Home</p>
+      </div>
+    </form>
+    
 
-  <% if (lesson.repeat === "Not") {%>
-    <input type="checkbox" id="repeat" onChange="enableRepeatSchedule()">
-  <% } else { %>
-    <input type="checkbox" id="repeat" onChange="enableRepeatSchedule()" enabled>
-  <% } %> 
-  <label for="repeat">Repeat</label>
-  <br>
-
-  <select id="frequency" name="repeat" class="scheduleItem" disabled>
-    <option value="Not">Not</option>
-    <option value="Daily">Daily</option>
-    <option value="Weekly">Weekly</option>
-    <option value="Monthly">Monthly</option>
-    <option value="Yearly">Yearly</option>
-  </select>
-  <br>
-
-  <select id="days" name="days" class="scheduleItem" disabled>
-    <option value="Not">Not</option>
-    <option value="Monday">Monday</option>
-    <option value="Tuesday">Tuesday</option>
-    <option value="Wednesday">Wednesday</option>
-    <option value="Thursday">Thursday</option>
-    <option value="Friday">Friday</option>
-    <option value="Saturday">Saturday</option>
-    <option value="Sunday">Sunday</option>
-  </select>
-  <br>
-  
-  <label for="duration">Duration in minutes</label>
-  <input type="number" name="duration" id="duration" value="<%= lesson.duration %>">
-  <br>
-  
-  <label for="price">Price per class in Kuas</label>
-  <input type="number" name="price" id="price" value="<%= lesson.price %>">
-  <br>
-  
-  <input type="submit" value="Accept changes">
-</form>
-
-<p><a href="/users">Cancel</a> changes and go Home</p>
+  </div>
+</div>
 <%- include('../../partials/backbutton.ejs')%>
