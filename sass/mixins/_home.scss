@@ -58,9 +58,17 @@
   .login-div {
     text-align: center;
   }
-
-  .login-button, .home-user-button {
+  
+  .home-button {
     width: 70%;
+    border: 1px solid white; 
+  }
+
+  .home-button:hover {
+    max-width: 70%;
+    background-color: #FFEFE9; 
+    color: $orange;
+    font-weight: bold;
   }
 
   .home-class-list {
@@ -71,7 +79,7 @@
 
   .home-class-list-title {
     text-align: center;
-    margin: 2rem auto;
+    margin: 2rem 0.7rem;
   }
 
   .active-pink-4 input[type=text]:focus:not([readonly]) {
@@ -86,9 +94,5 @@
 
   .copyright {
     text-align: center;
-  }
-
-  .button-noviolet {
-    background-color: $orange;
   }
 }

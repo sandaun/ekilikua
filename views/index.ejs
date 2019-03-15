@@ -4,15 +4,19 @@
   <div class="d-flex flex-column align-content-center opacity">
     <div class="card-body">
       <h4 class="card-title text-center home-card-title">Ekilikua</h4>
-      <p class="card-text text-center home-card-text">Knowledge is infinite. What do you wish to learn today?</p>
+      <p class="card-text text-center home-card-text">So, What are you going to learn today? There are big things ahead of us</p>
     </div>
     <div class="login-div">
       <% if (currentUser) { %>
-        <button onclick="location.href='/users/'" type="button" class="btn btn-primary mt-4 mb-2 home-user-button">Go to your homepage</button>
-        <p class="login-card-text">or <a href="/users/logout">Log out</a></p>
+        <div >
+          <button onclick="location.href='/users/'" type="button" class="btn mb-2 home-button">My classes</button>
+          <button onclick="location.href='/users/logout'" type="button" class="btn mb-2 home-button">Log out</button>
+        </div>
       <% } else { %>
-        <button onclick="location.href='/auth/'" type="button" class="btn button-noviolet mt-4 mb-2 login-button">Log in</button> 
-        <p class="login-card-text">or <a href="/auth/signup">Sign up</a></p>    
+        <div>
+          <button onclick="location.href='/auth/'" type="button" class="btn mb-2 home-button">Log in</button> 
+          <button onclick="location.href='/auth/signup'" type="button" class="btn mb-2 home-button">Sign up</button>
+        </div>
       <% } %>
     </div>
   </div>
