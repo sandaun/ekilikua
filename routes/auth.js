@@ -27,10 +27,8 @@ router.post('/', assets.anonRoute, async (req, res, next) => {
     }
     if (bcrypt.compareSync(password, userFound.password)) {
       req.session.currentUser = userFound;
-      req.flash('error', 'User succesfully logged.');
-      // setTimeout(() => delete req.session.returnTo, 1000);
-      return res.redirect(req.session.returnTo || '/');
-      // delete req.session.returnTo;
+      req.flash('success', `Welcome back ${req.session.currentUser.name}`);
+      res.redirect(req.session.returnTo || '/');
     }
     req.flash('error', 'Email or password incorrect.');
     res.redirect('/auth');
@@ -50,22 +48,37 @@ router.post('/signup', assets.anonRoute, async (req, res, next) => {
 
   if (name === '' || password === '' || email === '' || description === '') {
     req.flash('error', 'No empty fields allowed.');
-    return res.redirect('/signup');
+    res.redirect('/signup');
   }
 
   try {
     const userFound = await User.findOne({ email });
     if (userFound) {
       req.flash('error', `Sorry, ${email} already exists`);
-      return res.redirect('/signup');
+      res.redirect('/signup');
     }
     const hashedpassword = bcrypt.hashSync(password, 10);
     await User.create({ name, email, description, password: hashedpassword });
     req.flash('success', `User ${name} succesfully created.`);
-    return res.redirect('/auth');
+    res.redirect('/auth');
   } catch (error) {
     next(error);
   }
+});
+
+// User logout
+router.get('/logout', (req, res, next) => {
+  const { name } = req.session.currentUser;
+  delete req.session.currentUser;
+  req.flash('success', `We will miss you ${name}`);
+  res.redirect('/');
+
+  // req.session.destroy((err) => {
+  //   if (err) {
+  //     return next(err);
+  //   }
+  //   return res.redirect('/');
+  // });
 });
 
 module.exports = router;

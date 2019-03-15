@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
 router.get('/profile', async (req, res, next) => {
   const userID = res.locals.currentUser._id;
   try {
-    const user = await User.findById( userID );
+    const user = await User.findById(userID);
     res.render('user/profile', { user, title: 'Profile' });
   } catch (error) {
     next(error);
@@ -36,7 +36,7 @@ router.post('/profile', async (req, res, next) => {
 
   if (name === '' || description === '') {
     req.flash('error', 'No empty fields allowed.');
-    return res.redirect('/profile');
+    res.redirect('/profile');
   }
 
   try {
@@ -45,7 +45,7 @@ router.post('/profile', async (req, res, next) => {
     const userModifiedData = await User.findByIdAndUpdate(userID, { name, description }, { new:true });
     req.session.currentUser = userModifiedData;
     req.flash('success', `User ${name} succesfully updated.`);
-    return res.redirect('/users');
+    res.redirect('/users');
   } catch (error) {
     next(error);
   }
@@ -233,21 +233,6 @@ router.post('/classes/teaching/:classID', async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
-
-// User logout
-router.get('/logout', (req, res, next) => {
-  const { name } = req.session.currentUser;
-  delete req.session.currentUser;
-  req.flash('success', `We will miss you ${name}`);
-  return res.redirect('/');
-
-  // req.session.destroy((err) => {
-  //   if (err) {
-  //     return next(err);
-  //   }
-  //   return res.redirect('/');
-  // });
 });
 
 module.exports = router;

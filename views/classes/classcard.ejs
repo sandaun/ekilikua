@@ -93,7 +93,7 @@
           <% if (booked) {%>
             <a href="/classes/<%= lesson._id %>/leave" class="btn button delete-button">Leave</a>
           <% } else { %>
-            <% if (!(currentUser._id == lesson.professor._id)) { %>
+            <% if (currentUser && !(currentUser._id == lesson.professor._id)) { %>
               <a href="/classes/<%= lesson._id %>/join" class="btn button">Join</a>
             <% } %>
           <% } %>
