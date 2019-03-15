@@ -9,7 +9,7 @@
   <div class="p-4">
     <h2>Your Profile, <%= user.name %></h2>
     <p>You have <span class="color-orange"><%= user.kuas %> K$</span>.</p>
-    <form action="/users/profile" method="post">
+    <form action="profile" method="post">
       <!-- Material input subject -->
       <div class="md-form form-sm">
         <input type="text" name="name" id="name" class="form-control form-control-sm" value="<%= user.name %>">
