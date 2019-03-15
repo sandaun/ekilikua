@@ -141,7 +141,7 @@ router.get('/:classID/leave', assets.authRoute, async (req, res, next) => {
       });
     }
     req.flash('info', 'You will loose this new knowledge.');
-    res.redirect(`/classes/${classID}`);
+    res.redirect('/users/');
   } catch (error) {
     next(error);
   }
