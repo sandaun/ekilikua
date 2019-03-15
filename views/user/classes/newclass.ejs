@@ -9,17 +9,18 @@
     <form action="/users/classes/new" method="post">
       <!-- Material input subject -->
       <div class="md-form form-sm">
-        <input type="text" name="title" id="title" class="form-control form-control-sm" value="Class title">
-        <label for="title">Title</label>
+        <input type="text" name="title" id="title" class="form-control form-control-sm">
+        <label for="title">Class title</label>
       </div>
 
       <div class="md-form form-sm">
-        <textarea type="text" id="description"  name="description" class="md-textarea form-control">Add your description here</textarea>
+        <textarea type="text" id="description"  name="description" class="md-textarea form-control"></textarea>
         <label for="description">Description</label>
       </div>
 
       <div class="md-form form-sm">
-        <label for="category" class="active">Category</label>
+        <h6><span>Category</span></h6>
+        <!-- <label for="category" class="active">Category</label> -->
         <select id="category" name="category" class="form-control form-control-sm">
           <option value="" disabled selected>Choose a category</option>
           <% categories.forEach((cat) => { %>
@@ -29,7 +30,8 @@
       </div>
 
       <div class="md-form form-sm">
-        <label for="level" class="active">Level</label>
+        <h6><span>Level</span></h6>
+        <!-- <label for="level" class="active">Level</label> -->
         <select id="level" name="level" class="form-control form-control-sm">
           <option value="" disabled selected>Choose a level</option>
           <% levels.forEach((level) => { %>
@@ -40,7 +42,7 @@
 
       <div class="md-form form-sm">        
         <label for="schedule" class="active">Schedule</label>
-        <input type="date" name="schedule" id="schedule" max="2019-12-31" class="form-control form-control-sm">
+        <input type="date" class="datepicker" name="schedule" id="schedule" max="2019-12-31" class="form-control form-control-sm">
         <script>setMinScheduleDate();</script>
       </div>
 
