@@ -77,8 +77,8 @@
             <% } %>
             <li class="list-group-item avatar-list">
               <div class="avatar-list-item">
-                <img src="<%= alumn.avatar %>" alt="alumn avatar" class="img-fluid rounded-circle img-little-avatar">
-                <a href="/users/<%= alumn._id %>/profile"><%= alumn.name %></a>
+                <a href="/users/<%= alumn._id %>/profile"><img src="<%= alumn.avatar %>" alt="alumn avatar" class="img-fluid rounded-circle img-little-avatar"></a>
+                <a href="/users/<%= alumn._id %>/profile" class="ml-2"><%= alumn.name %></a>
               </div>
             </li>
           <% }) %>
@@ -100,7 +100,7 @@
           <% if (currentUser && lesson.professor._id == currentUser._id) {%>
             <a href="/users/classes/own/<%= lesson._id %>/update" class="btn button other-button">Update</a>
             <form action="/users/classes/own/<%= lesson._id %>/delete" method="post">
-              <input type="submit" value="Delete"  class="btn button delete-button">
+              <input type="submit" value="Delete"  class="btn delete-button">
             </form>
           <% } %>
         </div>
