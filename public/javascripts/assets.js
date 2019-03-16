@@ -6,8 +6,11 @@ function enableRepeatSchedule() {
   for (let i = 0; i < items.length; i++) {
     if (el.checked) {
       items[i].disabled = false;
+      items[i].style.display = "block";
     } else {
       items[i].disabled = true;
+      items[i].style.display = "none";
+      console.log(items);
     }
   }
 }

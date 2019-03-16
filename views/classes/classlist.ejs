@@ -9,37 +9,14 @@
   case 'own' : %>
     <h2 class="classlist-class-list-title ">Classes you would like to teach</h2>
     <% link += 'own/'; %>
-    <div class="d-flex flex-row justify-content-center align-items-center w-100 mb-3 mt-4">
-      <a href="/users/classes/new" class="btn button">New class</a>
-    </div>
     <% break;
   case 'attending' : %>
     <h2 class="classlist-class-list-title">Classes you are attending</h2>
     <% link += 'attending/'; %>
-    <div class="d-flex flex-row justify-content-center align-items-center w-100 mb-3 mt-4">
-      <a href="/" class="btn button">Check more classes</a>
-    </div>
     <% break;
   case 'teaching' : %>
     <h2 class="classlist-class-list-title">Classes you are teaching</h2>
     <% link += 'teaching/'; %>
-    <p class="text-black">Get more attendees at your classes, share your profile</p>
-    <div class="d-flex flex-row justify-content-center align-items-center w-100 mb-3 mt-3">
-    <span>
-      <a type="button" class="mx-2">
-      <i class="fab fa-facebook-f"></i>
-      </a>
-      <a type="button" class="mx-2">
-      <i class="fab fa-twitter"></i>
-      </a>
-      <a type="button" class="mx-2">
-      <i class="fab fa-linkedin-in"></i>
-      </a>
-      <a type="button" class="mx-2">
-      <i class="fab fa-github"></i>
-      </a>
-    </span>
-    </div>
     <% break; } %>
     
 <div class="home-class-list container">
@@ -50,4 +27,37 @@
     <% }) %>
   </div> 
 </div>
+
+<% switch (view) {
+  case 'own' : %>
+    <div class="d-flex flex-row justify-content-center align-items-center w-100 mb-3 mt-4">
+      <a href="/users/classes/new" class="btn button">New class</a>
+    </div>
+    <% break;
+  case 'attending' : %>
+    <div class="d-flex flex-row justify-content-center align-items-center w-100 mb-3 mt-4">
+      <a href="/" class="btn button">Check more classes</a>
+    </div>
+    <% break;
+  case 'teaching' : %>
+    <p class="text-black">Get more attendees at your classes and share your profile</p>
+    <div class="d-flex flex-row justify-content-center align-items-center w-100 mb-3 mt-3">
+      <span>
+        <a type="button" class="mx-2">
+        <i class="fab fa-facebook-f"></i>
+        </a>
+        <a type="button" class="mx-2">
+        <i class="fab fa-twitter"></i>
+        </a>
+        <a type="button" class="mx-2">
+        <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a type="button" class="mx-2">
+        <i class="fab fa-github"></i>
+        </a>
+      </span>
+    </div>
+    <% break; } %>
+
+
 <%- include('../partials/backbutton.ejs')%>

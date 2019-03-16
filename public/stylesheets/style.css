@@ -99,6 +99,11 @@
 .frequency {
   margin-top: 0; }
 
+.md-form input[type=text]:focus:not([readonly]), .md-form input[type=number]:focus:not([readonly]), .md-form input[type=date]:focus:not([readonly]), .md-form input[type=time]:focus:not([readonly]), .md-form input[type=url]:focus:not([readonly]), .md-form textarea.md-textarea:focus:not([readonly]) {
+  -webkit-box-shadow: 0 1px 0 0 #AA269F;
+  box-shadow: 0 1px 0 0 #AA269F;
+  border-bottom: 1px solid #AA269F; }
+
 .profile-input {
   width: 100%;
   height: 8rem;

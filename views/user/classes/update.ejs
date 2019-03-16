@@ -57,7 +57,7 @@
       <label for="repeat">Repeat</label>
 
       <div class="md-form form-sm frequency">
-        <select id="frequency" name="repeat" class="scheduleItem" disabled>
+        <select id="frequency" name="repeat" class="scheduleItem form-control form-control-sm" style="display: none" disabled>
           <option value="Not">Not</option>
           <option value="Daily">Daily</option>
           <option value="Weekly">Weekly</option>
@@ -81,7 +81,7 @@
         </select>
       -->
       <div class="d-flex">
-        <div class="md-form form-sm ">
+        <div class="md-form form-sm mr-4">
           <label for="duration">Duration in minutes</label>
           <input type="number" name="duration" id="duration" class="form-control form-control-sm" value="<%= lesson.duration %>">
         </div>

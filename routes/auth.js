@@ -24,14 +24,14 @@ router.post('/', assets.anonRoute, async (req, res, next) => {
     if (!userFound) {
       req.flash('error', "User doesn't exist.");
       res.redirect('/auth/signup');
-    }
-    if (bcrypt.compareSync(password, userFound.password)) {
+    } else if (bcrypt.compareSync(password, userFound.password)) {
       req.session.currentUser = userFound;
       req.flash('success', `Welcome back ${req.session.currentUser.name}`);
       res.redirect(req.session.returnTo || '/');
+    } else {
+      req.flash('error', 'Email or password incorrect.');
+      res.redirect('/auth');
     }
-    req.flash('error', 'Email or password incorrect.');
-    res.redirect('/auth');
   } catch (error) {
     next(error);
   }
