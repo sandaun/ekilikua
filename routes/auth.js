@@ -48,14 +48,14 @@ router.post('/signup', assets.anonRoute, async (req, res, next) => {
 
   if (name === '' || password === '' || email === '' || description === '') {
     req.flash('error', 'No empty fields allowed.');
-    res.redirect('/signup');
+    res.redirect('/auth/signup');
   }
 
   try {
     const userFound = await User.findOne({ email });
     if (userFound) {
       req.flash('error', `Sorry, ${email} already exists`);
-      res.redirect('/signup');
+      res.redirect('/auth/signup');
     }
     const hashedpassword = bcrypt.hashSync(password, 10);
     await User.create({ name, email, description, password: hashedpassword });
@@ -70,7 +70,7 @@ router.post('/signup', assets.anonRoute, async (req, res, next) => {
 router.get('/logout', (req, res, next) => {
   const { name } = req.session.currentUser;
   delete req.session.currentUser;
-  req.flash('success', `We will miss you ${name}`);
+  req.flash('success', `We will miss you${name}`);
   res.redirect('/');
 
   // req.session.destroy((err) => {
