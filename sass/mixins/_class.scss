@@ -46,3 +46,10 @@
 .frequency {
   margin-top: 0
 }
+
+// This is to change focus color in forms.
+.md-form input[type=text]:focus:not([readonly]), .md-form input[type=number]:focus:not([readonly]), .md-form input[type=date]:focus:not([readonly]),  .md-form input[type=time]:focus:not([readonly]), .md-form input[type=url]:focus:not([readonly]), .md-form textarea.md-textarea:focus:not([readonly]) {
+  -webkit-box-shadow: 0 1px 0 0 $violetoriginal;
+  box-shadow: 0 1px 0 0 $violetoriginal;
+  border-bottom: 1px solid $violetoriginal;
+}
