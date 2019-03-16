@@ -85,15 +85,32 @@ app.use((req, res, next) => {
   next(createError(404));
 });
 
+// Error handlers
+
+// app.use((req, res, next) => {
+//   res.status(404);
+//   res.format({
+//     html: () => {
+//       res.render('404', { url: req.url });
+//     },
+//     json: () => {
+//       res.json({ error: 'Not found' });
+//     },
+//     default: () => {
+//       res.type('txt').send('Not found');
+//     },
+//   });
+// });
+
 // error handler
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  // res.locals.message = err.message;
+  // res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { error: err });
 });
 
 module.exports = app;
