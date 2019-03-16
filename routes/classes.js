@@ -59,8 +59,8 @@ router.get('/:classID/join', assets.authRoute, async (req, res, next) => {
     const user = await User.findById(userID);
     let lesson = await Class.findById(classID).populate('professor alumns');
 
-    if (user.name === lesson.professor.name) {
-      req.flash('error', "Proffesor can't join his own class.");
+    if (user._id.equals(lesson.professor._id)) {
+      req.flash('error', "Professor can't join his own class.");
     } else {
       let booked = false;
       let kuas;
