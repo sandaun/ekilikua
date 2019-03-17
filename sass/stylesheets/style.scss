@@ -8,6 +8,7 @@
 @import '../mixins/class';
 @import '../mixins/profile';
 @import '../mixins/alert';
+@import '../mixins/chat';
 
 @include home;
 
@@ -72,3 +73,7 @@ span {
   color: $black!important; 
 }
 
+#footer {
+  z-index: 10;
+  // position: absolute;
+}

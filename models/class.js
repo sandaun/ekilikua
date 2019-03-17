@@ -37,6 +37,10 @@ const classSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  location: {
+    type: ObjectId,
+    ref: 'Location',
+  },
 }, {
   timestamps: true,
 });

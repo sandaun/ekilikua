@@ -131,6 +131,127 @@
 .alerts-icon {
   padding-right: 1em; }
 
+.chat-container {
+  background: linear-gradient(#F50089, #FD6E42);
+  opacity: 0.7;
+  height: 700px;
+  width: 100%;
+  margin-top: -77px !important;
+  padding-top: 77px;
+  padding-bottom: 30px; }
+
+.card-header {
+  border-radius: 15px 15px 0 0 !important;
+  border-bottom: 0 !important;
+  color: white;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0) !important; }
+
+.chat-card {
+  height: 500px;
+  border-radius: 15px !important;
+  background-color: rgba(0, 0, 0, 0.4) !important; }
+
+.chat {
+  margin-top: auto;
+  margin-bottom: auto; }
+
+.chat-body {
+  overflow-y: auto; }
+
+.img-cont {
+  position: relative;
+  height: 70px;
+  width: 70px; }
+
+.online-icon {
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  background-color: #4cd137;
+  border-radius: 50%;
+  bottom: 0.2em;
+  right: 0.4em;
+  border: 1.5px solid white; }
+
+.offline {
+  background-color: #c23616 !important; }
+
+.user-img {
+  height: 70px;
+  width: 70px;
+  border: 1.5px solid #f5f6fa; }
+
+.professor-img {
+  border-color: yellow !important; }
+
+.msg-head {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.4) !important; }
+
+.img-cont-msg {
+  height: 40px;
+  width: 40px; }
+
+.msg-cotainer {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+  border-radius: 25px;
+  background-color: #82ccdd;
+  padding: 10px;
+  position: relative; }
+
+.msg-cotainer-send {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 10px;
+  border-radius: 25px;
+  background-color: #78e08f;
+  padding: 10px;
+  position: relative; }
+
+.msg-time {
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 10px; }
+
+.msg-time-send {
+  position: absolute;
+  right: 0;
+  bottom: -15px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 10px; }
+
+.user-img-msg {
+  height: 40px;
+  width: 40px;
+  border: 1.5px solid #f5f6fa; }
+
+.card-footer {
+  border-radius: 0 0 15px 15px !important;
+  border-top: 0 !important; }
+
+.type-msg {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  border: 0 !important;
+  color: white !important;
+  height: 60px !important;
+  overflow-y: auto; }
+
+.type-msg:focus {
+  box-shadow: none !important;
+  outline: 0px !important; }
+
+.send-btn {
+  border-radius: 0 15px 15px 0 !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+  border: 0 !important;
+  color: white !important;
+  cursor: pointer; }
+
 .vertical-center {
   min-height: 100%;
   /* Fallback for browsers do NOT support vh unit */
@@ -253,5 +374,8 @@ span {
 
 .color-black {
   color: black !important; }
+
+#footer {
+  z-index: 10; }
 
 /*# sourceMappingURL=style.css.map */

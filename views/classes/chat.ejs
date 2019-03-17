@@ -1,0 +1,40 @@
+<div class="chat-container container-fluid h-100">
+  <%- include('../partials/navbar')%>
+  <div class="col-md-8 col-xl-6 chat">
+    <div class="card-header">
+        <h2><%= lesson.title %></h2>
+    </div>
+    <div class="card chat-card">
+      
+      <div class="card-header msg-head">
+        <div class="d-flex bd-highlight justify-content-around">
+          <div class="img-cont">
+              <a href="/users/<%= lesson.professor._id %>/profile"><img src="<%= lesson.professor.avatar %>" class="rounded-circle user-img professor-img"></a>
+            <span class="online-icon"></span>
+            <span class="offline-icon"></span>
+          </div>
+          <% lesson.alumns.forEach( alumn => { %>
+            <div class="img-cont">
+                <a href="/users/<%= alumn._id %>/profile"><img src="<%= alumn.avatar %>" class="rounded-circle user-img"></a>
+              <span class="online-icon"></span>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+
+      <div class="card-body chat-body">
+          <%- include('../partials/chatmsg.ejs')%>        
+      </div>
+
+      <div class="card-footer">
+        <div class="input-group">
+          <textarea name="" class="form-control type-msg" placeholder="Type your message..."></textarea>
+          <div class="input-group-append">
+            <span class="input-group-text send-btn"><i class="fas fa-location-arrow"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../partials/backbutton.ejs')%>

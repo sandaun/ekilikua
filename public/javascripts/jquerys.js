@@ -12,4 +12,8 @@ $(document).ready(function(){
   }
   $(".alerts").first().hide().fadeIn(200).delay(2000).fadeOut(1000, function () { $(this).remove(); });
 
+  $('#action_menu_btn').click(function(){
+    $('.action_menu').toggle();
+  });
+
 });

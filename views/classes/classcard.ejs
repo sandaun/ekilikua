@@ -103,11 +103,12 @@
         <% if (!currentUser) {%>
           <a href="/classes/<%= lesson._id %>/join" class="btn button">Join</a>
         <% } else { %>
+          <a href="/classes/<%= lesson._id %>/chat" class="btn button">Chat</a>
           <% if (!(lesson.professor._id == currentUser._id)) {%>
             <% if (booked) {%>
               <a href="/classes/<%= lesson._id %>/leave" class="btn button delete-button">Leave</a>
             <% } else { %>
-                <a href="/classes/<%= lesson._id %>/join" class="btn button">Join</a>
+              <a href="/classes/<%= lesson._id %>/join" class="btn button">Join</a>
             <% } %>
           <% } else { %>
             <a href="/users/classes/own/<%= lesson._id %>/update" class="btn button other-button">Update</a>
