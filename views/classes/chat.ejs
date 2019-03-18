@@ -3,11 +3,16 @@
   <div class="col-md-8 col-xl-6 chat">
     <div class="card-header">
         <h2><%= lesson.title %></h2>
-        <textarea id="username" class="hidden"> <%= currentUser.name %></textarea>
-        <textarea id="useravatar" class="hidden"> <%= currentUser.avatar %></textarea>
+
+        <!-- PASS OBJECTS BETWEEN EJS AND JS SCRIPTS -->
+        <span id='currentUser' hidden>
+            <%= JSON.stringify(currentUser); %>
+        </span>
+        <!-- <textarea id="username" class="hidden"> <%= currentUser.name %></textarea>
+        <textarea id="useravatar" class="hidden"> <%= currentUser.avatar %></textarea> -->
+    
     </div>
     <div id="chat-window" class="card chat-card">
-      
       <div class="card-header msg-head">
         <div class="d-flex bd-highlight justify-content-around">
           <div class="img-cont">

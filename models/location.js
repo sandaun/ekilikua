@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
+const { ObjectId } = Schema.Types;
 
-const point = new Schema({
+const location = new Schema({
+  city: String,
   type: {
     type: String,
     enum: ['Point'],
@@ -15,6 +17,6 @@ const point = new Schema({
   },
 });
 
-const myModel = mongoose.model('Point', point);
+const myModel = mongoose.model('Location', location);
 
 module.exports = myModel;

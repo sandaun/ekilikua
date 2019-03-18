@@ -1,0 +1,61 @@
+<div class="jumbotron vertical-center">
+  <div class="degrade">
+  </div> 
+  <div class="d-flex flex-column align-content-center opacity">
+    <div class="card-body">
+      <!-- <img src="/public/images/ekilikua-logo.png" alt="ekilikua logo"> -->
+      <h4 class="card-title text-center home-card-title">Ekilikua</h4>
+      <p class="card-text text-center home-card-text">So, What are you going to learn today? There are big things ahead of us</p>
+    </div>
+    <div class="login-div">
+      <% if (currentUser) { %>
+        <div >
+          <button onclick="location.href='/users/'" type="button" class="btn mb-2 home-button">My classes</button>
+          <button onclick="location.href='/auth/logout'" type="button" class="btn mb-2 home-button">Log out</button>
+        </div>
+      <% } else { %>
+        <div>
+          <button onclick="location.href='/auth/'" type="button" class="btn mb-2 home-button">Log in</button> 
+          <button onclick="location.href='/auth/signup'" type="button" class="btn mb-2 home-button">Sign up</button>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<h2 class="home-class-list-title">What do you want to learn today?</h2>
+
+<!-- Search form -->
+<form class="form-inline md-form form-sm active-purple-2 mt-2 justify-content-center" action="/classes/query" method="get">
+  <input class="form-control form-control-sm mr-3 w-75" type="text" name="query" placeholder="Knowledge search" aria-label="Search">
+  <i class="fas fa-search" aria-hidden="true"></i>
+</form>
+
+<!-- OLD Search form -->
+<!-- 
+  <div class="wrap">
+    <form action="/classes/query" method="get" class="home-search">
+      <input type="text" name="query" id="" placeholder="Knowledge search" class="searchTerm">
+      <button type="submit" class="searchButton"><i class="fas fa-search"></i></button>
+    </form>
+  </div>
+-->
+
+<!-- Map -->
+<div id='map'></div>
+
+<span id='points' hidden>
+    <%= JSON.stringify(points); %>
+</span>
+
+<script src="/javascripts/map.js"></script>
+
+<!-- Class list -->
+<div class="home-class-list container">
+  <div class="col-12">
+    <% classes.forEach((lesson) => { %>
+      <% const link = "/classes/"; %>
+      <%- include('partials/miniclasscard', { lesson, link })%>
+    <% }) %>
+  </div> 
+</div>

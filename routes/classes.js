@@ -152,8 +152,8 @@ router.get('/:classID/chat', async (req, res, next) => {
   const { classID } = req.params;
   const { currentUser } = res.locals;
   try {
-    const selectedClass = await Class.findById(classID).populate('professor alumns');
-    res.render('classes/chat', { lesson: selectedClass, currentUser, moment, view: 'all' });
+    const lesson = await Class.findById(classID).populate('professor alumns');
+    res.render('classes/chat', { lesson, currentUser, moment, view: 'all' });
   } catch (error) {
     next(error);
   }
