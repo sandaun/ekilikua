@@ -19,23 +19,36 @@ btn.addEventListener('click', () => {
 
 socket.on('chat:message', (msg) => {
   output.innerHTML += 
-    if (msg.username === currentUser.name) {
-      `<div class="d-flex justify-content-end mb-4">
-        <div class="msg-cotainer-send"><strong>${msg.username}</strong>: ${msg.message}</div>
-        <div class="img-cont-msg">
-          <img src="${useravatar.innerHTML}" class="rounded-circle user-img-msg">
-        </div>
-      </div>`
-    } else {
-      `<div class="d-flex justify-content-start mb-4">
-        <div class="img-cont-msg">
-          <img src="/images/login.jpg" class="rounded-circle user-img-msg">
-        </div>
-        <div class="msg-cotainer">
-          <div class="msg-cotainer-send"><strong>${msg.username}</strong>: ${msg.message}</div>
-          <span class="msg-time">8:40 AM, Today</span>
-        </div>
-      </div>`
-    };
+    `<div class="d-flex justify-content-end mb-4">
+      <div class="msg-cotainer-send"><strong>${msg.username}</strong>: ${msg.message}</div>
+      <div class="img-cont-msg">
+        <img src="${useravatar.innerHTML}" class="rounded-circle user-img-msg">
+      </div>
+    </div>`;
   // message.innerHTML = "";
 });
+
+// Este es con el IF ELSE para distinguir el usuario que escribe
+// socket.on('chat:message', (msg) => {
+//   if (msg.username === currentUser.name) { 
+//     output.innerHTML += 
+//       `<div class="d-flex justify-content-end mb-4">
+//         <div class="msg-cotainer-send"><strong>${msg.username}</strong>: ${msg.message}</div>
+//         <div class="img-cont-msg">
+//           <img src="${useravatar.innerHTML}" class="rounded-circle user-img-msg">
+//         </div>
+//       </div>`;
+//   } else {
+//     output.innerHTML += 
+//       `<div class="d-flex justify-content-start mb-4">
+//         <div class="img-cont-msg">
+//           <img src="/images/login.jpg" class="rounded-circle user-img-msg">
+//         </div>
+//         <div class="msg-cotainer">
+//           <div class="msg-cotainer-send"><strong>${msg.username}</strong>: ${msg.message}</div>
+//           <span class="msg-time">8:40 AM, Today</span>
+//         </div>
+//       </div>`;
+//   }
+//   // message.innerHTML = "";
+// });
