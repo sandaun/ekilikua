@@ -22,7 +22,7 @@ socket.on('chat:message', (msg) => {
     `<div class="d-flex justify-content-end mb-4">
       <div class="msg-cotainer-send"><strong>${msg.username}</strong>: ${msg.message}</div>
       <div class="img-cont-msg">
-        <img src="${useravatar.innerHTML}" class="rounded-circle user-img-msg">
+        <img src="${msg.useravatar}" class="rounded-circle user-img-msg">
       </div>
     </div>`;
   // message.innerHTML = "";
@@ -34,8 +34,9 @@ socket.on('chat:message', (msg) => {
 //     output.innerHTML += 
 //       `<div class="d-flex justify-content-end mb-4">
 //         <div class="msg-cotainer-send"><strong>${msg.username}</strong>: ${msg.message}</div>
+//         <span class="msg-time">8:40 AM, Today</span>
 //         <div class="img-cont-msg">
-//           <img src="${useravatar.innerHTML}" class="rounded-circle user-img-msg">
+//           <img src="${msg.useravatar}" class="rounded-circle user-img-msg">
 //         </div>
 //       </div>`;
 //   } else {
