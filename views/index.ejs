@@ -41,6 +41,16 @@
   </div>
 -->
 
+<!-- Map -->
+<div id='map'></div>
+
+<span id='points' hidden>
+    <%= JSON.stringify(points); %>
+</span>
+
+<script src="/javascripts/map.js"></script>
+
+<!-- Class list -->
 <div class="home-class-list container">
   <div class="col-12">
     <% classes.forEach((lesson) => { %>
