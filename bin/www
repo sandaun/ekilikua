@@ -101,10 +101,3 @@ io.on('connection', (socket) => {
     io.sockets.emit('chat:message', msg);
   });
 });
-
-
-// io.sockets.on('connection', function(socket){
-//   socket.emit('connected'); 
-//   console.log('new connection 2');
-//   //Evento creado por nosotros se puede llamar 'pepito'
-// });
