@@ -1,12 +1,10 @@
-<div id= "chat container" class="chat-container container-fluid h-100">
+<div class="chat-container container-fluid h-100">
   <%- include('../partials/navbar')%>
   <div class="col-md-8 col-xl-6 chat">
     <div class="card-header">
         <h2><%= lesson.title %></h2>
-        <textarea id="username" class="hidden"> <%= currentUser.name %></textarea>
-        <textarea id="useravatar" class="hidden"> <%= currentUser.avatar %></textarea>
     </div>
-    <div id="chat-window" class="card chat-card">
+    <div class="card chat-card">
       
       <div class="card-header msg-head">
         <div class="d-flex bd-highlight justify-content-around">
@@ -24,18 +22,15 @@
         </div>
       </div>
 
-      <!-- This should be on the sepparate partial -->
-        <div id="output" class="card-body chat-body">
-        </div>
-      <!-- End of This should be on the sepparate partial -->
-
-      <div id="actions"></div>
+      <div class="card-body chat-body">
+          <%- include('../partials/chatmsg.ejs')%>        
+      </div>
 
       <div class="card-footer">
         <div class="input-group">
-          <textarea id="message" class="form-control type-msg" placeholder="Type your message..."></textarea>
+          <textarea name="" class="form-control type-msg" placeholder="Type your message..."></textarea>
           <div class="input-group-append">
-            <button id="send" class="input-group-text send-btn"><i class="fas fa-location-arrow" value="<%= currentUser %>"></i></button>
+            <span class="input-group-text send-btn"><i class="fas fa-location-arrow"></i></span>
           </div>
         </div>
       </div>

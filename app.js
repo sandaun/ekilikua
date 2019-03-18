@@ -16,6 +16,7 @@ const sassMiddleware = require('node-sass-middleware');
 // notifications handle
 const { messages } = require('./assets');
 
+// Routes
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');

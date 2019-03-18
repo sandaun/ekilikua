@@ -147,4 +147,16 @@ router.get('/:classID/leave', assets.authRoute, async (req, res, next) => {
   }
 });
 
+// Join the class chat
+router.get('/:classID/chat', async (req, res, next) => {
+  const { classID } = req.params;
+  const { currentUser } = res.locals;
+  try {
+    const selectedClass = await Class.findById(classID).populate('professor alumns');
+    res.render('classes/chat', { lesson: selectedClass, currentUser, moment, view: 'all' });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

@@ -88,3 +88,23 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+
+// Configuration of websockets
+const SocketIO = require('socket.io');
+
+const io = SocketIO(server);
+io.on('connection', (socket) => {
+  console.log('new connection', socket.id);
+
+  socket.on('chat:message', (msg) => {
+    io.sockets.emit('chat:message', msg);
+  });
+});
+
+
+// io.sockets.on('connection', function(socket){
+//   socket.emit('connected'); 
+//   console.log('new connection 2');
+//   //Evento creado por nosotros se puede llamar 'pepito'
+// });

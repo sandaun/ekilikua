@@ -375,7 +375,16 @@ span {
 .color-black {
   color: black !important; }
 
+.color-white {
+  color: white !important; }
+
 #footer {
   z-index: 10; }
+
+.hidden {
+  display: none; }
+
+.bold {
+  font-weight: bold; }
 
 /*# sourceMappingURL=style.css.map */
