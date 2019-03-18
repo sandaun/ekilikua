@@ -387,4 +387,7 @@ span {
 .bold {
   font-weight: bold; }
 
+.back-button {
+  right: unset !important; }
+
 /*# sourceMappingURL=style.css.map */
