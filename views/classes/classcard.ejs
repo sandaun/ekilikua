@@ -99,24 +99,26 @@
       </div>
       <!--Buttons-->
     </div>
-      <div class="d-flex flex-row justify-content-center align-items-center w-100 mb-3">
-        <% if (!currentUser) {%>
-          <a href="/classes/<%= lesson._id %>/join" class="btn button">Join</a>
-        <% } else { %>
-          <a href="/classes/<%= lesson._id %>/chat" class="btn button">Chat</a>
-          <% if (!(lesson.professor._id == currentUser._id)) {%>
-            <% if (booked) {%>
-              <a href="/classes/<%= lesson._id %>/leave" class="btn button delete-button">Leave</a>
-            <% } else { %>
-              <a href="/classes/<%= lesson._id %>/join" class="btn button">Join</a>
-            <% } %>
+    <div class="d-flex flex-row justify-content-center align-items-center w-100 mb-3">
+      <% if (!currentUser) {%>
+        <a href="/classes/<%= lesson._id %>/join" class="btn button">Join</a>
+      <% } else { %>
+        <a href="/classes/<%= lesson._id %>/chat" class="btn button">Chat</a>
+        <% if (!(lesson.professor._id == currentUser._id)) {%>
+          <% if (booked) {%>
+            <a href="/classes/<%= lesson._id %>/leave" class="btn button delete-button">Leave</a>
           <% } else { %>
-            <a href="/users/classes/own/<%= lesson._id %>/update" class="btn button other-button">Update</a>
-            <form action="/users/classes/own/<%= lesson._id %>/delete" method="post">
-              <input type="submit" value="Delete"  class="btn delete-button">
-            </form>
+            <a href="/classes/<%= lesson._id %>/join" class="btn button">Join</a>
           <% } %>
+        <% } else { %>
+          <a href="/users/classes/own/<%= lesson._id %>/update" class="btn button other-button">Update</a>
+          <form action="/users/classes/own/<%= lesson._id %>/delete" method="post">
+            <input type="submit" value="Delete"  class="btn delete-button">
+          </form>
         <% } %>
-      </div>
+      <% } %>
+    </div>
+  </div>
 </div>
+
 <%- include('../partials/backbutton.ejs')%>
