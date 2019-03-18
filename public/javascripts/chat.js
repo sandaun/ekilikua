@@ -17,6 +17,7 @@ btn.addEventListener('click', () => {
     user,
     message: message.value,
   });
+  message.value = '';
 });
 
 // socket.on('chat:message', (msg) => {
@@ -48,8 +49,7 @@ socket.on('chat:message', (msg) => {
           <img src="${msg.user.avatar}" class="rounded-circle user-img-msg">
         </div>
         <div class="msg-cotainer"><strong>${msg.user.name}</strong>: ${msg.message}</div>
-          <span class="msg-time">8:40 AM, Today</span>
-
+        <span class="msg-time">8:40 AM, Today</span>
       </div>`;
   }
 });
