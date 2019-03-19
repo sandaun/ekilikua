@@ -1,3 +1,5 @@
+const socket = io();
+
 function enableRepeatSchedule() {
 
   const items = document.getElementsByClassName("scheduleItem");

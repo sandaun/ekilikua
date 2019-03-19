@@ -1,4 +1,5 @@
-const socket = io();
+// Declared on assejts.js to be global to map too
+// const socket = io();
 
 // DOM elements
 // PASS OBJECTS BETWEEN EJS AND JS SCRIPTS

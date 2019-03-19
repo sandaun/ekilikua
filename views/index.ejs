@@ -42,13 +42,7 @@
 -->
 
 <!-- Map -->
-<div id='map'></div>
-
-<span id='points' hidden>
-    <%= JSON.stringify(points); %>
-</span>
-
-<script src="/javascripts/map.js"></script>
+<%- include('partials/map')%>
 
 <!-- Class list -->
 <div class="home-class-list container">

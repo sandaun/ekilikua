@@ -40,16 +40,16 @@ if (window.navigator.geolocation) {
     var geojson = JSON.parse($('#points').text());
     $('#points').remove();
     geojson.features.forEach((marker) => {
-    // create a HTML element for each feature
-    const el = document.createElement('div');
-    el.className = 'marker';
+      // create a HTML element for each feature
+      const el = document.createElement('div');
+      el.className = 'marker';
 
-    // make a marker for each feature and add to the map
-    new mapboxgl.Marker(el)
-      .setLngLat(marker.geometry.coordinates)
-      .setPopup(new mapboxgl.Popup({ offset: 25 })
-      .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
-      .addTo(map);
+      // make a marker for each feature and add to the map
+      new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .setPopup(new mapboxgl.Popup({ offset: 25 })
+        .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+        .addTo(map);
     });
 
     map.addControl(new mapboxgl.GeolocateControl({
@@ -59,6 +59,10 @@ if (window.navigator.geolocation) {
       trackUserLocation: true,
     }));
 
-    map.on('click', evt => console.log(evt.lngLat.lat));
+    map.on('click', (evt) => {
+      socket.emit('map:selectedPosition', {
+        pos: evt.lngLat,
+      });
+    });
   });
 }
