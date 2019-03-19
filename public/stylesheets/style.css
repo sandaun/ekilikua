@@ -252,6 +252,26 @@
   color: white !important;
   cursor: pointer; }
 
+#map {
+  width: 390px;
+  height: 300px;
+  margin: 0 auto; }
+
+.marker {
+  background-image: url("/images/ekilikua-logo.png");
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer; }
+
+.mapboxgl-popup {
+  max-width: 200px; }
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Open Sans', sans-serif; }
+
 .vertical-center {
   min-height: 100%;
   /* Fallback for browsers do NOT support vh unit */

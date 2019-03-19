@@ -88,6 +88,20 @@
         </div>
       </div>
       
+      <!-- Class coords -->
+      <div class="d-flex" style="display: none !important">
+        <div class="md-form form-sm mr-4">
+          <input type="text" class="form-control form-control-sm" name="lng" id="lng">
+        </div>
+        <div class="md-form form-sm">
+          <input type="text" class="form-control form-control-sm" name="lat" id="lat">
+        </div>
+      </div>
+
+      <!-- Map -->
+      <div class="d-flex">
+        <%- include('../../partials/map')%>
+      </div>
 
       <div class="text-center mt-4 mb-2">
         <input class="btn button" type="submit" value="Create class">
