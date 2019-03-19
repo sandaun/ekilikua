@@ -8,31 +8,26 @@ const router = express.Router();
 router.get('/', async (req, res, next) => {
   try {
     const classes = await Class.find().populate('professor alumns location');
-    let points = {
+
+    // Object with class to draw in map
+    const points = {
       type: 'FeatureCollection',
-      features: [{
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [2.188854217529297, 41.43085452425],
-        },
-        properties: {
-          title: 'Mapbox',
-          description: 'Java',
-        },
-      },
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [2.1865206956863403, 41.40263407490894],
-        },
-        properties: {
-          title: 'Mapbox',
-          description: 'Marketing',
-        },
-      }],
+      features: [],
     };
+
+    // Fill feautres array with objects with classes data
+    classes.forEach((lesson) => {
+      const feature = {
+        type: 'Feature',
+        geometry: lesson.location,
+        properties: {
+          title: lesson.title,
+          description: lesson.description,
+        },
+      };
+      points.features.push(feature);
+    });
+
 
     res.render('index', { classes, points, view: 'all' });
   } catch (error) {
