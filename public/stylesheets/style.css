@@ -304,6 +304,10 @@
 .home > a {
   color: #FFDD5A; }
 
+.home-img {
+  width: 40%;
+  height: 40%; }
+
 .home-card {
   background-color: #F50089;
   border: none; }
