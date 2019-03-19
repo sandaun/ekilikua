@@ -7,6 +7,7 @@ const User = require('../models/user');
 const Class = require('../models/class');
 const Category = require('../models/category');
 const Level = require('../models/level');
+const Location = require('../models/location');
 
 const router = express.Router();
 router.use(assets.authRoute);
@@ -131,7 +132,33 @@ router.get('/classes/new', async (req, res, next) => {
   try {
     const categories = await Category.find();
     const levels = await Level.find();
-    res.render('user/classes/newclass', { categories, levels });
+    const classes = await Class.find().populate('professor alumns location');
+    let points = {
+      type: 'FeatureCollection',
+      features: [{
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [2.188854217529297, 41.43085452425],
+        },
+        properties: {
+          title: 'Mapbox',
+          description: 'Java',
+        },
+      },
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [2.1865206956863403, 41.40263407490894],
+        },
+        properties: {
+          title: 'Mapbox',
+          description: 'Marketing',
+        },
+      }],
+    };
+    res.render('user/classes/newclass', { classes, points, categories, levels });
   } catch (error) {
     next(error);
   }
@@ -140,9 +167,10 @@ router.get('/classes/new', async (req, res, next) => {
 // Submits form to create new own class for the user
 router.post('/classes/new', async (req, res, next) => {
   const professor = res.locals.currentUser._id;
-  const { title, category, subcategory, level, description, days, schedule, price, duration, repeat } = req.body;
+  const { title, category, subcategory, level, description, days, schedule, price, duration, repeat, lng, lat } = req.body;
   try {
-    const createdClass = await Class.create({ title, professor, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration, repeat });
+    const location = await Location.create({ coordinates: [lng, lat] });
+    const createdClass = await Class.create({ title, professor, categoryID: category, subcategoryID: subcategory, level, description, days, schedule, price, duration, repeat, location });
     const userModifiedData = await User.findByIdAndUpdate(professor, { $push: { classes: createdClass._id  } }, { new:true });
     req.session.currentUser = userModifiedData;
     req.flash('success', `Class ${title} succesfully created.`);

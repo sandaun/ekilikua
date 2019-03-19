@@ -60,9 +60,17 @@ if (window.navigator.geolocation) {
     }));
 
     map.on('click', (evt) => {
+      // Send position to server
       socket.emit('map:selectedPosition', {
         pos: evt.lngLat,
       });
+
+      console.log(evt);
+
+      if ($('#lng') && $('#lat')) {
+        $('#lng').val(evt.lngLat.lng);
+        $('#lat').val(evt.lngLat.lat);
+      }
     });
   });
 }

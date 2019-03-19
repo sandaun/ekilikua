@@ -1,12 +1,13 @@
 const express = require('express');
 const Class = require('../models/class');
+const Location = require('../models/location');
 
 const router = express.Router();
 
 // Renders homepage
 router.get('/', async (req, res, next) => {
   try {
-    const classes = await Class.find();
+    const classes = await Class.find().populate('professor alumns location');
     let points = {
       type: 'FeatureCollection',
       features: [{
