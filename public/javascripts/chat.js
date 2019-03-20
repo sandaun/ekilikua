@@ -21,7 +21,7 @@ btn.addEventListener('click', () => {
   message.value = '';
 });
 
-message.addEventListener('keydown', (e) => {
+message.addEventListener('keyup', (e) => {
   if (e.keyCode === 13) {
     socket.emit('chat:message', {
       user,
