@@ -10,32 +10,6 @@ if (window.navigator.geolocation) {
       zoom: 13,
     });
 
-    // let geojson = {
-    //   type: 'FeatureCollection',
-    //   features: [{
-    //     type: 'Feature',
-    //     geometry: {
-    //       type: 'Point',
-    //       coordinates: [2.188854217529297, 41.43085452425],
-    //     },
-    //     properties: {
-    //       title: 'Mapbox',
-    //       description: 'Java',
-    //     },
-    //   },
-    //   {
-    //     type: 'Feature',
-    //     geometry: {
-    //       type: 'Point',
-    //       coordinates: [2.1865206956863403, 41.40263407490894],
-    //     },
-    //     properties: {
-    //       title: 'Mapbox',
-    //       description: 'Marketing',
-    //     },
-    //   }],
-    // };
-
     // add markers to map
     var geojson = JSON.parse($('#points').text());
     $('#points').remove();
@@ -48,7 +22,7 @@ if (window.navigator.geolocation) {
       new mapboxgl.Marker(el)
         .setLngLat(marker.geometry.coordinates)
         .setPopup(new mapboxgl.Popup({ offset: 25 })
-        .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+        .setHTML('<h3><a href=' + marker.properties.link + '>' + marker.properties.title + '</a></h3><p>' + marker.properties.description + '</p>'))
         .addTo(map);
     });
 

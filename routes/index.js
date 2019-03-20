@@ -23,6 +23,7 @@ router.get('/', async (req, res, next) => {
         properties: {
           title: lesson.title,
           description: lesson.description,
+          link: `/classes/${lesson.id}`,
         },
       };
       points.features.push(feature);
