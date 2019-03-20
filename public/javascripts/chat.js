@@ -21,6 +21,16 @@ btn.addEventListener('click', () => {
   message.value = '';
 });
 
+message.addEventListener('keydown', (e) => {
+  if (e.keyCode === 13) {
+    socket.emit('chat:message', {
+      user,
+      message: message.value,
+    });
+    message.value = '';
+  }
+});
+
 // socket.on('chat:message', (msg) => {
 //   output.innerHTML += 
 //     `<div class="d-flex justify-content-end mb-4">
@@ -38,8 +48,7 @@ socket.on('chat:message', (msg) => {
     output.innerHTML += 
       `<div class="d-flex justify-content-end mb-4">
         <div class="msg-cotainer-send">
-          <strong>${msg.user.name}</strong>: ${msg.message}
-          <span class="msg-time-send">8:40 AM, Today</span>
+          ${msg.message}
         </div>
         <div class="img-cont-msg">
           <img src="${msg.user.avatar}" class="rounded-circle user-img-msg">
@@ -52,8 +61,7 @@ socket.on('chat:message', (msg) => {
           <img src="${msg.user.avatar}" class="rounded-circle user-img-msg">
         </div>
         <div class="msg-cotainer">
-          <strong>${msg.user.name}</strong>: ${msg.message}
-          <span class="msg-time">8:40 AM, Today</span>
+          ${msg.message}
         </div>
       </div>`;
   }
