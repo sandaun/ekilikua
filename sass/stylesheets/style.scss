@@ -46,6 +46,10 @@ span {
   padding: 0;
 }
 
+.background-gradient {
+  background: linear-gradient($violet, $orange);
+}
+
 .background-violet {
   background-color: $violet; 
 }

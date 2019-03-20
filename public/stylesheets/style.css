@@ -380,6 +380,9 @@ span {
   margin: 0;
   padding: 0; }
 
+.background-gradient {
+  background: linear-gradient(#F50089, #FD6E42); }
+
 .background-violet {
   background-color: #F50089; }
 
