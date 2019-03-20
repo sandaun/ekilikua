@@ -288,7 +288,8 @@
   background-position-y: center;
   background-size: cover;
   padding: 0;
-  z-index: 1; }
+  z-index: 1;
+  margin-bottom: unset !important; }
 
 .degrade {
   background: linear-gradient(#F50089, #FD6E42);
