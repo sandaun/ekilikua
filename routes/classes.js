@@ -44,8 +44,32 @@ router.get('/query', async (req, res, next) => {
 router.get('/:classID', async (req, res, next) => {
   const { classID } = req.params;
   try {
-    const selectedClass = await Class.findById(classID).populate('professor alumns');
-    res.render('classes/classcard', { lesson: selectedClass, moment, view: 'all' });
+    const classes = [];
+    const lesson = await Class.findById(classID).populate('professor alumns location');
+    classes.push(lesson);
+    
+    // Object with class to draw in map
+    const points = {
+      type: 'FeatureCollection',
+      features: [],
+    };
+
+    // Fill feautres array with objects with classes data
+    classes.forEach((element) => {
+      const feature = {
+        type: 'Feature',
+        geometry: element.location,
+        properties: {
+          title: element.title,
+          description: element.description,
+          link: `/classes/${element.id}`,
+        },
+      };
+      points.features.push(feature);
+    });
+
+
+    res.render('classes/classcard', { lesson, points, moment, view: 'all' });
   } catch (error) {
     next(error);
   }
