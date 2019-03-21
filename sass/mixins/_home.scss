@@ -47,17 +47,16 @@
   }
 
   .home-img {
-    width: 40%;
-    height: 40%;
+    width: 35%;
+    height: 35%;
+    margin-bottom: 1rem;
+    margin-top: -1rem;
   }
 
-  .home-card {
-    background-color: $violet;
-    border: none;
-  }
   .home-card-title {
     color: white;
     font-size: 3rem;
+    font-weight: bold; 
   }
 
   .home-card-text {

@@ -312,16 +312,15 @@
   color: #FFDD5A; }
 
 .home-img {
-  width: 40%;
-  height: 40%; }
-
-.home-card {
-  background-color: #F50089;
-  border: none; }
+  width: 35%;
+  height: 35%;
+  margin-bottom: 1rem;
+  margin-top: -1rem; }
 
 .home-card-title {
   color: white;
-  font-size: 3rem; }
+  font-size: 3rem;
+  font-weight: bold; }
 
 .home-card-text {
   color: white; }

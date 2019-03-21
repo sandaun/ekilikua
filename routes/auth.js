@@ -15,7 +15,7 @@ router.post('/', assets.anonRoute, async (req, res, next) => {
   const { password, email } = req.body;
 
   if (password === '' || email === '') {
-    req.flash('error', 'Email or password empty.');
+    req.flash('error', 'Email or password is empty.');
     res.redirect('/auth');
   }
 
@@ -59,7 +59,7 @@ router.post('/signup', assets.anonRoute, async (req, res, next) => {
     }
     const hashedpassword = bcrypt.hashSync(password, 10);
     await User.create({ name, email, description, password: hashedpassword });
-    req.flash('success', `User ${name} succesfully created.`);
+    req.flash('success', `${name}, your account has been succesfully created.`);
     res.redirect('/auth');
   } catch (error) {
     next(error);
@@ -70,7 +70,7 @@ router.post('/signup', assets.anonRoute, async (req, res, next) => {
 router.get('/logout', (req, res, next) => {
   const { name } = req.session.currentUser;
   delete req.session.currentUser;
-  req.flash('success', `We will miss you${name}`);
+  req.flash('success', `We will miss you${name}, come back again`);
   res.redirect('/');
 
   // req.session.destroy((err) => {
