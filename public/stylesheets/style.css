@@ -287,7 +287,7 @@
   align-items: center; }
 
 .jumbotron {
-  background-image: url("https://images.unsplash.com/photo-1528605105345-5344ea20e269?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+  background-image: url("/images/ekilikua-class-LR2.png");
   background-position: center;
   background-position-x: 70%;
   background-position-y: center;
@@ -295,16 +295,6 @@
   padding: 0;
   z-index: 1;
   margin-bottom: unset !important; }
-
-.degrade {
-  background: linear-gradient(#F50089, #FD6E42);
-  opacity: 0.7;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  z-index: 2;
-  margin: 0;
-  padding: 0; }
 
 .opacity {
   z-index: 3;
