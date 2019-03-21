@@ -4,7 +4,12 @@
   <div class="col-md-6 opacity color-white">
     <div class="card-body">
       <h2 class="color-yellow"> Error <%= error.status %>: <%= error.message %></h2>
-      <h3 class="mt-3"><span class="color-yellow">Congratulations</span>, you broke the <del>fucking</del> site. I bet you are waiting for us to tell you what happened, well basically you did something no one liked <span class="color-yellow"><%= currentUser.name %></span>, so <del>fuck you</del></h3>
+      <h3 class="mt-3"><span class="color-yellow">Congratulations</span>, you broke the <del>fucking</del> site. I bet you are waiting for us to tell you what happened, well basically you did something no one liked 
+      <% if (currentUser) { %>
+        <span class="color-yellow"><%= currentUser.name %></span>, so <del>fuck you</del></h3>
+      <% } else { %>
+        , so <del>fuck you</del></h3>
+      <% } %> 
     </div>
   </div>
 </div>
