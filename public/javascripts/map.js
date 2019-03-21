@@ -26,6 +26,13 @@ if (window.navigator.geolocation) {
         .addTo(map);
     });
 
+    // If the view is classcard, then center the map con class position
+    const classView = $('#view').text();
+    $('#view').remove();
+    if (classView === 'lesson') {
+      map.flyTo({ center: geojson.features[0].geometry.coordinates });
+    }
+
     map.addControl(new mapboxgl.GeolocateControl({
       positionOptions: {
         enableHighAccuracy: true,

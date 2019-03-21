@@ -44,10 +44,11 @@ router.get('/query', async (req, res, next) => {
 router.get('/:classID', async (req, res, next) => {
   const { classID } = req.params;
   try {
+    // fake array to construct point object
     const classes = [];
     const lesson = await Class.findById(classID).populate('professor alumns location');
     classes.push(lesson);
-    
+
     // Object with class to draw in map
     const points = {
       type: 'FeatureCollection',
@@ -69,7 +70,7 @@ router.get('/:classID', async (req, res, next) => {
     });
 
 
-    res.render('classes/classcard', { lesson, points, moment, view: 'all' });
+    res.render('classes/classcard', { lesson, points, moment, view: 'lesson' });
   } catch (error) {
     next(error);
   }
