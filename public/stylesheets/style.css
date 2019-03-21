@@ -302,7 +302,9 @@
   height: 100%;
   width: 100%;
   position: absolute;
-  z-index: 2; }
+  z-index: 2;
+  margin: 0;
+  padding: 0; }
 
 .opacity {
   z-index: 3;
