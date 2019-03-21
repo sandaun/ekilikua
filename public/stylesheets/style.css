@@ -35,6 +35,11 @@
 .signup-text-color {
   color: white; }
 
+.password-security {
+  color: white;
+  font-style: italic;
+  font-size: 0.8rem; }
+
 .miniclasscard-card {
   margin: 2rem 1rem;
   padding: 0 0.25rem; }
