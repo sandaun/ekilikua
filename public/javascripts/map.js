@@ -13,18 +13,20 @@ if (window.navigator.geolocation) {
     // add markers to map
     var geojson = JSON.parse($('#points').text());
     $('#points').remove();
-    geojson.features.forEach((marker) => {
-      // create a HTML element for each feature
-      const el = document.createElement('div');
-      el.className = 'marker';
-
-      // make a marker for each feature and add to the map
-      new mapboxgl.Marker(el)
-        .setLngLat(marker.geometry.coordinates)
-        .setPopup(new mapboxgl.Popup({ offset: 25 })
-        .setHTML('<h3><a href=' + marker.properties.link + '>' + marker.properties.title + '</a></h3><p>' + marker.properties.description + '</p>'))
-        .addTo(map);
-    });
+    if (geojson.features.length > 0) {
+      geojson.features.forEach((marker) => {
+        // create a HTML element for each feature
+        const el = document.createElement('div');
+        el.className = 'marker';
+  
+        // make a marker for each feature and add to the map
+        new mapboxgl.Marker(el)
+          .setLngLat(marker.geometry.coordinates)
+          .setPopup(new mapboxgl.Popup({ offset: 25 })
+          .setHTML('<h3><a href=' + marker.properties.link + '>' + marker.properties.title + '</a></h3><p>' + marker.properties.description + '</p>'))
+          .addTo(map);
+      });
+    }
 
     // If the view is classcard, then center the map con class position
     const classView = $('#view').text();
