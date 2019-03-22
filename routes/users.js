@@ -133,32 +133,12 @@ router.get('/classes/new', async (req, res, next) => {
     const categories = await Category.find();
     const levels = await Level.find();
     const classes = await Class.find().populate('professor alumns location');
-    let points = {
+    // Object with class to draw in map
+    const points = {
       type: 'FeatureCollection',
-      features: [{
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [2.188854217529297, 41.43085452425],
-        },
-        properties: {
-          title: 'Mapbox',
-          description: 'Java',
-        },
-      },
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [2.1865206956863403, 41.40263407490894],
-        },
-        properties: {
-          title: 'Mapbox',
-          description: 'Marketing',
-        },
-      }],
+      features: [],
     };
-    res.render('user/classes/newclass', { classes, points, categories, levels });
+    res.render('user/classes/newclass', { classes, points, categories, levels, view: 'newClass' });
   } catch (error) {
     next(error);
   }
